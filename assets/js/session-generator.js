@@ -51,24 +51,36 @@
 
   /**
    * Pick a theme not used in the last RECENCY_LOOKBACK sessions.
-   * Falls back to the least-recently-used theme if all themes are recent.
+   * Falls back to the least-recently-used viable theme if all viable themes are recent.
+   *
+   * A theme is "viable" if it has at least MIN_MOVES candidates — otherwise
+   * pickMoves() can't fill out a 4-6 move session from that theme alone.
+   * (Currently this filters out Foundation [Ginga only] and Flow [Giro + intro]
+   * until the curriculum-based session structure ships — see follow-up.)
    */
   function pickTheme(moves, history) {
     const allThemes = [...new Set(moves.map(m => m.theme))];
-    const recentThemes = history.slice(-RECENCY_LOOKBACK).map(s => s.theme);
+    const viableThemes = allThemes.filter(
+      t => moves.filter(m => m.theme === t).length >= MIN_MOVES
+    );
 
-    const available = allThemes.filter(t => !recentThemes.includes(t));
+    // Safety net: if nothing is viable, fall back to all themes (and pickMoves
+    // will just return whatever it can find).
+    const themePool = viableThemes.length > 0 ? viableThemes : allThemes;
+
+    const recentThemes = history.slice(-RECENCY_LOOKBACK).map(s => s.theme);
+    const available = themePool.filter(t => !recentThemes.includes(t));
 
     if (available.length > 0) {
       return available[Math.floor(Math.random() * available.length)];
     }
 
-    // Fallback: find the least-recently-used theme
+    // All viable themes were used recently — pick the least-recently-used one.
     const themeLastUsed = {};
-    allThemes.forEach(t => { themeLastUsed[t] = -1; });
+    themePool.forEach(t => { themeLastUsed[t] = -1; });
     history.forEach((s, i) => { themeLastUsed[s.theme] = i; });
 
-    const sorted = allThemes.sort((a, b) => themeLastUsed[a] - themeLastUsed[b]);
+    const sorted = [...themePool].sort((a, b) => themeLastUsed[a] - themeLastUsed[b]);
     return sorted[0];
   }
 
