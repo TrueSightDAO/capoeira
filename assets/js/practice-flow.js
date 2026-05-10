@@ -54,6 +54,13 @@
       return;
     }
 
+    // Stop any currently playing audio
+    const existingAudio = document.getElementById('practice-audio');
+    if (existingAudio) {
+      existingAudio.pause();
+      existingAudio.currentTime = 0;
+    }
+
     currentMoveIndex = index;
     const move = moves[index];
     const moveTime = move.duration_minutes * 60;
@@ -82,16 +89,19 @@
     // Music track for this move
     const musicTrack = music[index % music.length];
     const musicContainer = document.getElementById('music-player');
-    if (musicTrack && musicTrack.youtube_url) {
-      const musicId = extractYouTubeId(musicTrack.youtube_url);
-      if (musicId) {
-        musicContainer.innerHTML = `
-          <div class="video-embed">
-            <iframe src="https://www.youtube-nocookie.com/embed/${musicId}?autoplay=0" allowfullscreen allow="autoplay"></iframe>
-          </div>`;
-      }
+    if (musicTrack && musicTrack.audio_url) {
+      musicContainer.innerHTML = `
+        <div class="music-player-wrapper">
+          <audio id="practice-audio" preload="auto" controls style="width:100%">
+            <source src="${musicTrack.audio_url}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div style="margin-top:0.5rem;font-size:0.9rem;color:var(--color-text-light)">
+            ${musicTrack.title} (${musicTrack.tempo_category}, ${musicTrack.bpm}bpm)
+          </div>
+        </div>`;
     } else {
-      musicContainer.innerHTML = '<p class="loading">Music track — YouTube URL pending</p>';
+      musicContainer.innerHTML = '<p class="loading">Music track — audio file pending</p>';
     }
 
     // Reset UI
@@ -111,14 +121,12 @@
     document.getElementById('play-music-btn').classList.add('hidden');
     document.getElementById('pause-btn').classList.remove('hidden');
 
-    // Try to play the YouTube music embed
-    const iframe = document.querySelector('#music-player iframe');
-    if (iframe) {
-      // PostMessage to YouTube to start playing
-      iframe.contentWindow?.postMessage(
-        JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
-        '*'
-      );
+    // Play the local audio element
+    const audio = document.getElementById('practice-audio');
+    if (audio) {
+      audio.play().catch(err => {
+        console.error('Audio playback failed:', err);
+      });
     }
 
     startTimer();
@@ -132,18 +140,14 @@
     const btn = document.getElementById('pause-btn');
     btn.textContent = isPaused ? 'Resume' : 'Pause';
 
-    const iframe = document.querySelector('#music-player iframe');
-    if (iframe) {
+    const audio = document.getElementById('practice-audio');
+    if (audio) {
       if (isPaused) {
-        iframe.contentWindow?.postMessage(
-          JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }),
-          '*'
-        );
+        audio.pause();
       } else {
-        iframe.contentWindow?.postMessage(
-          JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
-          '*'
-        );
+        audio.play().catch(err => {
+          console.error('Audio playback failed:', err);
+        });
       }
     }
   }
@@ -178,6 +182,13 @@
     if (timerInterval) {
       clearInterval(timerInterval);
       timerInterval = null;
+    }
+
+    // Stop any playing audio
+    const audio = document.getElementById('practice-audio');
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
     }
   }
 
