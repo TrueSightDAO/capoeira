@@ -1,0 +1,110 @@
+[
+  {
+    "id": "001",
+    "title": "sem capoeira eu nao posso viver",
+    "youtube_url": "https://www.youtube.com/watch?v=OjOxCFTs2fc",
+    "duration_seconds": 225.5,
+    "bpm": 90,
+    "tempo_category": "Medium",
+    "style_notes": "Medium tempo, suitable for Defense and Attacks practice. Features traditional berimbau rhythms."
+  },
+  {
+    "id": "002",
+    "title": "Me leva na Bahia",
+    "youtube_url": "https://www.youtube.com/watch?v=PqZYDHkUcMU",
+    "duration_seconds": 142.4,
+    "bpm": 70,
+    "tempo_category": "Slow",
+    "style_notes": "Slow berimbau-heavy track, ideal for Foundation warm-up and basic movements."
+  },
+  {
+    "id": "003",
+    "title": "Carolina Soares - Capoeira não pode parar",
+    "youtube_url": "https://www.youtube.com/watch?v=UGNkQmFAbLg",
+    "duration_seconds": 210.8,
+    "bpm": 95,
+    "tempo_category": "Medium",
+    "style_notes": "Energetic medium tempo, drum-heavy rhythm suitable for flow practice."
+  },
+  {
+    "id": "004",
+    "title": "Eu Já Vivo Enjoado ⧸ Corridos de Angola",
+    "youtube_url": "https://www.youtube.com/watch?v=blLdft8P4Bk",
+    "duration_seconds": 594.9,
+    "bpm": 85,
+    "tempo_category": "Medium",
+    "style_notes": "Extended Angola corridos track with medium tempo, great for longer practice sessions."
+  },
+  {
+    "id": "005",
+    "title": "A Hora É Essa ⧸ Um Dia na Senzala",
+    "youtube_url": "https://www.youtube.com/watch?v=dKzpMdJQUgQ",
+    "duration_seconds": 259.7,
+    "bpm": 100,
+    "tempo_category": "Medium",
+    "style_notes": "Medium-fast tempo with drum emphasis, suitable for attack sequences."
+  },
+  {
+    "id": "006",
+    "title": "Paranaue-Capoeira",
+    "youtube_url": "https://www.youtube.com/watch?v=54JRejHOixA",
+    "duration_seconds": 195.1,
+    "bpm": 105,
+    "tempo_category": "Fast",
+    "style_notes": "Fast energetic track, ideal for Aerials and Floreios practice."
+  },
+  {
+    "id": "007",
+    "title": "Berimbau Viola",
+    "youtube_url": "https://www.youtube.com/watch?v=tbreG-ISSSc",
+    "duration_seconds": 142.7,
+    "bpm": 65,
+    "tempo_category": "Slow",
+    "style_notes": "Slow berimbau viola track, perfect for Foundation warm-up and ginga practice."
+  },
+  {
+    "id": "008",
+    "title": "Acarajé - João Grilo AC",
+    "youtube_url": "https://www.youtube.com/watch?v=MCV-K2yOQls",
+    "duration_seconds": 192.2,
+    "bpm": 98,
+    "tempo_category": "Medium",
+    "style_notes": "Medium tempo track with traditional capoeira rhythms, suitable for Defense practice."
+  },
+  {
+    "id": "009",
+    "title": "Capoeira Camará",
+    "youtube_url": "https://www.youtube.com/watch?v=_rXLdlyXD0I",
+    "duration_seconds": 146.3,
+    "bpm": 110,
+    "tempo_category": "Fast",
+    "style_notes": "Fast energetic track, designed for Aerials and Floreios sequences."
+  },
+  {
+    "id": "010",
+    "title": "Berimbau Viola Soul",
+    "youtube_url": "https://www.youtube.com/watch?v=ICszskK-Dko",
+    "duration_seconds": 177.5,
+    "bpm": 68,
+    "tempo_category": "Slow",
+    "style_notes": "Slow berimbau viola with soulful rhythm, ideal for Foundation and warm-up."
+  },
+  {
+    "id": "011",
+    "title": "Pomba Voou",
+    "youtube_url": "https://www.youtube.com/watch?v=PPWoq8th8RM",
+    "duration_seconds": 178.0,
+    "bpm": 102,
+    "tempo_category": "Medium",
+    "style_notes": "Medium-fast tempo track, suitable for Flow and advanced Defense practice."
+  },
+  {
+    "id": "011",
+    "title": "Pomba Voou",
+    "youtube_url": "https://www.youtube.com/watch?v=PPWoq8th8RM",
+    "duration_seconds": 178.0,
+    "bpm": 102,
+    "tempo_category": "Medium",
+    "style_notes": "Medium-fast tempo track, suitable for Flow and advanced Defense practice."
+  }
+]
