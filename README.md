@@ -77,19 +77,19 @@ Whisper confirmed they have no intelligible spoken narration (phone mic at recor
 ## Conventions
 
 - No frontend frameworks — static HTML/CSS/vanilla JS
-- Mirror [agroverse_shop](https://github.com/anomalyco/agroverse_shop) conventions
+- Mirror [agroverse_shop](https://github.com/TrueSightDAO/agroverse_shop_beta) conventions
 - Design tokens: `--color-primary: #3b3333`, `--color-accent: #fefc8f`, Playfair Display + Open Sans
 - Video embeds: `youtube-nocookie.com`
 - All session data is client-side (`localStorage`), no accounts or tracking
 
 ## Related repos
 
-| Repo | Purpose |
-|---|---|
-| `capoeira` | **This repo** — practice platform site + move/music data + upload scripts |
-| `tribomirimbahia` | Ledger & transparency layer (donation flow, treasury-cache integration) |
-| `truesight_me` | Transparency dashboard at `mirim-bahia.truesight.me` |
-| `agroverse_shop` | Cross-link from `farms/baia-itacare/` |
+| Repo | Purpose | Deploys to |
+|---|---|---|
+| [`capoeira`](https://github.com/TrueSightDAO/capoeira) | **This repo** — practice platform site + move/music data + upload scripts | `capoeira.agroverse.shop` |
+| [`tribomirimbahia`](https://github.com/TrueSightDAO/tribomirimbahia) | Ledger & transparency layer (donation flow, treasury-cache integration, transparency explorer) | `mirim-bahia.truesight.me` |
+| [`treasury-cache`](https://github.com/TrueSightDAO/treasury-cache) | Public JSON ledger consumed by transparency dashboards | (raw GitHub) |
+| [`agroverse_shop`](https://github.com/TrueSightDAO/agroverse_shop_beta) | Cross-link from `farms/baia-itacare/` (per spec §10) | `agroverse.shop` |
 
 ## License
 
