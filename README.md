@@ -78,3 +78,5 @@ The `data/` directory is filled by Phase 1:
 ## License
 
 No license yet. Contact Gary for permissions.
+
+Phase 2 shipped: 2026-05-10
