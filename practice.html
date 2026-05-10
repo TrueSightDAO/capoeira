@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Generate a 45-minute capoeira practice session. Theme-based move sequencing, berimbau music pairing, timed practice flow, and session history tracking.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice — Tribo Bahia Mirim Capoeira</title>
+
+    <meta property="og:title" content="Practice — Tribo Bahia Mirim Capoeira">
+    <meta property="og:description" content="Generate a 45-minute capoeira practice session with theme-based move sequencing and berimbau music.">
+    <meta property="og:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
+    <meta property="og:url" content="https://capoeira.agroverse.shop/practice.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Tribo Bahia Mirim Capoeira">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Practice — Tribo Bahia Mirim Capoeira">
+    <meta name="twitter:description" content="Generate a 45-minute capoeira practice session.">
+    <meta name="twitter:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
+
+    <link rel="icon" type="image/jpeg" sizes="192x192" href="https://www.agroverse.shop/assets/images/logo/favicon-192x192.jpeg">
+    <link rel="icon" type="image/jpeg" sizes="32x32" href="https://www.agroverse.shop/assets/images/logo/favicon-32x32.jpeg">
+    <link rel="shortcut icon" type="image/jpeg" href="https://www.agroverse.shop/assets/images/logo/favicon-32x32.jpeg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://www.agroverse.shop/assets/images/logo/agroverse-logo.jpeg" alt="Agroverse" onerror="this.style.display='none'">
+                Tribo Bahia Mirim
+            </a>
+            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="practice.html">Practice</a></li>
+                <li><a href="library.html">Move Library</a></li>
+                <li><a href="transparency.html">Transparency</a></li>
+                <li><a href="index.html#donate" class="donate-link">Donate</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- --- Generator Section --- -->
+    <section class="section" id="generate-section">
+        <div class="section-heading">
+            <h2>Generate a Session</h2>
+            <p>Theme-based sequencing, difficulty-weighted move selection, and berimbau music pairing. Each session is ~45 minutes.</p>
+        </div>
+
+        <div style="text-align:center;margin-bottom:1.5rem">
+            <label for="diff-bias" style="margin-right:0.5rem;font-weight:600">Difficulty bias:</label>
+            <select id="diff-bias" style="padding:0.4rem 0.75rem;border-radius:6px;border:1px solid #ddd;font-family:var(--font-body)">
+                <option value="balanced">Balanced</option>
+                <option value="beginner" selected>More Beginner-friendly</option>
+                <option value="intermediate">More Intermediate</option>
+                <option value="advanced">More Advanced</option>
+            </select>
+        </div>
+
+        <div style="text-align:center">
+            <button class="btn btn-primary" onclick="generateFromUI()">Generate Session</button>
+        </div>
+
+        <p id="generator-status" style="text-align:center;margin-top:1rem"></p>
+
+        <div id="session-card" class="session-card hidden" style="margin-top:2rem"></div>
+
+        <div style="text-align:center;margin-top:1rem">
+            <button id="start-session-btn" class="btn btn-primary hidden" onclick="window.CapoeiraPractice.start()">
+                Start Practice
+            </button>
+        </div>
+    </section>
+
+    <!-- --- Practice Flow Section --- -->
+    <section id="practice-section" class="hidden">
+        <div class="section">
+            <div class="practice-layout">
+                <!-- Main: Now Playing -->
+                <div class="now-playing">
+                    <p id="move-progress" style="color:var(--color-text-light);font-size:0.9rem"></p>
+                    <div class="move-title-pt" id="move-pt"></div>
+                    <div class="move-title-en" id="move-en"></div>
+
+                    <div id="move-video"></div>
+
+                    <div class="move-notes" id="move-notes"></div>
+
+                    <div class="progress-bar">
+                        <div class="fill" id="progress-fill" style="width:0%"></div>
+                    </div>
+
+                    <div class="timer" id="countdown">00:00</div>
+
+                    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+                        <button id="play-music-btn" class="btn btn-primary" onclick="window.CapoeiraPractice.playMusic()">
+                            Play Music & Start Timer
+                        </button>
+                        <button id="pause-btn" class="btn btn-outline hidden" onclick="window.CapoeiraPractice.togglePause()">
+                            Pause
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sidebar: Music Player -->
+                <div>
+                    <h4 style="margin-bottom:0.75rem">Music</h4>
+                    <div id="music-player"></div>
+                </div>
+            </div>
+
+            <!-- Rest Period -->
+            <div id="rest-section" class="session-card hidden" style="text-align:center;margin-top:2rem">
+                <h3 style="color:var(--color-success)">Rest</h3>
+                <div class="timer" style="color:var(--color-success)" id="rest-countdown">30</div>
+                <p id="next-move-label" style="color:var(--color-text-light)"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- Finish Section --- -->
+    <section id="finish-section" class="hidden">
+        <div class="section section-narrow" style="text-align:center">
+            <h2>Session Complete</h2>
+            <p style="font-size:1.2rem;margin:1.5rem 0">Total practice time: <strong id="session-total-time">0</strong> minutes</p>
+            <button class="btn btn-primary" onclick="window.CapoeiraPractice.logAndFinish()">
+                Log Session & View History
+            </button>
+            <button class="btn btn-outline" style="margin-left:1rem" onclick="window.CapoeiraPractice.reset()">
+                Generate New Session
+            </button>
+        </div>
+    </section>
+
+    <!-- --- Dashboard Section --- -->
+    <section id="dashboard-section" class="hidden">
+        <div class="section">
+            <div class="section-heading">
+                <h2>Your Practice History</h2>
+                <p>All data is stored locally in your browser. No accounts. No tracking.</p>
+            </div>
+            <div id="history-dashboard"></div>
+            <div style="text-align:center;margin-top:2rem">
+                <button class="btn btn-outline" onclick="window.CapoeiraPractice.reset()">
+                    Generate New Session
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div id="practice-status" style="text-align:center;margin:1rem"></div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="practice.html">Practice</a>
+            <a href="library.html">Move Library</a>
+            <a href="transparency.html">Transparency</a>
+        </div>
+        <p>Tribo Bahia Mirim Capoeira — Baia Itacare, Bahia, Brazil</p>
+        <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
+    </footer>
+
+    <script src="assets/js/session-history.js"></script>
+    <script src="assets/js/session-generator.js"></script>
+    <script src="assets/js/practice-flow.js"></script>
+
+    <script>
+        function generateFromUI() {
+            const biasSelect = document.getElementById('diff-bias');
+            const biasMap = {
+                balanced: {},
+                beginner: { Beginner: 1.3, Intermediate: 0.7, Advanced: 0.25 },
+                intermediate: { Beginner: 0.6, Intermediate: 1.3, Advanced: 0.5 },
+                advanced: { Beginner: 0.3, Intermediate: 0.7, Advanced: 1.2 }
+            };
+            window.generateSession(biasMap[biasSelect.value] || {});
+        }
+    </script>
+</body>
+</html>

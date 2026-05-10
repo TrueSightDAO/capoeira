@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Every donation to Tribo Bahia Mirim, minus Stripe processing fees, goes directly to the after-school capoeira program in Itacare. See the full ledger.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparency — Tribo Bahia Mirim Capoeira</title>
+
+    <meta property="og:title" content="Transparency — Tribo Bahia Mirim Capoeira">
+    <meta property="og:description" content="Every donation, minus processing fees, goes directly to Tribo Bahia Mirim.">
+    <meta property="og:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
+    <meta property="og:url" content="https://capoeira.agroverse.shop/transparency.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Tribo Bahia Mirim Capoeira">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Transparency — Tribo Bahia Mirim Capoeira">
+    <meta name="twitter:description" content="Every donation, minus processing fees, goes directly to Tribo Bahia Mirim.">
+    <meta name="twitter:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
+
+    <link rel="icon" type="image/jpeg" sizes="192x192" href="https://www.agroverse.shop/assets/images/logo/favicon-192x192.jpeg">
+    <link rel="icon" type="image/jpeg" sizes="32x32" href="https://www.agroverse.shop/assets/images/logo/favicon-32x32.jpeg">
+    <link rel="shortcut icon" type="image/jpeg" href="https://www.agroverse.shop/assets/images/logo/favicon-32x32.jpeg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://www.agroverse.shop/assets/images/logo/agroverse-logo.jpeg" alt="Agroverse" onerror="this.style.display='none'">
+                Tribo Bahia Mirim
+            </a>
+            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="practice.html">Practice</a></li>
+                <li><a href="library.html">Move Library</a></li>
+                <li><a href="transparency.html">Transparency</a></li>
+                <li><a href="index.html#donate" class="donate-link">Donate</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="section section-narrow">
+        <div class="section-heading">
+            <h2>Where Every Dollar Goes</h2>
+            <p>Every donation, minus processing fees, goes directly to Bico Duro and the kids. TrueSight DAO takes no cut.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:2rem">
+            <h3>The Flow</h3>
+            <ol style="padding-left:1.25rem;line-height:2;color:var(--color-text-light);font-size:0.95rem">
+                <li>You donate via <strong>Stripe Checkout</strong> on this site</li>
+                <li>Stripe deducts their processing fee (2.9% + $0.30 per transaction)</li>
+                <li>The remaining amount is recorded in the <strong>TrueSight DAO treasury-cache ledger</strong></li>
+                <li>Funds are transferred to Bico Duro via Pix (Brazilian instant payment)</li>
+                <li>Every transfer is published on the <strong>public transparency dashboard</strong> at <a href="https://mirim-bahia.truesight.me">mirim-bahia.truesight.me</a></li>
+            </ol>
+        </div>
+
+        <div class="fee-calc">
+            <h3 style="margin-bottom:0.75rem">Example: What Your Donation Funds</h3>
+            <table>
+                <tr><td>Your donation:</td><td style="font-weight:700" id="calc-donation">$50.00</td></tr>
+                <tr><td>Stripe fee (2.9% + $0.30):</td><td style="color:var(--color-danger)" id="calc-fee">$1.75</td></tr>
+                <tr><td>Net to Tribo Bahia Mirim:</td><td style="font-weight:700;color:var(--color-success)" id="calc-net">$48.25</td></tr>
+            </table>
+
+            <div style="margin-top:1.5rem">
+                <label for="calc-input" style="font-weight:600;margin-right:0.5rem">Try a different amount:</label>
+                $<input type="number" id="calc-input" value="50" min="1" max="10000" step="1"
+                    style="padding:0.4rem 0.5rem;border:1px solid #ddd;border-radius:4px;width:100px;font-family:var(--font-body);font-size:0.95rem"
+                    oninput="updateFeeCalc()">
+            </div>
+        </div>
+
+        <div class="card" style="background:var(--color-success);color:#fff;text-align:center;margin:2rem 0">
+            <p style="color:rgba(255,255,255,0.95);font-size:1.1rem;margin:0">
+                <strong>TrueSight DAO does not take a percentage.</strong><br>
+                100% of net proceeds go to the after-school program.
+            </p>
+        </div>
+
+        <div style="text-align:center;margin-top:2rem">
+            <p style="color:var(--color-text-light)">For the full public ledger, visit the transparency dashboard:</p>
+            <a href="https://mirim-bahia.truesight.me" class="btn btn-primary" style="margin-top:0.75rem">
+                View Full Dashboard →
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="practice.html">Practice</a>
+            <a href="library.html">Move Library</a>
+            <a href="transparency.html">Transparency</a>
+        </div>
+        <p>Tribo Bahia Mirim Capoeira — Baia Itacare, Bahia, Brazil</p>
+        <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
+    </footer>
+
+    <script>
+        function updateFeeCalc() {
+            const amount = parseFloat(document.getElementById('calc-input').value) || 0;
+            const fee = Math.round((amount * 0.029 + 0.30) * 100) / 100;
+            const net = Math.round((amount - fee) * 100) / 100;
+
+            document.getElementById('calc-donation').textContent = '$' + amount.toFixed(2);
+            document.getElementById('calc-fee').textContent = '$' + fee.toFixed(2);
+            document.getElementById('calc-net').textContent = '$' + net.toFixed(2);
+        }
+
+        // Check for just_donated query param
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('just_donated') === '1') {
+            const heading = document.querySelector('.section-heading p');
+            if (heading) {
+                heading.textContent = 'Thank you for your donation! Every dollar, minus fees, goes directly to Bico Duro and the kids.';
+                heading.style.color = 'var(--color-success)';
+                heading.style.fontWeight = '600';
+            }
+        }
+    </script>
+</body>
+</html>

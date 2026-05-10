@@ -1,0 +1,330 @@
+/**
+ * practice-flow.js — §4.2 Practice Flow Logic
+ * 
+ * Steps through generated session moves:
+ * - Display move: name_pt (large), name_en (subtitle), embedded YouTube, notes
+ * - "Play Music" button starts YouTube music embed + countdown timer
+ * - Timer runs for move's duration_minutes
+ * - When timer ends → "Rest" prompt with 30s countdown → next move auto-loads
+ * - Final move ends → "Log session" CTA writes to localStorage
+ */
+
+(function () {
+  'use strict';
+
+  let currentMoveIndex = 0;
+  let moves = [];
+  let music = [];
+  let theme = '';
+  let timerInterval = null;
+  let remainingSeconds = 0;
+  let totalSessionSeconds = 0;
+  let isPaused = false;
+
+  const REST_SECONDS = 30;
+
+  /**
+   * Start practice flow from a session plan (set by session-generator.js).
+   */
+  function startPractice() {
+    const plan = window.__sessionPlan;
+    if (!plan || !plan.moves || plan.moves.length === 0) {
+      showError('No session plan. Generate a session first.');
+      return;
+    }
+
+    moves = plan.moves;
+    music = plan.music || [];
+    theme = plan.theme || '';
+    currentMoveIndex = 0;
+    totalSessionSeconds = 0;
+
+    document.getElementById('generate-section').classList.add('hidden');
+    document.getElementById('practice-section').classList.remove('hidden');
+
+    loadMove(0);
+  }
+
+  /**
+   * Load a move into the practice view.
+   */
+  function loadMove(index) {
+    if (index >= moves.length) {
+      finishSession();
+      return;
+    }
+
+    currentMoveIndex = index;
+    const move = moves[index];
+    const moveTime = move.duration_minutes * 60;
+    remainingSeconds = moveTime;
+
+    document.getElementById('move-pt').textContent = move.name_pt;
+    document.getElementById('move-en').textContent = move.name_en;
+    document.getElementById('move-notes').textContent = move.notes || '';
+
+    // YouTube embed
+    const videoContainer = document.getElementById('move-video');
+    if (move.youtube_clip_url) {
+      const videoId = extractYouTubeId(move.youtube_clip_url);
+      if (videoId) {
+        videoContainer.innerHTML = `
+          <div class="video-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/${videoId}" allowfullscreen></iframe>
+          </div>`;
+      } else {
+        videoContainer.innerHTML = '<p class="loading">Video URL format not recognized</p>';
+      }
+    } else {
+      videoContainer.innerHTML = '<p class="loading">Video coming soon — Phase 1 data being curated</p>';
+    }
+
+    // Music track for this move
+    const musicTrack = music[index % music.length];
+    const musicContainer = document.getElementById('music-player');
+    if (musicTrack && musicTrack.youtube_url) {
+      const musicId = extractYouTubeId(musicTrack.youtube_url);
+      if (musicId) {
+        musicContainer.innerHTML = `
+          <div class="video-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/${musicId}?autoplay=0" allowfullscreen allow="autoplay"></iframe>
+          </div>`;
+      }
+    } else {
+      musicContainer.innerHTML = '<p class="loading">Music track — YouTube URL pending</p>';
+    }
+
+    // Reset UI
+    document.getElementById('play-music-btn').classList.remove('hidden');
+    document.getElementById('pause-btn').classList.add('hidden');
+    document.getElementById('rest-section').classList.add('hidden');
+    document.getElementById('move-progress').textContent = `Move ${index + 1} of ${moves.length}`;
+
+    updateTimerDisplay();
+    stopTimer();
+  }
+
+  /**
+   * Start the countdown timer and play music.
+   */
+  function playMusicAndStart() {
+    document.getElementById('play-music-btn').classList.add('hidden');
+    document.getElementById('pause-btn').classList.remove('hidden');
+
+    // Try to play the YouTube music embed
+    const iframe = document.querySelector('#music-player iframe');
+    if (iframe) {
+      // PostMessage to YouTube to start playing
+      iframe.contentWindow?.postMessage(
+        JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+        '*'
+      );
+    }
+
+    startTimer();
+  }
+
+  /**
+   * Pause / Resume toggle
+   */
+  function togglePause() {
+    isPaused = !isPaused;
+    const btn = document.getElementById('pause-btn');
+    btn.textContent = isPaused ? 'Resume' : 'Pause';
+
+    const iframe = document.querySelector('#music-player iframe');
+    if (iframe) {
+      if (isPaused) {
+        iframe.contentWindow?.postMessage(
+          JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }),
+          '*'
+        );
+      } else {
+        iframe.contentWindow?.postMessage(
+          JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+          '*'
+        );
+      }
+    }
+  }
+
+  /**
+   * Start the move timer.
+   */
+  function startTimer() {
+    isPaused = false;
+    updateTimerDisplay();
+
+    timerInterval = setInterval(() => {
+      if (isPaused) return;
+
+      remainingSeconds--;
+      totalSessionSeconds++;
+
+      updateTimerDisplay();
+      updateProgressBar();
+
+      if (remainingSeconds <= 0) {
+        stopTimer();
+        showRestPeriod();
+      }
+    }, 1000);
+  }
+
+  /**
+   * Stop the timer interval.
+   */
+  function stopTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+  }
+
+  /**
+   * Update the countdown display (MM:SS format).
+   */
+  function updateTimerDisplay() {
+    const el = document.getElementById('countdown');
+    const mins = Math.floor(Math.max(0, remainingSeconds) / 60);
+    const secs = Math.max(0, remainingSeconds) % 60;
+
+    el.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+    // Warning color when under 60 seconds
+    if (remainingSeconds < 60) {
+      el.classList.add('warning');
+    } else {
+      el.classList.remove('warning');
+    }
+  }
+
+  /**
+   * Update the progress bar.
+   */
+  function updateProgressBar() {
+    const move = moves[currentMoveIndex];
+    if (!move) return;
+
+    const total = move.duration_minutes * 60;
+    const elapsed = total - remainingSeconds;
+    const pct = Math.min(100, Math.max(0, (elapsed / total) * 100));
+
+    document.getElementById('progress-fill').style.width = pct + '%';
+  }
+
+  /**
+   * Show the 30-second rest period.
+   */
+  function showRestPeriod() {
+    document.getElementById('rest-section').classList.remove('hidden');
+    document.getElementById('play-music-btn').classList.add('hidden');
+    document.getElementById('pause-btn').classList.add('hidden');
+
+    const isLastMove = currentMoveIndex >= moves.length - 1;
+    document.getElementById('next-move-label').textContent = isLastMove
+      ? 'Session Complete! Time to reflect.'
+      : `Next: ${moves[currentMoveIndex + 1].name_pt}`;
+
+    let restRemaining = REST_SECONDS;
+    const restEl = document.getElementById('rest-countdown');
+    restEl.textContent = REST_SECONDS;
+
+    timerInterval = setInterval(() => {
+      restRemaining--;
+      restEl.textContent = Math.max(0, restRemaining);
+
+      if (restRemaining <= 0) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+
+        if (isLastMove) {
+          finishSession();
+        } else {
+          loadMove(currentMoveIndex + 1);
+        }
+      }
+    }, 1000);
+  }
+
+  /**
+   * Finish the session and show the log CTA.
+   */
+  function finishSession() {
+    stopTimer();
+    document.getElementById('practice-section').classList.add('hidden');
+    document.getElementById('finish-section').classList.remove('hidden');
+
+    const totalMin = Math.round(totalSessionSeconds / 60);
+    document.getElementById('session-total-time').textContent = totalMin;
+
+    // Store for logging
+    window.__completedSession = {
+      theme,
+      moves,
+      music,
+      totalTime: totalMin,
+      completedAt: new Date().toISOString()
+    };
+  }
+
+  /**
+   * Log session and show dashboard.
+   */
+  function logAndFinish() {
+    if (window.CapoeiraHistory && window.CapoeiraHistory.logSession) {
+      window.CapoeiraHistory.logSession(window.__completedSession);
+    }
+    document.getElementById('finish-section').classList.add('hidden');
+    document.getElementById('dashboard-section').classList.remove('hidden');
+
+    if (window.CapoeiraHistory && window.CapoeiraHistory.renderDashboard) {
+      window.CapoeiraHistory.renderDashboard('history-dashboard');
+    }
+  }
+
+  /**
+   * Reset to generate a new session.
+   */
+  function resetPractice() {
+    stopTimer();
+    document.getElementById('practice-section').classList.add('hidden');
+    document.getElementById('finish-section').classList.add('hidden');
+    document.getElementById('dashboard-section').classList.add('hidden');
+    document.getElementById('generate-section').classList.remove('hidden');
+    document.getElementById('session-card').classList.add('hidden');
+    document.getElementById('start-session-btn').classList.add('hidden');
+  }
+
+  // --- Helpers ---
+
+  function extractYouTubeId(url) {
+    if (!url) return null;
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube-nocookie\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+      /^([a-zA-Z0-9_-]{11})$/
+    ];
+    for (const p of patterns) {
+      const match = url.match(p);
+      if (match) return match[1];
+    }
+    return null;
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('practice-status');
+    if (el) {
+      el.textContent = msg;
+      el.className = 'error';
+    }
+  }
+
+  // Expose public API
+  window.CapoeiraPractice = {
+    start: startPractice,
+    playMusic: playMusicAndStart,
+    togglePause,
+    logAndFinish,
+    reset: resetPractice
+  };
+})();

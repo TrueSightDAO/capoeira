@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Search and filter capoeira moves by theme, difficulty, and tempo. Each move includes Bico Duro's video instruction and pedagogy notes.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Library — Tribo Bahia Mirim Capoeira</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Move Library — Tribo Bahia Mirim Capoeira">
+    <meta property="og:description" content="Search and filter capoeira moves by theme, difficulty, and tempo.">
+    <meta property="og:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
+    <meta property="og:url" content="https://capoeira.agroverse.shop/library.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Tribo Bahia Mirim Capoeira">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Move Library — Tribo Bahia Mirim Capoeira">
+    <meta name="twitter:description" content="Search and filter capoeira moves.">
+    <meta name="twitter:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
+
+    <link rel="icon" type="image/jpeg" sizes="192x192" href="https://www.agroverse.shop/assets/images/logo/favicon-192x192.jpeg">
+    <link rel="icon" type="image/jpeg" sizes="32x32" href="https://www.agroverse.shop/assets/images/logo/favicon-32x32.jpeg">
+    <link rel="shortcut icon" type="image/jpeg" href="https://www.agroverse.shop/assets/images/logo/favicon-32x32.jpeg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://www.agroverse.shop/assets/images/logo/agroverse-logo.jpeg" alt="Agroverse" onerror="this.style.display='none'">
+                Tribo Bahia Mirim
+            </a>
+            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="practice.html">Practice</a></li>
+                <li><a href="library.html">Move Library</a></li>
+                <li><a href="transparency.html">Transparency</a></li>
+                <li><a href="index.html#donate" class="donate-link">Donate</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="section">
+        <div class="section-heading">
+            <h2>Move Library</h2>
+            <p>Every move in the practice platform, searchable by name, theme, difficulty, and tempo. Click a move to see its full instruction video and notes on the practice page.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+            <input type="search" id="library-search" placeholder="Search moves by name or description...">
+            <select id="filter-theme">
+                <option value="">All Themes</option>
+                <option value="Foundation">Foundation</option>
+                <option value="Defense">Defense</option>
+                <option value="Attacks">Attacks</option>
+                <option value="Flow">Flow</option>
+                <option value="Aerials">Aerials</option>
+                <option value="Floreios">Floreios</option>
+            </select>
+            <select id="filter-difficulty">
+                <option value="">All Difficulties</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+            <select id="filter-tempo">
+                <option value="">All Tempos</option>
+                <option value="Slow">Slow</option>
+                <option value="Medium">Medium</option>
+                <option value="Fast">Fast</option>
+            </select>
+        </div>
+
+        <!-- Table -->
+        <table class="move-table" id="move-table" style="display:none">
+            <thead>
+                <tr>
+                    <th>Move</th>
+                    <th>Theme</th>
+                    <th>Difficulty</th>
+                    <th>Duration</th>
+                    <th>Tempo</th>
+                </tr>
+            </thead>
+            <tbody id="move-table-body"></tbody>
+        </table>
+
+        <div id="library-empty" class="empty-state hidden">
+            <p>Moves are being curated. Bico Duro's video instruction is being transcribed and catalogued. Check back soon.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="practice.html">Practice</a>
+            <a href="library.html">Move Library</a>
+            <a href="transparency.html">Transparency</a>
+        </div>
+        <p>Tribo Bahia Mirim Capoeira — Baia Itacare, Bahia, Brazil</p>
+        <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
+    </footer>
+
+    <script src="assets/js/move-library.js"></script>
+</body>
+</html>
