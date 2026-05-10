@@ -1,4 +1,4 @@
-# Capoeira Practice Platform
+# Capoeira Practice Platform 🎵
 
 Static-site capoeira practice tool that pairs Bico Duro's individual-move video clips with curated berimbau-tempo music to drive 45-minute solo sessions, plus a public donation flow whose net proceeds go to Tribo Bahia Mirim's after-school program in Itacaré.
 
