@@ -30,8 +30,14 @@ python3 -m http.server 8000
 │   ├── js/session-history.js
 │   └── images/          # Add hero/thumbnail images here
 ├── data/
-│   ├── moves.json       # Move catalog (placeholder — Phase 1 fills this)
-│   └── music_library.json # Music track catalog (placeholder)
+│   ├── moves.json              # 39 moves (Phase 1A), all with YouTube URLs on admin@truesight.me
+│   ├── move_metadata.json      # title/transcript_pt/transcript_en/summary per move (upload source)
+│   ├── segmentation_plan.json  # Whisper-word-timestamp cut windows used to slice each move
+│   ├── youtube_videos.json     # idempotent state: move_id → YouTube video_id
+│   ├── music_library.json      # Music track catalog (12 tracks, local MP3s)
+│   └── music/                  # *.mp3 — local audio for practice sessions
+├── scripts/
+│   └── upload_clips_to_youtube.py  # Slice + upload, reuses agroverse_shop OAuth (admin@truesight.me)
 └── README.md
 ```
 
@@ -48,15 +54,25 @@ CNAME record: `capoeira.agroverse.shop` → `<username>.github.io`
 - Source: Deploy from a branch
 - Branch: `main` / `(root)`
 
-## Data pipeline
+## Data pipeline (Phase 1A — shipped 2026-05-10)
 
-The `data/` directory is filled by Phase 1:
+Source: Bico Duro's two pre-compiled instructional uploads on TrueSight DAO's YouTube channel —
+[cqKMvYbB1Kw](https://www.youtube.com/watch?v=cqKMvYbB1Kw) (beginner curriculum, 10 min) and
+[zLPVWP5WQOg](https://www.youtube.com/watch?v=zLPVWP5WQOg) (intermediate rolê-drill, 13.6 min).
 
-1. `analyze_incoming_videos.py` processes raw `.MOV` files from `~/Downloads/capoeira/`
-2. Whisper transcribes Bico Duro's PT intro → `manifest.json`
-3. Claude extracts move names, writes EN translations, drafts pedagogy notes
-4. Gary reviews every entry before publish
-5. Final `moves.json` is committed to this repo
+1. `yt-dlp` both source videos → local `.mp4`
+2. `faster-whisper --language pt --word-timestamps` extracts Bico Duro's spoken move-name
+   announcements with sub-second timing
+3. `ffmpeg` cuts each per-move clip from announcement-to-next-announcement → `data/compiled_clips/<move_id>.mp4`
+   (gitignored — regeneratable, ~181 MB locally)
+4. Claude drafts EN translations + 1–2 sentence pedagogy summaries in `data/move_metadata.json`
+5. `scripts/upload_clips_to_youtube.py` re-uploads each clip as an individual public YouTube
+   video on admin@truesight.me, recording URLs in `data/youtube_videos.json`
+6. `data/moves.json` is the merged Phase 1A artifact consumed by the site (spec §3 schema)
+
+The 209 raw `.MOV` files in `~/Downloads/capoeira/` were originally intended as the source but
+Whisper confirmed they have no intelligible spoken narration (phone mic at recording distance
++ outdoor setting). The compiled instructional uploads were the real source.
 
 ## Conventions
 
@@ -70,8 +86,8 @@ The `data/` directory is filled by Phase 1:
 
 | Repo | Purpose |
 |---|---|
-| `tribomirimbahia` | Project container, spec, brief, data pipeline |
-| `capoeira` | This repo — the practice platform site |
+| `capoeira` | **This repo** — practice platform site + move/music data + upload scripts |
+| `tribomirimbahia` | Ledger & transparency layer (donation flow, treasury-cache integration) |
 | `truesight_me` | Transparency dashboard at `mirim-bahia.truesight.me` |
 | `agroverse_shop` | Cross-link from `farms/baia-itacare/` |
 

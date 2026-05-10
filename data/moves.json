@@ -1,182 +1,665 @@
 [
   {
     "id": "ginga",
-    "name_pt": "ginga",
-    "name_en": "The fundamental swing — the base movement from which all capoeira flows",
+    "name_pt": "Ginga",
+    "name_en": "the foundational rocking step",
     "theme": "Foundation",
     "difficulty": "Beginner",
-    "duration_minutes": 15,
-    "youtube_clip_url": "",
-    "tempo_range": "Slow",
-    "notes": "Feet shoulder-width. Step back with the right foot, arm across the face for protection. Never cross the feet. Keep the torso swaying — this is not a static position, it is where the game breathes. Beginners tend to look at their feet; keep your eyes on the space in front of you.",
-    "pairs_well_with": ["bencao", "meia_lua_de_compasso"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
-  },
-  {
-    "id": "bencao",
-    "name_pt": "bencao",
-    "name_en": "The blessing kick — a straight front push kick from the back leg",
-    "theme": "Attacks",
-    "difficulty": "Beginner",
-    "duration_minutes": 15,
-    "youtube_clip_url": "",
-    "tempo_range": "Medium",
-    "notes": "From ginga, push the back leg forward. Strike with the sole of the foot, not the toes. The name means 'blessing' — the kick pushes away, it does not smash. Retract the leg immediately; do not leave it hanging. The upper body leans back slightly to create distance.",
-    "pairs_well_with": ["ginga", "meia_lua_de_compasso"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
-  },
-  {
-    "id": "meia_lua_de_compasso",
-    "name_pt": "meia-lua de compasso",
-    "name_en": "Half-moon compass kick — a sweeping circular kick from a crouched position",
-    "theme": "Attacks",
-    "difficulty": "Intermediate",
     "duration_minutes": 20,
-    "youtube_clip_url": "",
-    "tempo_range": "Medium",
-    "notes": "Drop into negativa first. Both hands on the ground. The kicking leg sweeps in a wide arc — think compass drawing a circle. Keep the supporting leg bent. The power comes from the hip rotation, not the leg. Look at your target throughout the sweep. Beginners rush the arc; let the circle complete.",
-    "pairs_well_with": ["negativa", "role", "ginga"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
+    "youtube_clip_url": "https://www.youtube.com/watch?v=23acEufjXBI",
+    "tempo_range": "Slow",
+    "notes": "The Ginga is the rocking foundation of capoeira — every move begins and ends here. Bico Duro opens the beginner curriculum with it because everything else builds on this rhythm.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Vamos aprender a técnica de como se faz uma boa capoeira, com o passo básico para iniciante, ok? Ginga!",
+    "transcript_en": "Let's learn the technique of how to do good capoeira, with the basic step for beginners, ok? Ginga!"
   },
   {
-    "id": "negativa",
-    "name_pt": "negativa",
-    "name_en": "The escape — a low crouched dodge that creates distance from an incoming kick",
+    "id": "cocorinha_negativa",
+    "name_pt": "Cocorinha negativa",
+    "name_en": "low squat into negativa",
     "theme": "Defense",
     "difficulty": "Beginner",
-    "duration_minutes": 15,
-    "youtube_clip_url": "",
-    "tempo_range": "Slow",
-    "notes": "From ginga, drop low onto one leg with the other extended straight. One hand touches the ground for balance. The chest stays open, facing your partner. The extended leg is not dead weight — it is ready to sweep. This is a defensive position, not a resting position.",
-    "pairs_well_with": ["role", "meia_lua_de_compasso"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
-  },
-  {
-    "id": "role",
-    "name_pt": "role",
-    "name_en": "The roll — a grounded rotation that transitions from defense back to standing",
-    "theme": "Flow",
-    "difficulty": "Beginner",
-    "duration_minutes": 15,
-    "youtube_clip_url": "",
-    "tempo_range": "Medium",
-    "notes": "From negativa, roll over the shoulder — not the neck. Keep the body compact, chin tucked. The hands guide the rotation. The movement finishes in ginga. This is not a gymnastic roll; it is a tactical retreat-reposition. Speed comes from keeping the core tight.",
-    "pairs_well_with": ["negativa", "ginga"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
-  },
-  {
-    "id": "armada",
-    "name_pt": "armada",
-    "name_en": "The armada — a spinning back kick executed with the outside edge of the foot",
-    "theme": "Attacks",
-    "difficulty": "Intermediate",
     "duration_minutes": 20,
-    "youtube_clip_url": "",
-    "tempo_range": "Fast",
-    "notes": "From ginga, pivot on the front foot and let the back leg whip around. The arms cross the chest during the spin for protection. The kick lands with the outside edge of the foot — not the heel. Keep your eyes on the target even as you spin. Spot the target early; do not spin blind.",
-    "pairs_well_with": ["queixada", "ginga"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
+    "youtube_clip_url": "https://www.youtube.com/watch?v=2izd-E5SUr8",
+    "tempo_range": "Slow",
+    "notes": "Cocorinha (squatting low) into negativa (one leg extended, body close to the ground). Two of capoeira's signature ground-evasion shapes, used to slip under high kicks.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Cocorinha, negativa.",
+    "transcript_en": "Cocorinha, into negativa."
   },
   {
-    "id": "queixada",
-    "name_pt": "queixada",
-    "name_en": "The jaw kick — an outside-to-inside crescent kick",
-    "theme": "Attacks",
-    "difficulty": "Intermediate",
-    "duration_minutes": 15,
-    "youtube_clip_url": "",
-    "tempo_range": "Medium",
-    "notes": "From ginga, lift the back leg in a sweeping arc from outside to inside. The kick traces a crescent shape. Contact is made with the outside edge of the foot. The supporting leg stays slightly bent. The upper body leans away from the kick for balance. Keep the movement fluid — it is a sweeping motion, not a snap.",
-    "pairs_well_with": ["armada", "ginga"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
-  },
-  {
-    "id": "au",
-    "name_pt": "au",
-    "name_en": "The cartwheel — an inverted lateral movement used to reposition",
-    "theme": "Flow",
+    "id": "defesa",
+    "name_pt": "Defesa",
+    "name_en": "basic block / cover",
+    "theme": "Defense",
     "difficulty": "Beginner",
-    "duration_minutes": 15,
-    "youtube_clip_url": "",
-    "tempo_range": "Medium",
-    "notes": "Hands placed one after the other. Legs pass overhead in sequence. The movement traces a straight line — not a banana curve. Land softly. The cartwheel in capoeira is not a gymnastic display; it is a way to move across the roda without breaking the flow. Eyes stay on the partner throughout.",
-    "pairs_well_with": ["ginga", "negativa"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
-  },
-  {
-    "id": "martelo",
-    "name_pt": "martelo",
-    "name_en": "The hammer kick — a sharp roundhouse kick delivered with the instep",
-    "theme": "Attacks",
-    "difficulty": "Intermediate",
-    "duration_minutes": 15,
-    "youtube_clip_url": "",
-    "tempo_range": "Fast",
-    "notes": "Chamber the kicking leg high, pivot on the supporting foot. Snap the kick with the instep. The name means 'hammer' — the kick should be sharp and retracted quickly. The supporting leg bends slightly for stability. Do not telegraph the kick; the chamber should come from the ginga rhythm.",
-    "pairs_well_with": ["bencao", "ginga"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
-  },
-  {
-    "id": "macaco",
-    "name_pt": "macaco",
-    "name_en": "The monkey — a backwards-arching flip initiated from a crouch",
-    "theme": "Floreios",
-    "difficulty": "Advanced",
-    "duration_minutes": 25,
-    "youtube_clip_url": "",
-    "tempo_range": "Fast",
-    "notes": "From a low crouch, plant one hand behind you and kick the legs over. The arch comes from the hips pushing upward. This is explosive, not slow. The name reflects the movement's origins — watching monkeys in the forest. Beginners should master au first. Keep the neck relaxed — never land on the head.",
-    "pairs_well_with": ["au", "negativa"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=b139LDl90hs",
+    "tempo_range": "Slow",
+    "notes": "A standing block / cover. The simplest defensive shape — arms and body shielding center line. Often chained into other esquivas.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Defesa.",
+    "transcript_en": "Defense."
   },
   {
     "id": "esquiva_lateral",
-    "name_pt": "esquiva lateral",
-    "name_en": "The lateral dodge — a side-step evasion that drops the body away from an incoming strike",
+    "name_pt": "Esquiva lateral",
+    "name_en": "side dodge",
     "theme": "Defense",
     "difficulty": "Beginner",
-    "duration_minutes": 15,
-    "youtube_clip_url": "",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=9kobgpz2Dzg",
     "tempo_range": "Slow",
-    "notes": "From ginga, step wide to one side and drop your torso. One hand protects the face, the other touches the ground for balance. The movement is a dodge, not a lunge. Weight shifts fully onto the bent leg. Return to ginga immediately — esquiva is a momentary reposition, never a pause.",
-    "pairs_well_with": ["ginga", "bencao"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
+    "notes": "The first defensive move in Bico Duro's curriculum. A lateral evasion that slips an incoming kick to the side while keeping the body low and ready to flow back into Ginga.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Vamos fazer agora a defesa, pois a defesa é a segunda coisa mais importante dentro da capoeira. Esquiva lateral.",
+    "transcript_en": "Now we'll do defense, because defense is the second most important thing within capoeira. Side dodge."
   },
   {
-    "id": "rabo_de_arraia",
-    "name_pt": "rabo de arraia",
-    "name_en": "Stingray's tail — a spinning low sweep targeting the opponent's legs",
+    "id": "esquiva_para_tras",
+    "name_pt": "Esquiva para trás",
+    "name_en": "backward dodge",
+    "theme": "Defense",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=kmZhMnHCRR8",
+    "tempo_range": "Slow",
+    "notes": "Evasion backwards — body weight shifts onto the back leg, torso leans away, hands stay up. Used against straight front kicks (bênção, ponteira) and chest-line attacks.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Esquiva para trás.",
+    "transcript_en": "Backward dodge."
+  },
+  {
+    "id": "queda_de_quatro",
+    "name_pt": "Queda de quatro",
+    "name_en": "four-point drop",
+    "theme": "Defense",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=Fqqf1Xrv8wY",
+    "tempo_range": "Slow",
+    "notes": "Dropping into a four-point base — both hands and both feet on the ground. From here you can transition into kicks, flips, or evasions. A staple shape in the floor game.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Queda de quatro, ok?",
+    "transcript_en": "Four-point drop, ok?"
+  },
+  {
+    "id": "role_cocorinha",
+    "name_pt": "Cocorinha com rolê",
+    "name_en": "squat evasion + rolê",
+    "theme": "Defense",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=_3roQSVhQ_E",
+    "tempo_range": "Slow",
+    "notes": "From the deep squat (cocorinha), one leg extends and the body rolls into rolê. Trains the squat→roll transition cleanly.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Cocorinha com rolê.",
+    "transcript_en": "Cocorinha, into rolê."
+  },
+  {
+    "id": "role_defesa",
+    "name_pt": "Defesa com rolê",
+    "name_en": "block + rolê",
+    "theme": "Defense",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=VEGAKmIrid0",
+    "tempo_range": "Slow",
+    "notes": "The basic block ending in rolê — a low rolling transition back to base. The point: never end a defense standing still; always flow.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Defesa com rolê.",
+    "transcript_en": "Block, into rolê."
+  },
+  {
+    "id": "role_esquiva_martelo",
+    "name_pt": "Esquiva para martelo com rolê",
+    "name_en": "martelo dodge + rolê",
+    "theme": "Defense",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=t7A6t-GFh_s",
+    "tempo_range": "Slow",
+    "notes": "Specific evasion against an incoming martelo (hammer kick), followed by rolê. The body slips inside the arc of the kick, then drops into the roll for distance.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Esquiva para martelo com rolê.",
+    "transcript_en": "Martelo dodge, into rolê."
+  },
+  {
+    "id": "role_esquiva_para_tras",
+    "name_pt": "Esquiva para trás com rolê",
+    "name_en": "backward dodge + rolê",
+    "theme": "Defense",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=iAF3MmmotzU",
+    "tempo_range": "Slow",
+    "notes": "Backward esquiva chained into rolê. Use this against a straight front-line attack (bênção, ponteira): the body retreats, drops, and rolls out laterally.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Esquiva para trás com rolê.",
+    "transcript_en": "Backward dodge, into rolê."
+  },
+  {
+    "id": "role_negativa",
+    "name_pt": "Negativa com rolê",
+    "name_en": "negativa + rolê",
+    "theme": "Defense",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=9J66TVsoh-U",
+    "tempo_range": "Slow",
+    "notes": "Negativa (low extended-leg evasion) followed by rolê. The body never stops moving — drop low, roll, recover on the other side.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Negativa com rolê.",
+    "transcript_en": "Negativa, into rolê."
+  },
+  {
+    "id": "bencao",
+    "name_pt": "Bênção",
+    "name_en": "the blessing — straight front-thrust kick",
+    "theme": "Attacks",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=lJbkVonYZTU",
+    "tempo_range": "Medium",
+    "notes": "Bênção (\"blessing\") — a straight front-thrust kick delivered with the heel, hip behind the strike. The opening attack in Bico Duro's line-strike sequence.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Vamos fazer agora a terceira coisa mais importante dentro da capoeira: os ataques, os golpes. Primeiramente, os golpes de linha. Linha de frente: bênção.",
+    "transcript_en": "Now we'll do the third most important thing within capoeira: attacks — strikes. First, the line strikes. Front line: bênção."
+  },
+  {
+    "id": "chute",
+    "name_pt": "Chute",
+    "name_en": "basic kick",
+    "theme": "Attacks",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=Pa_I-huTAXU",
+    "tempo_range": "Medium",
+    "notes": "Chute — the generic term for a kick. In Bico Duro's progression, this is the straight, no-frills kick before the rotational and aerial work begins.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Chute.",
+    "transcript_en": "Basic kick."
+  },
+  {
+    "id": "gancho",
+    "name_pt": "Gancho",
+    "name_en": "hook kick",
+    "theme": "Attacks",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=3DCwBcYRQHs",
+    "tempo_range": "Medium",
+    "notes": "Gancho — a hooking kick where the heel curls back to strike. Sometimes called \"esporal.\" Lower-line variant; targets the ribs or hip from the outside.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Gancho ou esporal.",
+    "transcript_en": "Hook kick, also called esporal."
+  },
+  {
+    "id": "joelhada",
+    "name_pt": "Joelhada",
+    "name_en": "knee strike",
+    "theme": "Attacks",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=dQgaGc53Nu0",
+    "tempo_range": "Medium",
+    "notes": "Joelhada — a knee strike driven up from the ginga. Close-range; targets the chest, jaw, or thigh of the opponent.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Joelhada.",
+    "transcript_en": "Knee strike."
+  },
+  {
+    "id": "joelhada_lateral",
+    "name_pt": "Joelhada lateral",
+    "name_en": "side knee strike",
+    "theme": "Attacks",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=FUialEI2F5A",
+    "tempo_range": "Medium",
+    "notes": "Joelhada lateral — the knee strikes from the side, hip rotating to expose the side of the knee as the contact surface. Close-range counter to a body clinch.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Joelhada lateral.",
+    "transcript_en": "Side knee strike."
+  },
+  {
+    "id": "martelo",
+    "name_pt": "Martelo",
+    "name_en": "hammer kick",
+    "theme": "Attacks",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=1AMZBIhIroI",
+    "tempo_range": "Medium",
+    "notes": "Martelo — a hammer kick that whips in from the side, instep striking the head or body. Hip rotation drives the power; the support foot pivots a full quarter turn.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Martelo.",
+    "transcript_en": "Hammer kick."
+  },
+  {
+    "id": "meia_lua_de_frente",
+    "name_pt": "Meia lua de frente",
+    "name_en": "front half-moon kick",
+    "theme": "Attacks",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=YfMu3kSUSYk",
+    "tempo_range": "Medium",
+    "notes": "A half-moon arc kick traveling inward — from the outside line, sweeping across the opponent's centerline. The inside foot strikes; the body opens through the hip.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Meia lua de frente.",
+    "transcript_en": "Front half-moon kick."
+  },
+  {
+    "id": "ponteira",
+    "name_pt": "Ponteira",
+    "name_en": "toe-point thrust kick",
+    "theme": "Attacks",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=XvZEEhFcA-o",
+    "tempo_range": "Medium",
+    "notes": "Ponteira — a sharp front-thrust kick striking with the ball or toe of the foot. Lives between bênção (heel) and chute (instep) in the line-strike family.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Ponteira.",
+    "transcript_en": "Toe-point thrust kick."
+  },
+  {
+    "id": "queixada_de_frente",
+    "name_pt": "Queixada de frente",
+    "name_en": "front jaw-kick",
+    "theme": "Attacks",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=64-SXKsqx0U",
+    "tempo_range": "Medium",
+    "notes": "Queixada — \"jaw\" — an outward-arc kick that opens the body, the outer edge of the foot rising to strike the opponent's jaw or temple. Mirror image of the meia lua de frente.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Queixada de frente.",
+    "transcript_en": "Front jaw-kick."
+  },
+  {
+    "id": "armada_de_costas",
+    "name_pt": "Armada de costas",
+    "name_en": "back-spinning hook kick",
     "theme": "Attacks",
     "difficulty": "Intermediate",
     "duration_minutes": 20,
-    "youtube_clip_url": "",
+    "youtube_clip_url": "https://www.youtube.com/watch?v=Q2Tl1HSVX0Q",
     "tempo_range": "Medium",
-    "notes": "Drop into a one-handed stance. The sweeping leg traces the floor in a full circle. The name evokes the stingray's tail sweeping across the ocean floor. The supporting arm must be strong — the body's weight rests on it. Eyes stay on the partner's feet. The sweep should be continuous; do not stop halfway through the circle.",
-    "pairs_well_with": ["negativa", "meia_lua_de_compasso"],
-    "source_videos": [],
-    "transcript_pt": "",
-    "transcript_en": ""
+    "notes": "Armada de costas — armada delivered with the back turned to the target, the kick whipping around as the body completes a full rotation. Power comes from the windup.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Armada de costas.",
+    "transcript_en": "Back-spinning hook kick."
+  },
+  {
+    "id": "role_chapa",
+    "name_pt": "Chapa com rolê",
+    "name_en": "push kick + rolê",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=kRhr1am2myA",
+    "tempo_range": "Medium",
+    "notes": "Chapa — a side-thrust push kick driven from the hip, sole of the foot striking the opponent's centerline — chained into rolê. Distance management at the moment of contact.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Chapa com rolê.",
+    "transcript_en": "Chapa, into rolê."
+  },
+  {
+    "id": "chapeu_de_couro",
+    "name_pt": "Chapéu de couro",
+    "name_en": "leather hat",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=2Xk1EhiySPg",
+    "tempo_range": "Medium",
+    "notes": "Chapéu de couro — \"leather hat.\" A low spinning sweep: one hand plants while the body rotates and a leg sweeps the opponent's stance from below. Bico Duro closes the beginner curriculum with this move + rolê.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Chapéu de couro. Rolê.",
+    "transcript_en": "Leather hat. Rolê."
+  },
+  {
+    "id": "role_chute",
+    "name_pt": "Chute com rolê",
+    "name_en": "basic kick + rolê",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=w6ehNgi4YZQ",
+    "tempo_range": "Medium",
+    "notes": "Straight kick exiting into rolê. The simplest version of the kick-roll loop — drilled until the down-and-out becomes reflex.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Chute com rolê.",
+    "transcript_en": "Basic kick, into rolê."
+  },
+  {
+    "id": "role_gancho",
+    "name_pt": "Gancho com rolê",
+    "name_en": "hook kick + rolê",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=HiZGkcOuInw",
+    "tempo_range": "Medium",
+    "notes": "Gancho exiting into rolê. The hook lands; weight shifts down, the body folds into the rolling escape.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Gancho com rolê.",
+    "transcript_en": "Hook kick, into rolê."
+  },
+  {
+    "id": "role_giro_da_armada",
+    "name_pt": "Giro da armada com rolê",
+    "name_en": "armada spin + rolê",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=NxtPKYA8Yhw",
+    "tempo_range": "Medium",
+    "notes": "Armada delivered with the spinning entry, exiting into rolê. The full rotation drives the kick; the rolê absorbs the momentum on the way down.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Giro da armada com rolê.",
+    "transcript_en": "Armada spin, into rolê."
+  },
+  {
+    "id": "giro_da_meia_lua_de_compasso",
+    "name_pt": "Giro da meia lua de compasso",
+    "name_en": "compass half-moon spin",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=bT3NR6V1mKw",
+    "tempo_range": "Medium",
+    "notes": "Drilling the spin (giro) that sets up the meia lua de compasso. Isolate the rotation before adding the kick — the precision is in the foot placement before launch.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Giro da meia lua de compasso.",
+    "transcript_en": "The spin entry to the half-moon compass kick."
+  },
+  {
+    "id": "role_joelhada",
+    "name_pt": "Joelhada com rolê",
+    "name_en": "knee strike + rolê",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=bXvYd_X5jac",
+    "tempo_range": "Medium",
+    "notes": "Joelhada into rolê. After a close-range knee, the body drops and rolls — you don't stay in the clinch range to absorb a counter.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Joelhada com rolê.",
+    "transcript_en": "Knee strike, into rolê."
+  },
+  {
+    "id": "role_joelhada_lateral",
+    "name_pt": "Joelhada lateral com rolê",
+    "name_en": "side knee + rolê",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=9wrNnQQLRPY",
+    "tempo_range": "Medium",
+    "notes": "Side knee chained into rolê. Same logic as joelhada: strike, drop, roll out — never stand in counter-range.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Joelhada lateral com rolê.",
+    "transcript_en": "Side knee strike, into rolê."
+  },
+  {
+    "id": "role_martelo",
+    "name_pt": "Martelo com rolê",
+    "name_en": "hammer kick + rolê",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=GTl6A70bYuA",
+    "tempo_range": "Medium",
+    "notes": "Throw the martelo and exit into rolê. Trains the kick-recovery — landing already on the floor, ready to roll, instead of standing upright and exposed.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Martelo com rolê.",
+    "transcript_en": "Hammer kick, into rolê."
+  },
+  {
+    "id": "meia_lua_de_compasso",
+    "name_pt": "Meia lua de compasso",
+    "name_en": "compass half-moon kick",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=OJi2GJSP6vA",
+    "tempo_range": "Medium",
+    "notes": "Meia lua de compasso — the signature spinning kick of capoeira. One hand plants, body opens like a compass, the heel swings in a wide arc. Precision: the planted hand and the kicking leg form a straight line.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Meia lua de compasso.",
+    "transcript_en": "Compass half-moon kick."
+  },
+  {
+    "id": "role_meia_lua_de_frente",
+    "name_pt": "Meia lua de frente com rolê",
+    "name_en": "front half-moon + rolê",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=nGpBZfc9LLU",
+    "tempo_range": "Medium",
+    "notes": "Meia lua de frente lands and the body immediately spirals down into rolê. Trains the kick to terminate low rather than upright.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Meia lua de frente com rolê.",
+    "transcript_en": "Front half-moon kick, into rolê."
+  },
+  {
+    "id": "queixada_cavando",
+    "name_pt": "Queixada cavando",
+    "name_en": "digging queixada (lower trajectory)",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=ITEqKf0fqw4",
+    "tempo_range": "Medium",
+    "notes": "Queixada cavando — \"digging queixada.\" A lower-trajectory variant of the queixada that scoops upward, often used to break through a held guard rather than over it.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Queixada cavando.",
+    "transcript_en": "Digging queixada."
+  },
+  {
+    "id": "role_queixada_de_frente",
+    "name_pt": "Queixada de frente com rolê",
+    "name_en": "front queixada + rolê",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=sA1aj7zKJcE",
+    "tempo_range": "Medium",
+    "notes": "Queixada de frente chained into rolê. The outward-arc kick recovers downward into the roll rather than returning to standing — keeps you out of counter-range.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Queixada de frente com rolê.",
+    "transcript_en": "Front jaw-kick, into rolê."
+  },
+  {
+    "id": "role_queixada_de_frente_2",
+    "name_pt": "Queixada de frente com rolê (variação)",
+    "name_en": "front queixada + rolê — variation",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=ahWAmkgyd9M",
+    "tempo_range": "Medium",
+    "notes": "A variation of the queixada de frente + rolê — Bico Duro returns to the same move later in the drill with a different entry angle.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Queixada de frente com rolê.",
+    "transcript_en": "Front jaw-kick, into rolê."
+  },
+  {
+    "id": "rabo_de_arraia",
+    "name_pt": "Rabo de arraia",
+    "name_en": "stingray tail",
+    "theme": "Attacks",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=bfbWNmUlA2Y",
+    "tempo_range": "Medium",
+    "notes": "Rabo de arraia — \"stingray tail.\" A spinning low-handstand kick: the hands plant, the body inverts, and one leg whips around like a tail. One of capoeira's iconic shapes.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Rabo de arraia.",
+    "transcript_en": "Stingray tail."
+  },
+  {
+    "id": "role_giro_da_meia_lua_de_compasso",
+    "name_pt": "Giro da meia lua de compasso com rolê",
+    "name_en": "compass half-moon spin + rolê",
+    "theme": "Attacks",
+    "difficulty": "Advanced",
+    "duration_minutes": 25,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=HHCGUrL7Loc",
+    "tempo_range": "Fast",
+    "notes": "The signature spinning kick chained into rolê, with a key teaching note from Bico Duro: this drill builds the body awareness needed to set up a bananeira (handstand) inside live play.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Giro da meia lua de compasso com rolê. Essa é uma boa técnica para fazer bananeira na ginga ou jogando.",
+    "transcript_en": "Spin-entry compass half-moon kick, into rolê. This is a good technique for setting up the bananeira (handstand) within the ginga or in the game itself."
+  },
+  {
+    "id": "giro",
+    "name_pt": "Giro",
+    "name_en": "spin (pivot setup)",
+    "theme": "Flow",
+    "difficulty": "Beginner",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=R-PpNdm2YCo",
+    "tempo_range": "Medium",
+    "notes": "Giro — the basic pivot/turn. Practiced in isolation so that when it joins armada, meia lua de compasso, or rabo de arraia, the spin itself is already automatic.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "cqKMvYbB1Kw"
+    ],
+    "transcript_pt": "Giro.",
+    "transcript_en": "Spin."
+  },
+  {
+    "id": "role_intro_modalidade",
+    "name_pt": "Modalidade com rolê",
+    "name_en": "intro: combining moves with rolê",
+    "theme": "Flow",
+    "difficulty": "Intermediate",
+    "duration_minutes": 20,
+    "youtube_clip_url": "https://www.youtube.com/watch?v=zuOGXOLaHTw",
+    "tempo_range": "Medium",
+    "notes": "Bico Duro's intermediate drill: every defensive shape and every attack ends with rolê — the defensive roll back to ginga. The whole video below pairs each move with rolê so the transition becomes automatic.",
+    "pairs_well_with": [],
+    "source_videos": [
+      "zLPVWP5WQOg"
+    ],
+    "transcript_pt": "Vamos fazer modalidade com rolê.",
+    "transcript_en": "We're going to drill each move chained with rolê."
   }
 ]
