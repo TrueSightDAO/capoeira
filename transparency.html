@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Every donation to Tribo Bahia Mirim, minus Stripe processing fees, goes directly to the after-school capoeira program in Itacare. See the full ledger.">
+    <meta name="description" content="Every donation to Tribo Bahia Mirim, minus Stripe and Wise transfer fees, goes directly to the after-school capoeira program in Itacare. See the full ledger.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transparency — Tribo Bahia Mirim Capoeira</title>
 
     <meta property="og:title" content="Transparency — Tribo Bahia Mirim Capoeira">
-    <meta property="og:description" content="Every donation, minus processing fees, goes directly to Tribo Bahia Mirim.">
+    <meta property="og:description" content="Every donation, minus Stripe and Wise transfer fees, goes directly to Tribo Bahia Mirim.">
     <meta property="og:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
     <meta property="og:url" content="https://capoeira.agroverse.shop/transparency.html">
     <meta property="og:type" content="website">
@@ -15,7 +15,7 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Transparency — Tribo Bahia Mirim Capoeira">
-    <meta name="twitter:description" content="Every donation, minus processing fees, goes directly to Tribo Bahia Mirim.">
+    <meta name="twitter:description" content="Every donation, minus Stripe and Wise transfer fees, goes directly to Tribo Bahia Mirim.">
     <meta name="twitter:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
 
     <link rel="icon" type="image/jpeg" sizes="192x192" href="https://www.agroverse.shop/assets/images/logo/favicon-192x192.jpeg">
@@ -51,7 +51,7 @@
     <section class="section section-narrow">
         <div class="section-heading">
             <h2>Where Every Dollar Goes</h2>
-            <p>Every donation, minus processing fees, goes directly to Bico Duro and the kids. TrueSight DAO takes no cut.</p>
+            <p>Every donation, minus Stripe and Wise transfer fees, goes directly to Bico Duro and the kids. TrueSight DAO takes no cut.</p>
         </div>
 
         <div class="card" style="margin-bottom:2rem">
@@ -60,7 +60,8 @@
                 <li>You donate via <strong>Stripe Checkout</strong> on this site</li>
                 <li>Stripe deducts their processing fee (2.9% + $0.30 per transaction)</li>
                 <li>The remaining amount is recorded in the <strong>TrueSight DAO treasury-cache ledger</strong></li>
-                <li>Funds are transferred to Bico Duro via Pix (Brazilian instant payment)</li>
+                <li>Funds are transferred to Bico Duro via <strong>Wise</strong> to Brazil (0.5% + $1.50 fee)</li>
+                <li>Bico Duro receives the final amount via Pix (Brazilian instant payment)</li>
                 <li>Every transfer is published on the <strong>public transparency dashboard</strong> at <a href="https://mirim-bahia.truesight.me">mirim-bahia.truesight.me</a></li>
             </ol>
         </div>
@@ -69,8 +70,10 @@
             <h3 style="margin-bottom:0.75rem">Example: What Your Donation Funds</h3>
             <table>
                 <tr><td>Your donation:</td><td style="font-weight:700" id="calc-donation">$50.00</td></tr>
-                <tr><td>Stripe fee (2.9% + $0.30):</td><td style="color:var(--color-danger)" id="calc-fee">$1.75</td></tr>
-                <tr><td>Net to Tribo Bahia Mirim:</td><td style="font-weight:700;color:var(--color-success)" id="calc-net">$48.25</td></tr>
+                <tr><td>Stripe fee (2.9% + $0.30):</td><td style="color:var(--color-danger)" id="calc-stripe-fee">$1.75</td></tr>
+                <tr><td>Net after Stripe:</td><td style="font-weight:600" id="calc-after-stripe">$48.25</td></tr>
+                <tr><td>Wise transfer fee (0.5% + $1.50):</td><td style="color:var(--color-danger)" id="calc-wise-fee">$1.74</td></tr>
+                <tr><td>Net to Tribo Bahia Mirim:</td><td style="font-weight:700;color:var(--color-success)" id="calc-net">$46.51</td></tr>
             </table>
 
             <div style="margin-top:1.5rem">
@@ -110,11 +113,19 @@
     <script>
         function updateFeeCalc() {
             const amount = parseFloat(document.getElementById('calc-input').value) || 0;
-            const fee = Math.round((amount * 0.029 + 0.30) * 100) / 100;
-            const net = Math.round((amount - fee) * 100) / 100;
+
+            // Stripe fee: 2.9% + $0.30
+            const stripeFee = Math.round((amount * 0.029 + 0.30) * 100) / 100;
+            const afterStripe = Math.round((amount - stripeFee) * 100) / 100;
+
+            // Wise transfer fee: 0.5% + $1.50 (typical for Brazil transfers)
+            const wiseFee = Math.round((afterStripe * 0.005 + 1.50) * 100) / 100;
+            const net = Math.round((afterStripe - wiseFee) * 100) / 100;
 
             document.getElementById('calc-donation').textContent = '$' + amount.toFixed(2);
-            document.getElementById('calc-fee').textContent = '$' + fee.toFixed(2);
+            document.getElementById('calc-stripe-fee').textContent = '$' + stripeFee.toFixed(2);
+            document.getElementById('calc-after-stripe').textContent = '$' + afterStripe.toFixed(2);
+            document.getElementById('calc-wise-fee').textContent = '$' + wiseFee.toFixed(2);
             document.getElementById('calc-net').textContent = '$' + net.toFixed(2);
         }
 
