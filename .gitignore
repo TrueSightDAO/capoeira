@@ -1,0 +1,8 @@
+.DS_Store
+*.swp
+__pycache__/
+.venv/
+node_modules/
+
+# Compiled per-move clips — regeneratable from yt-dlp + ffmpeg + data/segmentation_plan.json
+data/compiled_clips/
