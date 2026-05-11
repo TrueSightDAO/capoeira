@@ -48,6 +48,15 @@
         </nav>
     </header>
 
+    <!-- --- Past Sessions Summary (always visible on landing) --- -->
+    <section class="section" id="history-summary-section">
+        <div class="section-heading">
+            <h2>Your Practice History</h2>
+            <p>All data is stored locally in your browser. No accounts. No tracking.</p>
+        </div>
+        <div id="history-summary"></div>
+    </section>
+
     <!-- --- Generator Section --- -->
     <section class="section" id="generate-section">
         <div class="section-heading">
@@ -183,6 +192,11 @@
                 advanced: { Beginner: 0.3, Intermediate: 0.7, Advanced: 1.2 }
             };
             window.generateSession(biasMap[biasSelect.value] || {});
+        }
+
+        // Render past-sessions dashboard on page load (always visible at top)
+        if (window.CapoeiraHistory && window.CapoeiraHistory.renderDashboard) {
+            window.CapoeiraHistory.renderDashboard('history-summary');
         }
     </script>
 </body>

@@ -672,3 +672,133 @@ body > footer .footer-links {
     height: 100%;
     border: none;
 }
+
+/* ---------- Session preview move cards with Bico Duro thumbnails ---------- */
+.move-preview-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+}
+.move-preview-card {
+    display: grid;
+    grid-template-columns: 28px 110px 1fr;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem;
+    background: var(--color-bg-warm, #faf7f2);
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+.move-preview-index {
+    font-weight: 700;
+    color: var(--color-text-light, #888);
+    text-align: center;
+}
+.move-thumb-link {
+    position: relative;
+    display: block;
+    line-height: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    text-decoration: none;
+}
+.move-thumb {
+    width: 110px;
+    height: 62px;
+    object-fit: cover;
+    display: block;
+}
+.move-thumb-placeholder {
+    background: #ddd;
+    color: #888;
+    font-size: 0.75rem;
+    line-height: 62px;
+    text-align: center;
+    border-radius: 6px;
+}
+.move-thumb-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 1.5rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+    pointer-events: none;
+}
+.move-thumb-link:hover .move-thumb-play { font-size: 1.7rem; transition: font-size 0.15s; }
+.move-preview-body { min-width: 0; }
+.move-preview-body .move-name-pt { font-weight: 600; font-size: 0.95rem; }
+.move-preview-body .move-name-en { color: var(--color-text-light, #888); font-size: 0.8rem; margin-bottom: 0.25rem; }
+.move-preview-meta { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; font-size: 0.75rem; }
+.move-preview-meta .move-duration { color: var(--color-text-light, #888); }
+.music-chip {
+    display: inline-block;
+    background: #eee;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    margin: 0.2rem;
+}
+
+/* ---------- Move library: clickable rows + modal demo ---------- */
+.move-table tbody tr { cursor: pointer; }
+.move-table tbody tr.no-link { cursor: default; }
+.move-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+.move-modal-backdrop.hidden { display: none; }
+.move-modal-content {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.move-modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-text-light, #888);
+    padding: 0.25rem 0.5rem;
+}
+.move-modal-close:hover { color: #000; }
+.move-modal-video {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+.move-modal-video iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.move-modal h3 { margin: 0 0 0.25rem; }
+.move-modal-subtitle { color: var(--color-text-light, #888); margin-bottom: 0.5rem; }
+.move-modal-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
+.move-modal-notes { font-size: 0.95rem; line-height: 1.5; }
+.move-modal-transcript { margin-top: 1rem; font-size: 0.9rem; color: var(--color-text-light, #555); }
+.move-modal-transcript strong { color: var(--color-text, #333); }
