@@ -688,12 +688,22 @@ body > footer .footer-links {
     body > footer { padding: 1.5rem 1rem; }
     body > footer .footer-links { gap: 1rem; }
 
-    /* Add breathing room above the iOS Safari toolbar so the footer isn't
-       hidden behind it on initial scroll-to-bottom. The base body padding
-       already accounts for env(safe-area-inset-bottom); on phones we add an
-       extra 48px floor so non-iOS mobile browsers (where the inset is 0)
-       still get meaningful clearance. */
-    body { padding-bottom: max(env(safe-area-inset-bottom, 0px), 48px); }
+    /* Add breathing room above the iOS Safari toolbar so the footer (and
+       the Start Practice / Generate Session buttons that sit at the bottom
+       of practice.html) isn't hidden behind it on initial scroll-to-bottom.
+       Generous floor: iOS Safari toolbar can be ~50-90px depending on
+       device + landscape orientation; 96px clears all of them. Non-iOS
+       mobile browsers (where safe-area-inset-bottom is 0) still get the
+       96px floor. Falls back to 0 on desktop. */
+    body { padding-bottom: max(env(safe-area-inset-bottom, 0px), 96px); }
+
+    /* scroll-margin-bottom on action buttons so when scrollIntoView fires
+       they sit comfortably above the bottom toolbar instead of jammed
+       against the viewport edge. */
+    #start-session-btn,
+    .session-card,
+    .now-playing,
+    .donate-cta button { scroll-margin-bottom: 96px; }
 
     /* Defensive: practice page's main content column shouldn't overflow its
        grid cell when content (timer, video, button row) gets wide. */

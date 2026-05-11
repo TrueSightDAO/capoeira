@@ -304,6 +304,18 @@
       statusEl.className = '';
       cardEl.classList.remove('hidden');
       startBtn.classList.remove('hidden');
+
+      // Mobile: ensure the just-revealed Start Practice button is visible.
+      // Without this, on a small viewport the button can render below the
+      // fold (especially below iOS Safari's bottom toolbar) and the user
+      // doesn't realize it appeared. Smooth scroll keeps the context.
+      // Use rAF + setTimeout so layout settles after the .hidden -> visible
+      // class change before measuring.
+      requestAnimationFrame(function () {
+        setTimeout(function () {
+          startBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
+      });
     } catch (err) {
       statusEl.textContent = 'Could not generate session: ' + err.message;
       statusEl.className = 'error';
