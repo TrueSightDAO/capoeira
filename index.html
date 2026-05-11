@@ -30,6 +30,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#f4a300">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/capoeira-checkout.css">
 </head>
@@ -152,6 +154,38 @@
         </div>
     </section>
 
+    <!-- QR Code for Dojo -->
+    <section class="donate-cta" style="background:var(--color-bg)">
+        <div class="section-heading">
+            <h2>Treine Conosco</h2>
+            <p>Escaneie o QR code para acessar os vídeos de treino. Salve na tela inicial do seu celular.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;align-items:center;max-width:800px;margin:0 auto">
+            <div style="background:#fff;padding:1rem;border-radius:12px;box-shadow:var(--shadow-md)">
+                <img src="https://chart.googleapis.com/chart?chs=280x280&cht=qr&chl=https://capoeira.agroverse.shop&choe=UTF-8&chld=L|0" 
+                     alt="QR code para capoeira.agroverse.shop" 
+                     width="280" height="280"
+                     style="display:block"
+                     onerror="this.style.display='none';document.getElementById('qr-fallback').style.display='block'">
+                <div id="qr-fallback" style="display:none;width:280px;height:280px;background:var(--color-bg-light);display:none;align-items:center;justify-content:center;font-family:monospace;font-size:0.75rem;color:var(--color-text-light);text-align:center;padding:1rem">
+                    capoeira.agroverse.shop
+                </div>
+            </div>
+            <div style="text-align:left;max-width:300px">
+                <p style="font-size:1rem;color:var(--color-text);font-weight:600;margin-bottom:0.5rem">Para o Dojô</p>
+                <p style="font-size:0.9rem;color:var(--color-text-light);line-height:1.6">
+                    Bico Duro pode baixar esta imagem e imprimir para colocar na entrada do dojô. 
+                    Alunos e visitantes escaneiam o código para acessar os treinos de 45 minutos 
+                    com vídeos e música de berimbau.
+                </p>
+                <p style="font-size:0.85rem;color:var(--color-text-light);margin-top:0.5rem">
+                    <strong>No celular:</strong> abra o site e toque em "Adicionar à tela inicial" 
+                    para ter um atalho igual a um aplicativo.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Donate CTA -->
     <section class="donate-cta" id="donate">
         <h2>Support The Kids</h2>
@@ -221,5 +255,6 @@
             banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
         })();
     </script>
+<script>if("serviceWorker"in navigator)navigator.serviceWorker.register("/service-worker.js")</script>
 </body>
 </html>
