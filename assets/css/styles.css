@@ -641,12 +641,60 @@ body > footer .footer-links {
 /* --- Responsive --- */
 @media (max-width: 600px) {
     .hero { min-height: 60vh; }
+    .hero-content { padding: 1.5rem 1rem; }
+    .hero-content h1 br { display: none; }  /* let h1 wrap naturally on narrow screens */
+    .hero-buttons .btn { flex: 1 1 auto; min-width: 140px; }
+
     .section { padding: 2.5rem 1rem; }
-    .cards-grid { grid-template-columns: 1fr; }
-    .photo-gallery { grid-template-columns: 1fr; }
+    .section-narrow { padding: 2.5rem 1rem; }
+    .section-heading { margin-bottom: 1.75rem; }
+    .narrative p { font-size: 1rem; line-height: 1.7; }
+    .narrative .bico-duro-quote { font-size: 1.1rem; padding-left: 1rem; margin: 1.5rem 0; }
+
+    .donate-cta { padding: 2.5rem 1rem; }
+    .donate-cta p { margin-bottom: 1.5rem; }
+    .donate-amounts { gap: 0.5rem; }
+    .donate-amount {
+        /* grow uniformly so 5 amount buttons wrap to a clean 3+2 grid on phones
+           instead of an unbalanced 4+1 with one tiny button on its own row */
+        flex: 1 1 80px;
+        padding: 0.7rem 0.5rem;
+    }
+
+    .cards-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .photo-gallery { grid-template-columns: 1fr; gap: 1rem; }
+    .photo-item img { height: 220px; }
+
     .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .stat-box { padding: 1rem; }
+    .stat-box .stat-value { font-size: 1.6rem; }
+
+    /* Move table: wrap rules already handle font-size; add horizontal overflow
+       affordance so wide tables don't blow out the layout on narrow screens.
+       The library.html `.move-table-wrapper` (added in this PR) does the actual scroll. */
     .move-table { font-size: 0.85rem; }
     .move-table th, .move-table td { padding: 0.5rem; }
+
+    body > footer { padding: 1.5rem 1rem; }
+    body > footer .footer-links { gap: 1rem; }
+}
+
+/* Tighten header at very narrow widths (small phones, landscape Galaxy S, etc.).
+   At <=480px the "Tribo Bahia Mirim" logo text + 48px image + hamburger crowd
+   each other. Shrink the image and rely on the text alone for branding. */
+@media (max-width: 480px) {
+    body > header nav { padding: 0.4rem 1rem; gap: 0.5rem; }
+    body > header nav a.logo { font-size: 1rem; }
+    body > header nav a.logo img { height: 36px; }
+}
+
+/* Wrapper for any wide table that needs horizontal scroll on narrow screens.
+   Apply with <div class="move-table-wrapper"><table class="move-table">…</table></div>
+   so the table can outgrow the viewport without breaking the layout. */
+.move-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* --- Stripe donate button --- */
