@@ -155,7 +155,7 @@
     </section>
 
     <!-- QR Code for Dojo -->
-    <section class="donate-cta" style="background:var(--color-bg)">
+    <section class="donate-cta" style="background:var(--color-bg)" id="qr-section">
         <div class="section-heading">
             <h2>Treine Conosco</h2>
             <p>Escaneie o QR code para acessar os vídeos de treino. Salve na tela inicial do seu celular.</p>
@@ -165,18 +165,20 @@
                 <img src="assets/images/qr-dojo.png" 
                      alt="QR code para capoeira.agroverse.shop" 
                      width="280" height="280"
-                     style="display:block">
+                     style="display:block"
+                     id="qr-image">
             </div>
             <div style="text-align:left;max-width:300px">
                 <p style="font-size:1rem;color:var(--color-text);font-weight:600;margin-bottom:0.5rem">Para o Dojô</p>
                 <p style="font-size:0.9rem;color:var(--color-text-light);line-height:1.6">
-                    Bico Duro pode baixar esta imagem e imprimir para colocar na entrada do dojô. 
                     Alunos e visitantes escaneiam o código para acessar os treinos de 45 minutos 
                     com vídeos e música de berimbau.
                 </p>
-                <p style="font-size:0.85rem;color:var(--color-text-light);margin-top:0.5rem">
-                    <strong>No celular:</strong> abra o site e toque em "Adicionar à tela inicial" 
-                    para ter um atalho igual a um aplicativo.
+                <button onclick="printQR()" class="btn btn-primary btn-sm" style="margin-top:0.75rem">
+                    🖨 Baixar para imprimir
+                </button>
+                <p style="font-size:0.8rem;color:var(--color-text-light);margin-top:0.5rem">
+                    No celular: toque em "Adicionar à tela inicial"
                 </p>
             </div>
         </div>
@@ -250,6 +252,13 @@
             // Bring the banner into view without jumping past the header.
             banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
         })();
+
+        function printQR() {
+            var w = window.open('', '_blank', 'width=600,height=700');
+            var img = document.getElementById('qr-image');
+            w.document.write('<!DOCTYPE html><html><head><title>Tribo Bahia Mirim</title><style>body{margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f7f1e8;flex-direction:column;font-family:sans-serif}img{max-width:90vw;max-height:80vh}h2{color:#3b3333;margin-bottom:0.25rem}p{color:#6f5a44;margin-top:0;font-size:0.85rem}@media print{body{margin:0;padding:20px}}</style></head><body><h2>Treine Conosco</h2><p>capoeira.agroverse.shop</p><img src="' + img.src + '" width="400" height="400" onload="setTimeout(function(){window.print()},500)"></body></html>');
+            w.document.close();
+        }
     </script>
 <script>if("serviceWorker"in navigator)navigator.serviceWorker.register("/service-worker.js")</script>
 </body>
