@@ -203,27 +203,64 @@
   }
 
   /**
-   * Render the session card into the DOM
+   * Extract the YouTube video ID from a watch URL.
+   * Supports https://www.youtube.com/watch?v=ID and https://youtu.be/ID forms.
+   */
+  function extractYouTubeId(url) {
+    if (!url) return null;
+    let m = url.match(/[?&]v=([A-Za-z0-9_-]{6,})/);
+    if (m) return m[1];
+    m = url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
+    if (m) return m[1];
+    return null;
+  }
+
+  /**
+   * Render the session card into the DOM.
+   *
+   * Each move renders as a card with Bico Duro's YouTube thumbnail (clickable
+   * to open in a new tab) + PT/EN names + duration. Lightweight: thumbnails
+   * are static images (i.ytimg.com), no iframe per move.
    */
   function renderSessionCard(theme, moves, music, totalTime) {
     const container = document.getElementById('session-card');
 
-    const themeBadge = document.createElement('div');
-    themeBadge.className = 'theme-badge';
-    themeBadge.textContent = theme;
+    const themeBadge = `<div class="theme-badge">${theme}</div>`;
 
-    const moveItems = moves.map(m =>
-      `<li><span class="move-name-pt">${m.name_pt}</span> <span class="move-name-en">— ${m.name_en}</span> <span style="font-size:0.8rem;color:var(--color-text-light)">~${m.duration_minutes}min</span></li>`
-    ).join('');
+    const moveCards = moves.map((m, i) => {
+      const ytId = extractYouTubeId(m.youtube_clip_url);
+      const thumb = ytId
+        ? `<a href="${m.youtube_clip_url}" target="_blank" rel="noopener" class="move-thumb-link" aria-label="Watch ${m.name_pt} demo by Bico Duro">
+             <img src="https://i.ytimg.com/vi/${ytId}/mqdefault.jpg" alt="${m.name_pt} demo by Bico Duro" loading="lazy" class="move-thumb">
+             <span class="move-thumb-play" aria-hidden="true">▶</span>
+           </a>`
+        : `<div class="move-thumb move-thumb-placeholder" aria-hidden="true">no video</div>`;
+      return `
+        <li class="move-preview-card">
+          <div class="move-preview-index">${i + 1}</div>
+          ${thumb}
+          <div class="move-preview-body">
+            <div class="move-name-pt">${m.name_pt}</div>
+            <div class="move-name-en">${m.name_en}</div>
+            <div class="move-preview-meta">
+              <span class="diff-tag ${m.difficulty.toLowerCase()}">${m.difficulty}</span>
+              <span class="theme-tag ${(m.tempo_range || 'medium').toLowerCase()}">${m.tempo_range || 'Medium'}</span>
+              <span class="move-duration">~${m.duration_minutes} min</span>
+            </div>
+          </div>
+        </li>`;
+    }).join('');
 
     const musicItems = music.map(t =>
-      `<span style="display:inline-block;background:#eee;padding:0.15rem 0.5rem;border-radius:10px;font-size:0.8rem;margin:0.2rem">${t.title} (${t.tempo_category}, ${t.bpm}bpm)</span>`
+      `<span class="music-chip">${t.title} (${t.tempo_category}, ${t.bpm}bpm)</span>`
     ).join(' ');
 
     container.innerHTML = `
-      ${themeBadge.outerHTML}
+      ${themeBadge}
       <h3>Your ${theme} Session</h3>
-      <ol class="move-list">${moveItems}</ol>
+      <p style="color:var(--color-text-light);margin-bottom:1rem">Click any thumbnail to preview Bico Duro's demo on YouTube before you start.</p>
+      <ol class="move-preview-list">${moveCards}</ol>
+      <h4 style="margin-top:1.5rem;margin-bottom:0.5rem">Music</h4>
       <div class="music-list">${musicItems}</div>
       <div class="session-total">Total estimated time: ~${totalTime} minutes</div>
     `;

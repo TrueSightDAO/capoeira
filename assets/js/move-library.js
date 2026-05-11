@@ -41,14 +41,25 @@
 
     filteredMoves = [...allMoves];
 
+    function extractYouTubeId(url) {
+      if (!url) return null;
+      let m = url.match(/[?&]v=([A-Za-z0-9_-]{6,})/);
+      if (m) return m[1];
+      m = url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
+      return m ? m[1] : null;
+    }
+
     function render() {
       if (!container) return;
 
       if (filteredMoves.length === 0) {
         container.innerHTML = '<tr><td colspan="5" class="text-center" style="padding:2rem;color:var(--color-text-light)">No moves match the current filters</td></tr>';
       } else {
-        container.innerHTML = filteredMoves.map(m => `
-          <tr>
+        container.innerHTML = filteredMoves.map((m, idx) => {
+          const hasVideo = !!extractYouTubeId(m.youtube_clip_url);
+          const rowClass = hasVideo ? '' : 'no-link';
+          return `
+          <tr data-move-id="${m.id}" class="${rowClass}" ${hasVideo ? 'role="button" tabindex="0"' : ''}>
             <td>
               <strong>${m.name_pt}</strong><br>
               <small style="color:var(--color-text-light)">${m.name_en}</small>
@@ -57,10 +68,72 @@
             <td><span class="diff-tag ${m.difficulty.toLowerCase()}">${m.difficulty}</span></td>
             <td>${m.duration_minutes} min</td>
             <td><span class="theme-tag ${(m.tempo_range || 'medium').toLowerCase()}">${m.tempo_range || 'Medium'}</span></td>
-          </tr>
-        `).join('');
+          </tr>`;
+        }).join('');
       }
     }
+
+    function openModal(moveId) {
+      const m = allMoves.find(x => x.id === moveId);
+      if (!m) return;
+      const ytId = extractYouTubeId(m.youtube_clip_url);
+      const backdrop = document.getElementById('move-modal-backdrop');
+      const body = document.getElementById('move-modal-body');
+      if (!backdrop || !body) return;
+      const embed = ytId
+        ? `<div class="move-modal-video">
+             <iframe src="https://www.youtube-nocookie.com/embed/${ytId}?rel=0" title="${m.name_pt} demo by Bico Duro" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+           </div>`
+        : '';
+      body.innerHTML = `
+        <h3>${m.name_pt}</h3>
+        <p class="move-modal-subtitle">${m.name_en}</p>
+        <div class="move-modal-meta">
+          <span class="theme-tag ${m.theme.toLowerCase()}">${m.theme}</span>
+          <span class="diff-tag ${m.difficulty.toLowerCase()}">${m.difficulty}</span>
+          <span class="theme-tag ${(m.tempo_range || 'medium').toLowerCase()}">${m.tempo_range || 'Medium'}</span>
+          <span style="color:var(--color-text-light);font-size:0.85rem">${m.duration_minutes} min</span>
+        </div>
+        ${embed}
+        ${m.notes ? `<p class="move-modal-notes">${m.notes}</p>` : ''}
+        ${m.transcript_pt ? `<div class="move-modal-transcript"><strong>Bico Duro (PT):</strong> "${m.transcript_pt}"</div>` : ''}
+        ${m.transcript_en ? `<div class="move-modal-transcript"><strong>Translation:</strong> "${m.transcript_en}"</div>` : ''}
+      `;
+      backdrop.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const backdrop = document.getElementById('move-modal-backdrop');
+      const body = document.getElementById('move-modal-body');
+      if (!backdrop) return;
+      backdrop.classList.add('hidden');
+      // Clear the iframe to stop playback
+      if (body) body.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    // Row click → open modal (event delegation, works after re-render)
+    container?.addEventListener('click', (e) => {
+      const tr = e.target.closest('tr[data-move-id]');
+      if (!tr || tr.classList.contains('no-link')) return;
+      openModal(tr.dataset.moveId);
+    });
+    container?.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const tr = e.target.closest('tr[data-move-id]');
+      if (!tr || tr.classList.contains('no-link')) return;
+      e.preventDefault();
+      openModal(tr.dataset.moveId);
+    });
+    // Modal close handlers
+    document.getElementById('move-modal-backdrop')?.addEventListener('click', (e) => {
+      if (e.target.id === 'move-modal-backdrop') closeModal();
+    });
+    document.getElementById('move-modal-close')?.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
 
     function applyFilters() {
       const search = (searchInput?.value || '').toLowerCase().trim();
