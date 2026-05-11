@@ -260,7 +260,7 @@
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(220px, 100%), 1fr));gap:1.5rem">
         <div>
           <h4 style="margin-bottom:0.5rem">Themes (30 days)</h4>
           ${themeBars || '<span style="color:var(--color-text-light)">—</span>'}

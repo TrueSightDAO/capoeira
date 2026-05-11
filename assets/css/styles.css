@@ -27,7 +27,10 @@
 /* --- Reset & Base --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+/* Global overflow safety net — html + body never scroll horizontally so a
+   stray wide element (long URL, oversized inline grid, embed) doesn't
+   sideways-scroll the whole page and make vertical scrolling feel jittery. */
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
     font-family: var(--font-body);
@@ -35,6 +38,13 @@ body {
     background-color: var(--color-bg-light);
     line-height: 1.6;
     min-height: 100vh;
+    overflow-x: hidden;
+    /* Reserve space for iOS Safari's bottom toolbar / iPhone home indicator
+       so the footer (and any "can't reach the bottom" content) isn't hidden
+       behind it. Requires viewport-fit=cover in the page meta for env() to
+       return non-zero on iOS. Falls back to 0 on browsers without safe-area
+       support, so no desktop space is wasted. */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; }
@@ -677,6 +687,31 @@ body > footer .footer-links {
 
     body > footer { padding: 1.5rem 1rem; }
     body > footer .footer-links { gap: 1rem; }
+
+    /* Add breathing room above the iOS Safari toolbar so the footer (and
+       the Start Practice / Generate Session buttons that sit at the bottom
+       of practice.html) isn't hidden behind it on initial scroll-to-bottom.
+       Generous floor: iOS Safari toolbar can be ~50-90px depending on
+       device + landscape orientation; 96px clears all of them. Non-iOS
+       mobile browsers (where safe-area-inset-bottom is 0) still get the
+       96px floor. Falls back to 0 on desktop. */
+    body { padding-bottom: max(env(safe-area-inset-bottom, 0px), 96px); }
+
+    /* scroll-margin-bottom on action buttons so when scrollIntoView fires
+       they sit comfortably above the bottom toolbar instead of jammed
+       against the viewport edge. */
+    #start-session-btn,
+    .session-card,
+    .now-playing,
+    .donate-cta button { scroll-margin-bottom: 96px; }
+
+    /* Defensive: practice page's main content column shouldn't overflow its
+       grid cell when content (timer, video, button row) gets wide. */
+    .practice-layout > * { min-width: 0; }
+
+    /* Defensive: fee-calc table on transparency.html scrolls horizontally
+       on narrow screens instead of pushing the body wider. */
+    .fee-calc { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 
 /* Tighten header at very narrow widths (small phones, landscape Galaxy S, etc.).
