@@ -1,0 +1,123 @@
+/**
+ * capoeira-checkout.css — Styles for Stripe donation checkout
+ * 
+ * Production description: Styles for capoeira Stripe donation checkout flow via Edgar API integration
+ */
+
+.donate-cta {
+    padding: 3rem 2rem;
+    background: var(--color-bg);
+    text-align: center;
+}
+
+.donate-cta h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.donate-cta > p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.donate-amounts {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.donate-amount {
+    padding: 1rem 1.5rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    min-width: 120px;
+}
+
+.donate-amount:hover {
+    border-color: var(--color-primary);
+    background: #f9f9f9;
+}
+
+.donate-amount.selected {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: white;
+    font-weight: 700;
+}
+
+#stripe-donate-btn {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1.2rem 2.5rem;
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+#stripe-donate-btn:hover:not(:disabled) {
+    background-color: var(--color-secondary);
+}
+
+#stripe-donate-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--color-text-light);
+}
+
+.donate-fineprint {
+    font-size: 0.95rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+.donate-fineprint a {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.donate-fineprint a:hover {
+    color: var(--color-secondary);
+}
+
+#checkout-errors {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .donate-amounts {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .donate-amount {
+        min-width: auto;
+        width: 100%;
+    }
+}

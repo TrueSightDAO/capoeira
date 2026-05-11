@@ -31,6 +31,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/capoeira-checkout.css">
 </head>
 <body>
     <!-- Sticky Header -->
@@ -138,8 +139,8 @@
 
     <!-- Donate CTA -->
     <section class="donate-cta" id="donate">
-        <h2>Support the Kids</h2>
-        <p>100% of donations, minus Stripe processing fees, go directly to Tribo Bahia Mirim's after-school capoeira program in Itacare.</p>
+        <h2>Support The Kids</h2>
+        <p>100% of donations, minus Stripe and Wise transfer fees, go directly to Tribo Bahia Mirim's after-school capoeira program in Itacare.</p>
 
         <div class="donate-amounts" id="donate-amounts">
             <button class="donate-amount" data-amount="10" onclick="selectAmount(10, this)">$10</button>
@@ -148,8 +149,10 @@
             <button class="donate-amount" data-amount="100" onclick="selectAmount(100, this)">$100</button>
         </div>
 
-        <div>
-            <button id="stripe-donate-btn" class="btn btn-primary" onclick="initiateStripeCheckout()">
+        <div id="checkout-errors" style="display: none;"></div>
+
+        <div style="text-align: center; margin-top: 1rem;">
+            <button id="stripe-donate-btn" class="btn btn-primary" onclick="initiateCapoeiraCheckout()">
                 Donate $<span id="selected-amount">50</span>
             </button>
         </div>
@@ -171,27 +174,7 @@
         <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
     </footer>
 
-    <script>
-        // Donate amount selector
-        let selectedDonation = 50;
-
-        function selectAmount(amount, btn) {
-            selectedDonation = amount;
-            document.querySelectorAll('.donate-amount').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            document.getElementById('selected-amount').textContent = amount;
-        }
-
-        function initiateStripeCheckout() {
-            const btn = document.getElementById('stripe-donate-btn');
-            btn.disabled = true;
-            btn.textContent = 'Redirecting to Stripe...';
-
-            // Stripe Checkout hosted page — replace with live link when Stripe is configured
-            // Per spec §4.5: hosted page link with preset amount
-            const stripeLink = 'https://buy.stripe.com/TODO';
-            window.location.href = stripeLink + '?amount=' + (selectedDonation * 100);
-        }
-    </script>
+    <script src="assets/js/capoeira-checkout.js"></script>
+</body>
 </body>
 </html>
