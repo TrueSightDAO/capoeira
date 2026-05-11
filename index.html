@@ -41,10 +41,10 @@
                 <img src="assets/images/logo/tribobahia-logo.png" alt="Tribo Bahia Mirim Capoeira" onerror="this.style.display='none'">
                 Tribo Bahia Mirim
             </a>
-            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav-links">
                 <span></span><span></span><span></span>
             </button>
-            <ul class="nav-links">
+            <ul class="nav-links" id="primary-nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="practice.html">Practice</a></li>
                 <li><a href="library.html">Move Library</a></li>
@@ -57,7 +57,7 @@
     <!-- Hero -->
     <section class="hero" style="background:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.35)),url('https://www.agroverse.shop/assets/images/experiences/itacare/capoeira-sunset-beach.jpg') center center/cover no-repeat">
         <div class="hero-content">
-            <h1>Capoeira Practice<br>Tribo Bahia Mirim</h1>
+            <h1>Capoeira Practice <br>Tribo Bahia Mirim</h1>
             <p>45-minute solo practice sessions. Bico Duro's instruction. Berimbau rhythm. One move at a time.</p>
             <div class="hero-buttons">
                 <a href="practice.html" class="btn btn-primary">Start Practicing</a>
@@ -175,6 +175,7 @@
         <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
     </footer>
 
+    <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/capoeira-checkout.js"></script>
 </body>
 </body>

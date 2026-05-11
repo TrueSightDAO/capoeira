@@ -35,10 +35,10 @@
                 <img src="assets/images/logo/tribobahia-logo.png" alt="Tribo Bahia Mirim Capoeira" onerror="this.style.display='none'">
                 Tribo Bahia Mirim
             </a>
-            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav-links">
                 <span></span><span></span><span></span>
             </button>
-            <ul class="nav-links">
+            <ul class="nav-links" id="primary-nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="practice.html">Practice</a></li>
                 <li><a href="library.html">Move Library</a></li>
@@ -205,5 +205,6 @@
             window.CapoeiraHistory.renderDashboard('history-summary');
         }
     </script>
+    <script src="assets/js/nav.js" defer></script>
 </body>
 </html>
