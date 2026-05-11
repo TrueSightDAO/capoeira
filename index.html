@@ -192,6 +192,34 @@
 
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/capoeira-checkout.js"></script>
-</body>
+
+    <script>
+        // Reveal the donation-success banner if we landed here via Stripe's
+        // success_url redirect (?donation=success&session_id=cs_…). After
+        // surfacing it, scrub the query string so a page refresh doesn't
+        // re-fire the banner.
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            if (params.get('donation') !== 'success') return;
+
+            var banner = document.getElementById('donation-success-banner');
+            if (!banner) return;
+            banner.classList.remove('hidden');
+
+            var sessionId = params.get('session_id');
+            if (sessionId) {
+                var refEl = document.getElementById('donation-session-ref');
+                if (refEl) refEl.textContent = sessionId;
+            }
+
+            // Clean the URL (preserve hash if any).
+            try {
+                history.replaceState({}, '', window.location.pathname + window.location.hash);
+            } catch (e) { /* old browser — leave the URL as is */ }
+
+            // Bring the banner into view without jumping past the header.
+            banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        })();
+    </script>
 </body>
 </html>
