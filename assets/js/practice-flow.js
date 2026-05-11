@@ -329,6 +329,18 @@
     document.getElementById('generate-section').classList.remove('hidden');
     document.getElementById('session-card').classList.add('hidden');
     document.getElementById('start-session-btn').classList.add('hidden');
+
+    // Restore the bits that hide once a session is generated, so the
+    // overview page (history + generator preamble) is back to its initial
+    // state. Mirror of the hide-on-generate logic in session-generator.js.
+    var historySection = document.getElementById('history-summary-section');
+    var preamble = document.getElementById('generator-preamble');
+    var regenBtn = document.getElementById('regenerate-session-btn');
+    var backBtn = document.getElementById('back-to-overview-btn');
+    if (historySection) historySection.classList.remove('hidden');
+    if (preamble) preamble.classList.remove('hidden');
+    if (regenBtn) regenBtn.classList.add('hidden');
+    if (backBtn) backBtn.classList.add('hidden');
   }
 
   // --- Helpers ---

@@ -305,6 +305,20 @@
       cardEl.classList.remove('hidden');
       startBtn.classList.remove('hidden');
 
+      // Hide the now-redundant preamble (history dashboard + generator
+      // intro/heading/bias picker/Generate button) so the session card
+      // and Start Practice button are the only visible content. Reveal a
+      // "Generate Different" + "← Back" pair so the user can iterate or
+      // back out without refreshing.
+      var historySection = document.getElementById('history-summary-section');
+      var preamble = document.getElementById('generator-preamble');
+      var regenBtn = document.getElementById('regenerate-session-btn');
+      var backBtn = document.getElementById('back-to-overview-btn');
+      if (historySection) historySection.classList.add('hidden');
+      if (preamble) preamble.classList.add('hidden');
+      if (regenBtn) regenBtn.classList.remove('hidden');
+      if (backBtn) backBtn.classList.remove('hidden');
+
       // Mobile: ensure the just-revealed Start Practice button is visible.
       // Without this, on a small viewport the button can render below the
       // fold (especially below iOS Safari's bottom toolbar) and the user

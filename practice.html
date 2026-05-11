@@ -59,32 +59,45 @@
 
     <!-- --- Generator Section --- -->
     <section class="section" id="generate-section">
-        <div class="section-heading">
-            <h2>Generate a Session</h2>
-            <p>Theme-based sequencing, difficulty-weighted move selection, and berimbau music pairing. Each session is ~45 minutes.</p>
-        </div>
+        <!-- Preamble: heading + difficulty picker + Generate button.
+             Once a session is rendered, this whole block hides (along with
+             #history-summary-section above) so the user only sees the
+             actionable session card + Start Practice button. Reappears on
+             CapoeiraPractice.reset() / "← Back". -->
+        <div id="generator-preamble">
+            <div class="section-heading">
+                <h2>Generate a Session</h2>
+                <p>Theme-based sequencing, difficulty-weighted move selection, and berimbau music pairing. Each session is ~45 minutes.</p>
+            </div>
 
-        <div style="text-align:center;margin-bottom:1.5rem">
-            <label for="diff-bias" style="margin-right:0.5rem;font-weight:600">Difficulty bias:</label>
-            <select id="diff-bias" style="padding:0.4rem 0.75rem;border-radius:6px;border:1px solid #ddd;font-family:var(--font-body)">
-                <option value="balanced">Balanced</option>
-                <option value="beginner" selected>More Beginner-friendly</option>
-                <option value="intermediate">More Intermediate</option>
-                <option value="advanced">More Advanced</option>
-            </select>
-        </div>
+            <div style="text-align:center;margin-bottom:1.5rem">
+                <label for="diff-bias" style="margin-right:0.5rem;font-weight:600">Difficulty bias:</label>
+                <select id="diff-bias" style="padding:0.4rem 0.75rem;border-radius:6px;border:1px solid #ddd;font-family:var(--font-body)">
+                    <option value="balanced">Balanced</option>
+                    <option value="beginner" selected>More Beginner-friendly</option>
+                    <option value="intermediate">More Intermediate</option>
+                    <option value="advanced">More Advanced</option>
+                </select>
+            </div>
 
-        <div style="text-align:center">
-            <button class="btn btn-primary" onclick="generateFromUI()">Generate Session</button>
+            <div style="text-align:center">
+                <button class="btn btn-primary" onclick="generateFromUI()">Generate Session</button>
+            </div>
         </div>
 
         <p id="generator-status" style="text-align:center;margin-top:1rem"></p>
 
         <div id="session-card" class="session-card hidden" style="margin-top:2rem"></div>
 
-        <div style="text-align:center;margin-top:1rem">
+        <div style="margin-top:1rem;display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap">
             <button id="start-session-btn" class="btn btn-primary hidden" onclick="window.CapoeiraPractice.start()">
                 Start Practice
+            </button>
+            <button id="regenerate-session-btn" class="btn btn-outline hidden" onclick="generateFromUI()">
+                Generate Different
+            </button>
+            <button id="back-to-overview-btn" class="btn btn-outline hidden" onclick="window.CapoeiraPractice.reset()">
+                ← Back
             </button>
         </div>
     </section>
