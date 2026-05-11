@@ -96,3 +96,4 @@ Whisper confirmed they have no intelligible spoken narration (phone mic at recor
 No license yet. Contact Gary for permissions.
 
 Phase 2 shipped: 2026-05-10
+PWA + QR dojo poster shipped
