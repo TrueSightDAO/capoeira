@@ -116,13 +116,20 @@
   }
 
   /**
-   * Toggle disabled state on prev/next based on bounds.
+   * Toggle disabled state on prev/next based on bounds. On the final move,
+   * relabel "Next →" to "Finish Session →" so the user has a clear way out
+   * without sitting through the full timer + rest countdown.
    */
   function updateNavButtons() {
     const prev = document.getElementById('prev-move-btn');
     const next = document.getElementById('next-move-btn');
     if (prev) prev.disabled = currentMoveIndex <= 0;
-    if (next) next.disabled = currentMoveIndex >= moves.length - 1;
+    if (next) {
+      next.disabled = false;
+      const isLast = currentMoveIndex >= moves.length - 1;
+      next.textContent = isLast ? 'Finish Session →' : 'Next →';
+      next.setAttribute('aria-label', isLast ? 'Finish session' : 'Next move');
+    }
   }
 
   /**
@@ -134,7 +141,10 @@
     loadMove(currentMoveIndex - 1);
   }
   function nextMove() {
-    if (currentMoveIndex >= moves.length - 1) return;
+    if (currentMoveIndex >= moves.length - 1) {
+      finishSession();
+      return;
+    }
     loadMove(currentMoveIndex + 1);
   }
 
