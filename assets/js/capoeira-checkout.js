@@ -39,6 +39,12 @@
 
     var LEDGER_ID = 'TBM';
     var DESCRIPTION = 'Donation to Tribo Bahia Mirim';
+    // Bico Duro profile photo shown on the Stripe Checkout page. Must be HTTPS + publicly fetchable by Stripe.
+    // Use the non-www host because `www.agroverse.shop/...` 301-redirects to the apex and Stripe doesn't follow redirects when fetching product images.
+    var IMAGE_URL = 'https://agroverse.shop/assets/images/experiences/itacare/bico-duro-profile.jpg';
+    // Donor-facing description shown under the line item on Stripe Checkout.
+    // Keep under ~500 chars (Stripe truncates).
+    var DETAILS = 'Funds the Tribo Bahia Mirim after-school program led by Mestre Bico Duro — capoeira, English, and arts for ~47 children in Itacaré, Bahia. 100% of your donation, minus Stripe processing fees, is transferred monthly to Bico Duro via Pix. Live transparency at tribomirimbahia.truesight.me — every dollar in and out is publicly logged.';
 
     // Stripe test mode when hosted locally, live mode in production.
     var hostname = (window.location && window.location.hostname) || '';
@@ -93,6 +99,8 @@
                 amount: String(selectedAmount),
                 currency: 'usd',
                 description: DESCRIPTION,
+                details: DETAILS,
+                image_url: IMAGE_URL,
                 environment: ENVIRONMENT,
                 source: 'capoeira.agroverse.shop',
                 success_url: urls.success_url,
