@@ -148,8 +148,8 @@
                 <div class="photo-caption">Bico Duro, Tribo Bahia Mirim</div>
             </div>
             <div class="photo-item">
-                <img src="assets/images/bico-duro-kids.jpg" alt="Bico Duro com as crianças no Dia das Crianças, Tribo Bahia Mirim" loading="lazy">
-                <div class="photo-caption">Bico Duro e as crianças · Dia das Crianças</div>
+                <img src="assets/images/bico-duro-kids.jpg" alt="Bico Duro with the kids on Children's Day, Tribo Bahia Mirim" loading="lazy">
+                <div class="photo-caption">Bico Duro and the kids · Children's Day</div>
             </div>
         </div>
     </section>
@@ -157,8 +157,8 @@
     <!-- QR Code for Dojo -->
     <section class="donate-cta" style="background:var(--color-bg)" id="qr-section">
         <div class="section-heading">
-            <h2>Treine Conosco</h2>
-            <p>Escaneie o QR code para acessar os vídeos de treino. Salve na tela inicial do seu celular.</p>
+            <h2>Train With Us</h2>
+            <p>Scan the QR code to access training videos. Save to your phone's home screen.</p>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;align-items:center;max-width:800px;margin:0 auto">
             <div style="background:#fff;padding:1rem;border-radius:12px;box-shadow:var(--shadow-md)">
@@ -169,16 +169,16 @@
                      id="qr-image">
             </div>
             <div style="text-align:left;max-width:300px">
-                <p style="font-size:1rem;color:var(--color-text);font-weight:600;margin-bottom:0.5rem">Para o Dojô</p>
+                <p style="font-size:1rem;color:var(--color-text);font-weight:600;margin-bottom:0.5rem">For the Dojo</p>
                 <p style="font-size:0.9rem;color:var(--color-text-light);line-height:1.6">
                     Alunos e visitantes escaneiam o código para acessar os treinos de 45 minutos 
                     com vídeos e música de berimbau.
                 </p>
                 <button onclick="printQR()" class="btn btn-primary btn-sm" style="margin-top:0.75rem">
-                    🖨 Baixar para imprimir
+                    🖨 Download to print
                 </button>
                 <p style="font-size:0.8rem;color:var(--color-text-light);margin-top:0.5rem">
-                    No celular: toque em "Adicionar à tela inicial"
+                    On mobile: tap "Add to Home Screen"
                 </p>
             </div>
         </div>
@@ -187,26 +187,33 @@
     <script>
         function printQR() {
             var img = document.getElementById('qr-image');
-            var w = window.open('', '_blank', 'width=600,height=800');
-            w.document.write('<!DOCTYPE html><html><head><title>Tribo Bahia Mirim — Treine Conosco</title><style>\
+            var w = window.open('', '_blank', 'width=800,height=700');
+            w.document.write('<!DOCTYPE html><html><head><title>Tribo Bahia Mirim — Train With Us</title><style>\
                 *{margin:0;padding:0;box-sizing:border-box}\
-                body{font-family:"Space Grotesk","Inter",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;\
-                    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.4)),url(https://www.agroverse.shop/assets/images/experiences/itacare/capoeira-sunset-beach.jpg) center center/cover no-repeat}\
-                .poster{text-align:center;padding:2rem;max-width:500px}\
-                .poster h1{color:#fff;font-size:2rem;margin-bottom:0.25rem;text-shadow:0 2px 8px rgba(0,0,0,0.6)}\
-                .poster h2{color:#f6c86d;font-size:1.1rem;font-weight:400;margin-bottom:1.5rem;text-shadow:0 1px 4px rgba(0,0,0,0.6)}\
-                .qr-card{background:#fff;border-radius:16px;padding:1.25rem;display:inline-block;box-shadow:0 8px 32px rgba(0,0,0,0.3)}\
-                .qr-card img{display:block;width:300px;height:300px}\
-                .poster p{color:rgba(255,255,255,0.85);margin-top:1.5rem;font-size:0.95rem;text-shadow:0 1px 4px rgba(0,0,0,0.5)}\
-                .poster .brand{color:#f6c86d;font-weight:700;font-size:0.85rem;margin-top:0.75rem}\
+                body{font-family:"Space Grotesk","Inter",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative}\
+                .bg{position:absolute;inset:0;z-index:0}\
+                .bg img{width:100%;height:100%;object-fit:cover;display:block}\
+                .bg::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:1}\
+                .poster{position:relative;z-index:2;display:flex;align-items:center;gap:2.5rem;padding:2rem;max-width:750px}\
+                .qr-card{background:#fff;border-radius:16px;padding:1rem;box-shadow:0 8px 32px rgba(0,0,0,0.35);flex-shrink:0}\
+                .qr-card img{display:block;width:260px;height:260px}\
+                .poster-text{text-align:left}\
+                .poster-text h1{color:#fff;font-size:2.25rem;margin-bottom:0.25rem;text-shadow:0 2px 8px rgba(0,0,0,0.6)}\
+                .poster-text h2{color:#f6c86d;font-size:1.1rem;font-weight:400;margin-bottom:1rem;text-shadow:0 1px 4px rgba(0,0,0,0.6)}\
+                .poster-text p{color:rgba(255,255,255,0.9);font-size:1.05rem;line-height:1.5;text-shadow:0 1px 4px rgba(0,0,0,0.5)}\
+                .poster-text .brand{color:#f6c86d;font-weight:700;font-size:0.85rem;margin-top:0.75rem}\
                 @media print{body{margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}}\
-            </style></head><body><div class="poster">\
-                <h1>Treine Conosco</h1>\
-                <h2>Capoeira com Bico Duro · Tribo Bahia Mirim</h2>\
-                <div class="qr-card"><img src="' + img.src + '" width="300" height="300"></div>\
-                <p>Escaneie para treinar · 45 minutos · vídeos e berimbau</p>\
-                <p class="brand">capoeira.agroverse.shop</p>\
-            </div><script>setTimeout(function(){window.print()},800)</'+'script></body></html>');
+            </style></head><body><div class="bg"><img src="https://www.agroverse.shop/assets/images/experiences/itacare/capoeira-sunset-beach.jpg"></div>\
+                <div class="poster">\
+                    <div class="qr-card"><img src="' + img.src + '" width="260" height="260"></div>\
+                    <div class="poster-text">\
+                        <h1>Train With Us</h1>\
+                        <h2>Capoeira with Bico Duro · Tribo Bahia Mirim</h2>\
+                        <p>Scan to train · 45-minute sessions<br>Move videos · Berimbau music<br>Free — donations support the kids</p>\
+                        <p class="brand">capoeira.agroverse.shop</p>\
+                    </div>\
+                </div>\
+            <script>setTimeout(function(){window.print()},800)</'+'script></body></html>');
             w.document.close();
         }
     </script>
