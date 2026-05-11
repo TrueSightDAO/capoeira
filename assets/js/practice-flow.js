@@ -110,8 +110,32 @@
     document.getElementById('rest-section').classList.add('hidden');
     document.getElementById('move-progress').textContent = `Move ${index + 1} of ${moves.length}`;
 
+    updateNavButtons();
     updateTimerDisplay();
     stopTimer();
+  }
+
+  /**
+   * Toggle disabled state on prev/next based on bounds.
+   */
+  function updateNavButtons() {
+    const prev = document.getElementById('prev-move-btn');
+    const next = document.getElementById('next-move-btn');
+    if (prev) prev.disabled = currentMoveIndex <= 0;
+    if (next) next.disabled = currentMoveIndex >= moves.length - 1;
+  }
+
+  /**
+   * Manual navigation. Skips any in-flight timer / rest period and loads the
+   * neighbouring move. Music+timer reset; user can re-click "Play Music".
+   */
+  function prevMove() {
+    if (currentMoveIndex <= 0) return;
+    loadMove(currentMoveIndex - 1);
+  }
+  function nextMove() {
+    if (currentMoveIndex >= moves.length - 1) return;
+    loadMove(currentMoveIndex + 1);
   }
 
   /**
@@ -335,6 +359,8 @@
     start: startPractice,
     playMusic: playMusicAndStart,
     togglePause,
+    prev: prevMove,
+    next: nextMove,
     logAndFinish,
     reset: resetPractice
   };
