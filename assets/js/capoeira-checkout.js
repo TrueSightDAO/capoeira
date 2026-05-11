@@ -35,7 +35,7 @@
 
     // Shared Apps Script deploy URL (also used by agroverse_shop checkout).
     // Source of truth: agroverse_shop/js/config.js → GOOGLE_SCRIPT_URL.
-    var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyefqjQNwegrXR9y18HyJMxSM2wWCyucsK5qdh5isJICVhonssajEpT4Dt3hq3A7PTA/exec';
+    var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyefqjQnWegrXR9y18HyJMxSM2wWCyucsK5qdh5isJICVhonssajEpT4Dt3hq3A7PTA/exec';
 
     var LEDGER_ID = 'TBM';
     var DESCRIPTION = 'Donation to Tribo Bahia Mirim';
