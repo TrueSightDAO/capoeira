@@ -94,15 +94,34 @@
    * @param {Object} bias - difficulty weight overrides (optional)
    * @return {Array} selected moves (4-6)
    */
+  /**
+   * Build a per-move-id count of how many times each move has been practiced
+   * across all recorded sessions. Used to weight coverage so the user
+   * eventually cycles through every move.
+   */
+  function computePracticeCounts(history) {
+    const counts = {};
+    history.forEach(s => {
+      (s.moves || []).forEach(m => {
+        if (m && m.id) counts[m.id] = (counts[m.id] || 0) + 1;
+      });
+    });
+    return counts;
+  }
+
   function pickMoves(moves, theme, history, bias = {}) {
     const diffWeights = { ...DIFFICULTY_WEIGHTS, ...bias };
     const lastSessionMoveIds = history.length > 0
       ? (history[history.length - 1].moves || []).map(m => m.id)
       : [];
+    const practiceCounts = computePracticeCounts(history);
 
-    let candidates = moves.filter(m => m.theme === theme);
+    // Ginga is the warm-up — always prepended to the session (see
+    // generateSession). Drop it from theme candidates so we don't double it
+    // and so the duration budget for theme moves is the remaining ~39min.
+    let candidates = moves.filter(m => m.theme === theme && m.id !== 'ginga');
 
-    // Score each candidate: difficulty bias * recency penalty
+    // Score each candidate: difficulty bias * recency penalty * coverage boost
     candidates = candidates.map(m => {
       let weight = diffWeights[m.difficulty] || 0.5;
 
@@ -112,17 +131,26 @@
         weight *= 0.5;
       }
 
+      // Coverage boost: never-practiced moves get 2x, practiced-once 1.5x,
+      // practiced-many gradually back to ~1x. Goal: the user cycles through
+      // every move over time, with no move left permanently neglected.
+      const cnt = practiceCounts[m.id] || 0;
+      weight *= 1 + (1 / (1 + cnt));
+
       return { ...m, _weight: weight };
     });
 
     // Sort by weight descending (prefer higher-weighted moves first)
     candidates.sort((a, b) => b._weight - a._weight);
 
-    // Greedy subset selection: pick moves that sum to ~45min
+    // Greedy subset selection. Theme moves fill the budget LESS Ginga's
+    // warm-up duration (always prepended) so total session stays at ~45min.
+    const gingaMove = moves.find(m => m.id === 'ginga');
+    const gingaDur = gingaMove ? (gingaMove.duration_minutes || 0) : 0;
     const selected = [];
     let totalDur = 0;
-    const target = TARGET_DURATION;
-    const minTarget = target - DURATION_TOLERANCE;
+    const target = Math.max(MIN_MOVES, TARGET_DURATION - gingaDur);
+    const minTarget = Math.max(0, target - DURATION_TOLERANCE);
     const maxTarget = target + DURATION_TOLERANCE;
 
     // Weighted random selection: higher-weight moves are more likely to be picked early
@@ -294,7 +322,14 @@
 
       const history = getSessionHistory();
       const theme = pickTheme(moves, history);
-      const selectedMoves = pickMoves(moves, theme, history, bias);
+      const themeMoves = pickMoves(moves, theme, history, bias);
+
+      // Ginga is the warm-up — always at position 0 (it's literally the
+      // foundational rocking step every other move builds on). pickMoves
+      // already excludes Ginga from theme candidates so there's no dupe.
+      const ginga = moves.find(m => m.id === 'ginga');
+      const selectedMoves = ginga ? [ginga, ...themeMoves] : themeMoves;
+
       const selectedMusic = pickMusic(music, selectedMoves);
       const totalTime = selectedMoves.reduce((sum, m) => sum + m.duration_minutes, 0);
 
