@@ -287,6 +287,6 @@
             banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
         })();
     </script>
-<script>if("serviceWorker"in navigator)navigator.serviceWorker.register("/service-worker.js")</script>
+<script>if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));if(window.caches)caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)));}</script>
 </body>
 </html>
