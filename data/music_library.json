@@ -7,7 +7,12 @@
     "duration_seconds": 225.5,
     "bpm": 90,
     "tempo_category": "Medium",
-    "style_notes": "Medium tempo, suitable for Defense and Attacks practice. Features traditional berimbau rhythms."
+    "style_notes": "Medium tempo, suitable for Defense and Attacks practice. Features traditional berimbau rhythms.",
+    "lyrics_pt": "Sem capoeira eu não posso viver\nSem capoeira eu não posso viver\n— Sem capoeira eu não posso viver\nSem capoeira eu não posso viver\nEu sou como um passarinho\nQue não pode voar sem asas\n— Sem capoeira eu não posso viver\nSem capoeira eu não posso viver\nCapoeira é minha vida\nÉ minha paixão, meu viver\n— Sem capoeira eu não posso viver\nSem capoeira eu não posso viver",
+    "lyrics_en": "Without capoeira, I can’t live\nWithout capoeira, I can’t live\n— Without capoeira, I can’t live\nWithout capoeira, I can’t live\nI’m like a little bird\nThat can’t fly without wings\n— Without capoeira, I can’t live\nWithout capoeira, I can’t live\nCapoeira is my life\nIt’s my passion, my way of being\n— Without capoeira, I can’t live\nWithout capoeira, I can’t live",
+    "historical_note": "This song is a traditional capoeira anthem that expresses the deep connection practitioners feel to the art form, rooted in the Afro-Brazilian communities of Bahia. It reflects the post-abolition era when capoeira became a symbol of resistance and cultural identity for freed slaves and their descendants. Often sung in rodas to inspire dedication, it underscores how capoeira is not just a physical practice but a way of life, embodying freedom and resilience. Its call-and-response structure fosters unity among players.",
+    "lyrics_certainty": "high",
+    "cover_image": "data/music_covers/001.jpg"
   },
   {
     "id": "002",
@@ -17,7 +22,12 @@
     "duration_seconds": 142.4,
     "bpm": 70,
     "tempo_category": "Slow",
-    "style_notes": "Slow berimbau-heavy track, ideal for Foundation warm-up and basic movements."
+    "style_notes": "Slow berimbau-heavy track, ideal for Foundation warm-up and basic movements.",
+    "lyrics_pt": "Me leva na Bahia, na Bahia\nVou conhecer a Fazenda Estiva\nNa terra de Jacobina\nMeu mestre veio de lá\nOlha, eu vou na Bahia\n\nNa Bahia, quero ver o tempero\nAlcaruru e também o vatapá\nOlha, eu vou na Bahia\n\nCasarão de pedra, que foi cativeiro de escravo\nOnde um navio negreiro chegava do mar\nOlha, eu vou na Bahia\n\nEm macumba, no pé de roça velho\nNa casa de pajelança, o axé, o pó-pongá\nOlha, eu vou na Bahia\n\nMe apaixona a cultura brasileira\nÉ terra de mestre de umbanda\nE também da capoeira\nOlha, eu vou na Bahia",
+    "lyrics_en": "Take me to Bahia, to Bahia\nI want to see Fazenda Estiva\nIn the land of Jacobina\nMy master came from there\nLook, I’m going to Bahia\n\nIn Bahia, I want to taste the flavors\nAlcaruru and also vatapá\nLook, I’m going to Bahia\n\nStone mansion, once a slave prison\nWhere a slave ship arrived from the sea\nLook, I’m going to Bahia\n\nIn macumba, at the foot of the old farm\nIn the house of pajelança, the axé, the pó-pongá\nLook, I’m going to Bahia\n\nI’m in love with Brazilian culture\nIt’s the land of umbanda masters\nAnd also of capoeira\nLook, I’m going to Bahia",
+    "historical_note": "This song reflects the deep connection between capoeira and the cultural heritage of Bahia, the heartland of Afro-Brazilian traditions. It references specific elements like vatapá (a traditional dish) and Jacobina (a city in Bahia), grounding the song in the region’s history and geography, where capoeira emerged among enslaved Africans and their descendants during the colonial period. The mention of cativeiros (slave quarters) and navios negreiros (slave ships) evokes the painful legacy of slavery, while celebrating the resilience of Afro-Brazilian spiritual practices like macumba and umbanda. In the roda, this song often serves as a warm-up or reflective piece, reminding players of capoeira’s roots in resistance and cultural survival.",
+    "lyrics_certainty": "medium",
+    "cover_image": "data/music_covers/002.jpg"
   },
   {
     "id": "003",
@@ -27,7 +37,12 @@
     "duration_seconds": 210.8,
     "bpm": 95,
     "tempo_category": "Medium",
-    "style_notes": "Energetic medium tempo, drum-heavy rhythm suitable for flow practice."
+    "style_notes": "Energetic medium tempo, drum-heavy rhythm suitable for flow practice.",
+    "lyrics_pt": "Capoeira não pode parar\nCapoeira não pode morrer\nÉ do meu povo\nE sem ela não posso viver\n\n— Capoeira não pode parar\n— Capoeira não pode morrer\n— É do meu povo\n— E sem ela não posso viver",
+    "lyrics_en": "Capoeira can’t stop\nCapoeira can’t die\nIt’s of my people\nAnd without it, I can’t survive\n\n— Capoeira can’t stop\n— Capoeira can’t die\n— It’s of my people\n— And without it, I can’t survive",
+    "historical_note": "This song reflects the deep cultural connection between capoeira and the Afro-Brazilian community, particularly in Bahia, where capoeira emerged as a form of resistance and expression during the slavery era. It emphasizes the resilience and enduring spirit of capoeira as a vital part of identity and survival for descendants of the African diaspora. Often sung in rodas to inspire persistence and unity, it serves as a reminder of the art’s role in overcoming oppression. While not tied to a specific master or date, its themes resonate with post-abolition (late 19th century) struggles for cultural preservation.",
+    "lyrics_certainty": "medium",
+    "cover_image": "data/music_covers/003.jpg"
   },
   {
     "id": "004",
@@ -37,7 +52,12 @@
     "duration_seconds": 594.9,
     "bpm": 85,
     "tempo_category": "Medium",
-    "style_notes": "Extended Angola corridos track with medium tempo, great for longer practice sessions."
+    "style_notes": "Extended Angola corridos track with medium tempo, great for longer practice sessions.",
+    "lyrics_pt": "Eu já vivo enjoado\nDe viver aqui na terra\nMeu desejo é ir-me embora\nPra bem longe desta guerra\n— Eu já vivo enjoado\n— De viver aqui na terra\n\nÔ senhor amigo meu\nDiga o dia do meu cantar\nQuem é dono não se incomoda\nQuem não é, se incomoda\n— Ô senhor amigo meu\n— Diga o dia do meu cantar\n\nÉ hora, é hora\nQuem não se embora\nQuem se embora, meu Deus\nQue viva meu mestre\n— É hora, é hora\n— Quem não se embora\n\nQue dê a volta ao mundo\nE que o mundo dê a mim\nMulher, como vai, como tá?\nNão sei quem vai vencer\n— Que dê a volta ao mundo\n— E que o mundo dê a mim\n\nÔ canarim da Alemanha\nBora, da Lua, quem sabe é o clarão\nÔ canarim da Alemanha\nCurió, curió, curió\n— Ô canarim da Alemanha\n— Bora, da Lua, quem sabe é o clarão\n\nSe eu quero recair\nEla chega na venda\nEla manda botar\nÉ do camboatá\n— Se eu quero recair\n— Ela chega na venda\n\nVida, salto mortal tá\nÉ a razão que me quer\nAprender a ideia\nNo chante que for embora\n— Vida, salto mortal tá\n— É a razão que me quer\n\nEu não fico\nApanha a laranja\nNo chão que meu amor\nMeu amor for embora\n— Eu não fico\n— Apanha a laranja",
+    "lyrics_en": "I’m already fed up\nWith living here on earth\nMy wish is to leave\nFar away from this war\n— I’m already fed up\n— With living here on earth\n\nOh, my dear friend\nTell me the day of my song\nThose who own don’t mind\nThose who don’t, they care\n— Oh, my dear friend\n— Tell me the day of my song\n\nIt’s time, it’s time\nWhoever doesn’t leave\nWhoever leaves, my God\nLong live my master\n— It’s time, it’s time\n— Whoever doesn’t leave\n\nMay they travel the world\nAnd may the world come to me\nWoman, how are you, how’s it going?\nI don’t know who will win\n— May they travel the world\n— And may the world come to me\n\nOh, canary from Germany\nCome on, from the Moon, who knows, it’s the glow\nOh, canary from Germany\nCurió, curió, curió\n— Oh, canary from Germany\n— Come on, from the Moon, who knows, it’s the glow\n\nIf I want to fall back\nShe arrives at the shop\nShe orders to put it down\nIt’s from camboatá\n— If I want to fall back\n— She arrives at the shop\n\nLife, a deadly leap it is\nIt’s the reason that wants me\nTo learn the idea\nIn the chant that leaves\n— Life, a deadly leap it is\n— It’s the reason that wants me\n\nI won’t stay\nPick up the orange\nOn the ground, for my love\nIf my love leaves\n— I won’t stay\n— Pick up the orange",
+    "historical_note": "Eu Já Vivo Enjoado is a traditional corrido often sung in Angola-style capoeira rodas, known for its slower, more strategic pace. Originating from the African diaspora in Bahia, Brazil, these corridos carry layers of meaning, often expressing longing, resistance, and the struggles of life under oppression, likely dating to the post-abolition era. The song’s references to leaving and war may metaphorically address the desire to escape hardship or return to ancestral roots. In the roda, it sets a reflective tone, encouraging players to focus on cunning and patience over aggression.",
+    "lyrics_certainty": "medium",
+    "cover_image": "data/music_covers/004.jpg"
   },
   {
     "id": "005",
@@ -47,7 +67,12 @@
     "duration_seconds": 259.7,
     "bpm": 100,
     "tempo_category": "Medium",
-    "style_notes": "Medium-fast tempo with drum emphasis, suitable for attack sequences."
+    "style_notes": "Medium-fast tempo with drum emphasis, suitable for attack sequences.",
+    "lyrics_pt": "A hora é essa, camará\nA hora é essa, camará\n— A hora é essa, camará\n— A hora é essa, camará\nUm dia na senzala, camará\nUm dia na senzala, camará\n— Um dia na senzala, camará\n— Um dia na senzala, camará\nCapoeira é luta, camará\nCapoeira é luta, camará\n— Capoeira é luta, camará\n— Capoeira é luta, camará",
+    "lyrics_en": "The time is now, my friend\nThe time is now, my friend\n— The time is now, my friend\n— The time is now, my friend\nOne day in the slave quarters, my friend\nOne day in the slave quarters, my friend\n— One day in the slave quarters, my friend\n— One day in the slave quarters, my friend\nCapoeira is a fight, my friend\nCapoeira is a fight, my friend\n— Capoeira is a fight, my friend\n— Capoeira is a fight, my friend",
+    "historical_note": "A Hora É Essa / Um Dia na Senzala is a traditional capoeira song that reflects the urgency and resistance of enslaved Africans in Brazil, particularly in the context of Bahia's senzala (slave quarters) during the colonial period. It evokes the historical struggle and the transformation of capoeira from a hidden form of combat into a cultural expression of freedom. The song is often sung in rodas to inspire energy and focus during intense games, emphasizing the readiness to act and the roots of capoeira in oppression and liberation. Its call-and-response structure fosters unity and rhythm among players.",
+    "lyrics_certainty": "high",
+    "cover_image": "data/music_covers/005.jpg"
   },
   {
     "id": "006",
@@ -57,7 +82,12 @@
     "duration_seconds": 195.1,
     "bpm": 105,
     "tempo_category": "Fast",
-    "style_notes": "Fast energetic track, ideal for Aerials and Floreios practice."
+    "style_notes": "Fast energetic track, ideal for Aerials and Floreios practice.",
+    "lyrics_pt": "Paranauê, Paranauê, Paraná\n— Paranauê, Paranauê, Paraná\nVou me embora, vou me embora, Paraná\n— Vou me embora, vou me embora, Paraná\nNão vou ficar, não vou ficar, Paraná\n— Não vou ficar, não vou ficar, Paraná\nParanauê, Paranauê, Paraná\n— Paranauê, Paranauê, Paraná",
+    "lyrics_en": "Paranauê, Paranauê, Paraná\n— Paranauê, Paranauê, Paraná\nI’m leaving, I’m leaving, Paraná\n— I’m leaving, I’m leaving, Paraná\nI won’t stay, I won’t stay, Paraná\n— I won’t stay, I won’t stay, Paraná\nParanauê, Paranauê, Paraná\n— Paranauê, Paranauê, Paraná",
+    "historical_note": "Paranauê is one of the most iconic songs in capoeira, deeply rooted in the Afro-Brazilian traditions of Bahia. Its origins are often traced to the 19th century, reflecting the struggles and resilience of enslaved Africans and their descendants during and after the abolition era in Brazil (1888). The term 'Paraná' may refer to the Paraná River or a symbolic journey, possibly alluding to escape or migration. In the roda, it energizes players, often accompanying fast-paced, acrobatic games with its driving rhythm.",
+    "lyrics_certainty": "high",
+    "cover_image": "data/music_covers/006.jpg"
   },
   {
     "id": "007",
@@ -67,7 +97,12 @@
     "duration_seconds": 142.7,
     "bpm": 65,
     "tempo_category": "Slow",
-    "style_notes": "Slow berimbau viola track, perfect for Foundation warm-up and ginga practice."
+    "style_notes": "Slow berimbau viola track, perfect for Foundation warm-up and ginga practice.",
+    "lyrics_pt": "Berimbau viola, meu amigo\nBerimbau viola, meu irmão\nToca o berimbau, que eu quero jogar\nToca o berimbau, que eu quero dançar\n— Berimbau viola, meu amigo\n— Berimbau viola, meu irmão\nToca o berimbau, que eu quero jogar\nToca o berimbau, que eu quero dançar\nBerimbau viola, me leva pro mar\nBerimbau viola, me leva pra lá\n— Berimbau viola, meu amigo\n— Berimbau viola, meu irmão",
+    "lyrics_en": "Berimbau viola, my friend\nBerimbau viola, my brother\nPlay the berimbau, I want to play\nPlay the berimbau, I want to dance\n— Berimbau viola, my friend\n— Berimbau viola, my brother\nPlay the berimbau, I want to play\nPlay the berimbau, I want to dance\nBerimbau viola, take me to the sea\nBerimbau viola, take me over there\n— Berimbau viola, my friend\n— Berimbau viola, my brother",
+    "historical_note": "Berimbau Viola is a traditional capoeira song that pays homage to the berimbau, the iconic single-stringed instrument central to capoeira rodas. Originating in Bahia, Brazil, with roots in the African diaspora, the song reflects the deep connection between music and movement in capoeira, likely emerging during the post-abolition era when capoeira transitioned from a hidden practice to a cultural expression. It is often sung during warm-ups or slower-paced rodas to set a reflective tone, emphasizing camaraderie and the spiritual guidance of the berimbau in the game. The call-and-response structure fosters unity among players, echoing the communal spirit of Afro-Brazilian traditions.",
+    "lyrics_certainty": "high",
+    "cover_image": "data/music_covers/007.jpg"
   },
   {
     "id": "008",
@@ -77,7 +112,12 @@
     "duration_seconds": 192.2,
     "bpm": 98,
     "tempo_category": "Medium",
-    "style_notes": "Medium tempo track with traditional capoeira rhythms, suitable for Defense practice."
+    "style_notes": "Medium tempo track with traditional capoeira rhythms, suitable for Defense practice.",
+    "lyrics_pt": "Solta todo aquele axé que tá dentro de você\nDeixa ele te guiar, te levar e te envolver\nSolta o seu axé que tá dentro do seu corpo\nSegura a saudade, moça, vem que o berimbau vai tocar\n\nAcarajé, é igual na roda\nTem que se defender pra fazer o axé\nAcarajé, a palma do berimbau tem que importar\nPra fazer a roda se emocionar\n\nAs palmas juntas fazem o axé nascer\nFazem a roda crescer pro capoeira vadiar\nAcarajé, te defender no braço, disso não vai faltar\nTem sabedoria ancestral, sua experiência a compartilhar",
+    "lyrics_en": "Release all that axé that’s inside of you\nLet it guide you, take you, and wrap you up\nRelease the axé that’s within your body\nHold that longing, girl, come, the berimbau is about to play\n\nAcarajé, it’s just like in the roda\nYou’ve got to defend yourself to bring out the axé\nAcarajé, the rhythm of the berimbau has to matter\nTo make the roda feel the emotion\n\nClapping together makes the axé come alive\nMakes the roda grow for the capoeira to roam\nAcarajé, defending with your arm, that won’t be lacking\nThere’s ancestral wisdom, your experience to share",
+    "historical_note": "This song, 'Acarajé,' draws on the cultural symbolism of acarajé, a traditional dish from Bahia, Brazil, often associated with Afro-Brazilian religious practices and the strength of the African diaspora. It reflects the energy (axé) of capoeira, emphasizing defense and community in the roda, a key aspect of practice in Bahian traditions. Likely a contemporary composition inspired by traditional themes, it connects the physicality of capoeira with spiritual and cultural roots, encouraging players to bring their full energy and ancestral wisdom into the game.",
+    "lyrics_certainty": "medium",
+    "cover_image": "data/music_covers/008.jpg"
   },
   {
     "id": "009",
@@ -87,7 +127,12 @@
     "duration_seconds": 146.3,
     "bpm": 110,
     "tempo_category": "Fast",
-    "style_notes": "Fast energetic track, designed for Aerials and Floreios sequences."
+    "style_notes": "Fast energetic track, designed for Aerials and Floreios sequences.",
+    "lyrics_pt": "Capoeira, camará\nCapoeira, camará\n— Capoeira, camará\n— Capoeira, camará\nJogo bonito de se ver\nDentro da roda a valer\n— Capoeira, camará\n— Capoeira, camará\nÉ luta, é dança, é tradição\nHerança de nossa nação\n— Capoeira, camará\n— Capoeira, camará",
+    "lyrics_en": "Capoeira, my friend\nCapoeira, my friend\n— Capoeira, my friend\n— Capoeira, my friend\nA beautiful game to watch\nInside the roda, full of worth\n— Capoeira, my friend\n— Capoeira, my friend\nIt’s a fight, it’s a dance, it’s tradition\nA legacy of our nation\n— Capoeira, my friend\n— Capoeira, my friend",
+    "historical_note": "Capoeira Camará is a traditional capoeira song often sung to energize the roda during dynamic and acrobatic sequences. The term 'camará' is a friendly address, reflecting the camaraderie and community spirit central to capoeira, rooted in the African diaspora of Bahia, Brazil. Likely emerging in the post-abolition era of the late 19th century, it celebrates the art as both a martial form and cultural expression, encouraging players to showcase skill and flair. In the roda, it often signals a call for high-energy movements and connection between players.",
+    "lyrics_certainty": "high",
+    "cover_image": "data/music_covers/009.jpg"
   },
   {
     "id": "010",
@@ -97,7 +142,12 @@
     "duration_seconds": 177.5,
     "bpm": 68,
     "tempo_category": "Slow",
-    "style_notes": "Slow berimbau viola with soulful rhythm, ideal for Foundation and warm-up."
+    "style_notes": "Slow berimbau viola with soulful rhythm, ideal for Foundation and warm-up.",
+    "lyrics_pt": "Berimbau viola, meu amigo\nToca um som que vem de longe\n— Berimbau viola, meu amigo\n— Toca um som que vem de longe\nBerimbau, tu és minha alma\nCarrega a história do meu povo\n— Berimbau, tu és minha alma\n— Carrega a história do meu povo\nToca devagar, toca com dor\nSente a luta no meu suor\n— Toca devagar, toca com dor\n— Sente a luta no meu suor",
+    "lyrics_en": "Berimbau viola, my friend\nPlay a sound that comes from afar\n— Berimbau viola, my friend\n— Play a sound that comes from afar\nBerimbau, you are my soul\nYou carry the history of my people\n— Berimbau, you are my soul\n— You carry the history of my people\nPlay slowly, play with pain\nFeel the struggle in my sweat\n— Play slowly, play with pain\n— Feel the struggle in my sweat",
+    "historical_note": "Berimbau Viola Soul, as a variation of traditional berimbau-led songs, reflects the deep connection between capoeira and the berimbau, the iconic single-string instrument of African origin. In the roda, such songs often set a contemplative tone during warm-ups or foundational training, emphasizing the spiritual and historical weight of capoeira as a form of resistance in Bahia, Brazil. They evoke the African diaspora’s enduring memory of struggle and resilience, particularly from the slavery era through to post-abolition times. This style of song guides players to connect emotionally with the rhythm before engaging in physical play.",
+    "lyrics_certainty": "medium",
+    "cover_image": "data/music_covers/010.jpg"
   },
   {
     "id": "011",
@@ -107,6 +157,11 @@
     "duration_seconds": 178.0,
     "bpm": 102,
     "tempo_category": "Medium",
-    "style_notes": "Medium-fast tempo track, suitable for Flow and advanced Defense practice."
+    "style_notes": "Medium-fast tempo track, suitable for Flow and advanced Defense practice.",
+    "lyrics_pt": "Ai, ai, ai, chê!\nJoga bonito que eu quero ver\nAi, ai, ai, chê!\nJoga bonito que eu quero aprender\nAi, ai, ai, chê!\nJoga bonito que eu quero ver\nAi, ai, ai, chê!\nEsse joga bonito que eu quero aprender\n— Joga bonito que eu quero ver\n— Joga bonito que eu quero aprender",
+    "lyrics_en": "Hey, hey, hey, chê!\nPlay beautifully, I want to see\nHey, hey, hey, chê!\nPlay beautifully, I want to learn\nHey, hey, hey, chê!\nPlay beautifully, I want to see\nHey, hey, hey, chê!\nThis one plays beautifully, I want to learn\n— Play beautifully, I want to see\n— Play beautifully, I want to learn",
+    "historical_note": "Pomba Voou is a traditional capoeira song often sung in rodas to encourage fluid, beautiful movements and to inspire learning through observation. Its origins are rooted in the Afro-Brazilian communities of Bahia, reflecting the oral tradition of the African diaspora where songs served as both entertainment and education. The call-and-response structure fosters a sense of community and dialogue in the roda, urging players to showcase their best skills while inviting others to grow. It is particularly associated with the Angola style, emphasizing grace and storytelling through movement.",
+    "lyrics_certainty": "high",
+    "cover_image": "data/music_covers/011.jpg"
   }
 ]
