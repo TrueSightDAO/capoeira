@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Roda — the music of capoeira. Cycle through the playlist slow → fast or shuffle, with full lyrics, English translation, and the story behind each song.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Roda — Tribo Bahia Mirim Capoeira</title>
+
+    <meta property="og:title" content="Roda — Tribo Bahia Mirim Capoeira">
+    <meta property="og:description" content="The music of capoeira — lyrics, translations, and the story behind each song.">
+    <meta property="og:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
+    <meta property="og:url" content="https://capoeira.agroverse.shop/roda.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Tribo Bahia Mirim Capoeira">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Roda — Tribo Bahia Mirim Capoeira">
+    <meta name="twitter:description" content="The music of capoeira — lyrics, translations, history.">
+    <meta name="twitter:image" content="https://capoeira.agroverse.shop/assets/images/capoeira-sunset-beach.jpg">
+
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/logo/tribobahia-favicon-192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/tribobahia-favicon-32.png">
+    <link rel="shortcut icon" type="image/png" href="assets/images/logo/tribobahia-favicon-32.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <meta name="theme-color" content="#f4a300">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+      .roda-stage {
+        max-width: 920px; margin: 0 auto;
+        background: var(--color-surface); border-radius: 12px;
+        padding: 1.5rem; box-shadow: var(--shadow-md);
+      }
+      .roda-cover {
+        width: 100%; max-height: 360px; object-fit: cover;
+        border-radius: 8px; background: #000;
+      }
+      .roda-title { font-family: var(--font-heading); font-size: 1.6rem; margin: 1rem 0 0.25rem; color: var(--color-text); }
+      .roda-meta { color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 1rem; }
+      .roda-meta .tempo-pill {
+        display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px;
+        background: var(--color-bg); color: var(--color-text);
+        font-size: 0.78rem; font-weight: 600; margin-right: 0.5rem;
+      }
+      .roda-meta .certainty-pill {
+        display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px;
+        font-size: 0.72rem; font-weight: 600; margin-left: 0.25rem;
+      }
+      .certainty-high   { background: #dcfce7; color: #166534; }
+      .certainty-medium { background: #fef3c7; color: #92400e; }
+      .certainty-low    { background: #fee2e2; color: #991b1b; }
+      .roda-audio { width: 100%; margin-bottom: 1rem; }
+      .roda-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 1.25rem; }
+      .roda-controls .order-toggle { margin-left: auto; }
+      .order-toggle label { font-size: 0.9rem; color: var(--color-text-light); margin-right: 0.4rem; }
+      .order-toggle select {
+        padding: 0.35rem 0.5rem; border: 1px solid #ccc; border-radius: 4px;
+        font-family: var(--font-body); font-size: 0.9rem; background: white;
+      }
+      .roda-content { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+      .roda-content > div { background: var(--color-bg); padding: 1rem; border-radius: 8px; }
+      .roda-content h3 { font-size: 1rem; margin: 0 0 0.5rem; color: var(--color-text); }
+      .roda-content pre {
+        white-space: pre-wrap; word-wrap: break-word;
+        font-family: var(--font-body); color: var(--color-text);
+        font-size: 0.95rem; line-height: 1.6; margin: 0;
+      }
+      .roda-history { grid-column: 1 / -1; font-style: italic; color: var(--color-text-light); }
+      .roda-history p { margin: 0; }
+      .roda-list {
+        margin-top: 2rem; max-width: 920px; margin-left: auto; margin-right: auto;
+        background: var(--color-surface); border-radius: 12px; padding: 1rem;
+        box-shadow: var(--shadow-md);
+      }
+      .roda-list h3 { margin-top: 0; font-family: var(--font-heading); font-size: 1.1rem; }
+      .roda-list ol { list-style: none; padding: 0; margin: 0; }
+      .roda-list li {
+        display: flex; align-items: center; gap: 0.75rem;
+        padding: 0.5rem; border-radius: 6px; cursor: pointer;
+        border-bottom: 1px solid var(--color-bg);
+      }
+      .roda-list li:last-child { border-bottom: 0; }
+      .roda-list li:hover { background: var(--color-bg); }
+      .roda-list li.active { background: var(--color-bg); font-weight: 600; }
+      .roda-list li img { width: 56px; height: 36px; object-fit: cover; border-radius: 4px; }
+      .roda-list li .meta { flex: 1; min-width: 0; }
+      .roda-list li .meta .name { font-size: 0.93rem; color: var(--color-text); overflow: hidden; text-overflow: ellipsis; }
+      .roda-list li .meta .tempo { font-size: 0.72rem; color: var(--color-text-light); }
+      @media (max-width: 640px) {
+        .roda-content { grid-template-columns: 1fr; }
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo/tribobahia-logo.png" alt="Tribo Bahia Mirim Capoeira" onerror="this.style.display='none'">
+                Tribo Bahia Mirim
+            </a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav-links">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="primary-nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="practice.html">Practice</a></li>
+                <li><a href="library.html">Move Library</a></li>
+                <li><a href="roda.html">Roda</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="berimbau.html">Berimbau</a></li>
+                <li><a href="roots.html">Roots</a></li>
+                <li><a href="transparency.html">Transparency</a></li>
+                <li><a href="index.html#donate" class="donate-link">Donate</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="section">
+        <div class="section-heading">
+            <h2>Roda — The Music of Capoeira</h2>
+            <p>Sit in the roda. The berimbau leads. Every song carries history — listen, read along, and learn what the lyrics mean and where they come from.</p>
+        </div>
+
+        <div class="roda-stage">
+          <img id="roda-cover" class="roda-cover" alt="">
+          <div class="roda-title" id="roda-title">—</div>
+          <div class="roda-meta" id="roda-meta"></div>
+
+          <audio id="roda-audio" class="roda-audio" controls preload="metadata"></audio>
+
+          <div class="roda-controls">
+            <button id="prev-btn" class="btn">← Previous</button>
+            <button id="next-btn" class="btn">Next →</button>
+            <div class="order-toggle">
+              <label for="order-select">Order:</label>
+              <select id="order-select">
+                <option value="slow-to-fast">Slow → fast</option>
+                <option value="random">Random</option>
+                <option value="fast-to-slow">Fast → slow</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="roda-content">
+            <div><h3>Lyrics (Portuguese)</h3><pre id="lyrics-pt">—</pre></div>
+            <div><h3>Translation (English)</h3><pre id="lyrics-en">—</pre></div>
+            <div class="roda-history"><h3 style="font-style:normal">The story behind it</h3><p id="historical-note">—</p></div>
+          </div>
+        </div>
+
+        <div class="roda-list">
+          <h3>Playlist</h3>
+          <ol id="roda-playlist"></ol>
+        </div>
+
+        <div style="text-align:center;margin-top:2rem">
+          <p style="color:var(--color-text-light);font-size:0.85rem">Lyrics marked <em>medium</em> or <em>low</em> certainty were reconstructed from cultural memory — corrections welcome.</p>
+          <a href="berimbau.html" class="btn btn-secondary" style="margin-top:0.5rem">How a Berimbau is Made →</a>
+          <a href="practice.html" class="btn" style="margin-top:0.5rem;margin-left:0.5rem">Practice with these moves →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="practice.html">Practice</a>
+            <a href="library.html">Move Library</a>
+            <a href="roda.html">Roda</a>
+            <a href="community.html">Community</a>
+            <a href="berimbau.html">Berimbau</a>
+            <a href="roots.html">Roots</a>
+            <a href="transparency.html">Transparency</a>
+        </div>
+        <p>Tribo Bahia Mirim Capoeira — Itacaré, Bahia, Brazil</p>
+        <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
+    </footer>
+
+    <script>
+    (async function () {
+      const tempoRank = { Slow: 0, Medium: 1, Fast: 2 };
+      const res = await fetch('data/music_library.json', { cache: 'no-store' });
+      const tracks = await res.json();
+
+      const els = {
+        cover: document.getElementById('roda-cover'),
+        title: document.getElementById('roda-title'),
+        meta: document.getElementById('roda-meta'),
+        audio: document.getElementById('roda-audio'),
+        lyricsPt: document.getElementById('lyrics-pt'),
+        lyricsEn: document.getElementById('lyrics-en'),
+        history: document.getElementById('historical-note'),
+        playlist: document.getElementById('roda-playlist'),
+        prevBtn: document.getElementById('prev-btn'),
+        nextBtn: document.getElementById('next-btn'),
+        orderSel: document.getElementById('order-select'),
+      };
+
+      let order = [];
+      let cursor = 0;
+
+      function rebuildOrder(mode) {
+        const copy = tracks.slice();
+        if (mode === 'random') {
+          for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+          }
+        } else if (mode === 'fast-to-slow') {
+          copy.sort((a, b) => (tempoRank[b.tempo_category] ?? 1) - (tempoRank[a.tempo_category] ?? 1));
+        } else {
+          copy.sort((a, b) => (tempoRank[a.tempo_category] ?? 1) - (tempoRank[b.tempo_category] ?? 1));
+        }
+        order = copy;
+        renderPlaylist();
+      }
+
+      function renderPlaylist() {
+        els.playlist.innerHTML = order.map((t, i) => `
+          <li data-index="${i}" class="${i === cursor ? 'active' : ''}">
+            <img src="${t.cover_image || ''}" alt="" onerror="this.style.visibility='hidden'">
+            <div class="meta">
+              <div class="name">${escapeHtml(t.title)}</div>
+              <div class="tempo">${t.tempo_category || ''} · ${Math.round(t.duration_seconds || 0)}s</div>
+            </div>
+          </li>`).join('');
+        els.playlist.querySelectorAll('li').forEach(li => {
+          li.addEventListener('click', () => {
+            cursor = Number(li.dataset.index);
+            loadCurrent();
+          });
+        });
+      }
+
+      function escapeHtml(s) {
+        return String(s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+      }
+
+      function certaintyClass(c) {
+        return c === 'high' ? 'certainty-high'
+             : c === 'medium' ? 'certainty-medium'
+             : c === 'low' ? 'certainty-low'
+             : '';
+      }
+
+      function loadCurrent() {
+        const t = order[cursor];
+        if (!t) return;
+        els.cover.src = t.cover_image || '';
+        els.cover.alt = t.title;
+        els.title.textContent = t.title;
+        const tempo = t.tempo_category || '—';
+        const cert = t.lyrics_certainty || 'unknown';
+        els.meta.innerHTML = `
+          <span class="tempo-pill">${escapeHtml(tempo)}</span>
+          <span>${t.bpm ? t.bpm + ' bpm · ' : ''}${Math.round(t.duration_seconds || 0)}s</span>
+          <span class="certainty-pill ${certaintyClass(cert)}">lyrics: ${escapeHtml(cert)}</span>
+        `;
+        els.audio.src = t.audio_url || '';
+        els.audio.play().catch(() => { /* autoplay may be blocked — user can press play */ });
+        els.lyricsPt.textContent = t.lyrics_pt || '(no lyrics on file)';
+        els.lyricsEn.textContent = t.lyrics_en || '(no translation on file)';
+        els.history.textContent = t.historical_note || '(no historical note on file)';
+        renderPlaylist();
+      }
+
+      function step(delta) {
+        cursor = (cursor + delta + order.length) % order.length;
+        loadCurrent();
+      }
+
+      els.prevBtn.addEventListener('click', () => step(-1));
+      els.nextBtn.addEventListener('click', () => step(1));
+      els.audio.addEventListener('ended', () => step(1));
+      els.orderSel.addEventListener('change', () => {
+        rebuildOrder(els.orderSel.value);
+        cursor = 0;
+        loadCurrent();
+      });
+
+      rebuildOrder('slow-to-fast');
+      loadCurrent();
+    })();
+    </script>
+    <script src="assets/js/nav.js" defer></script>
+<script>if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));if(window.caches)caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)));}</script>
+</body>
+</html>
