@@ -295,7 +295,49 @@
 
     // Store session plan for practice-flow.js
     window.__sessionPlan = { theme, moves, music, totalTime };
+    // Persist to URL hash + localStorage so refresh / new-window resumes here.
+    if (window.CapoeiraSessionState) {
+      window.CapoeiraSessionState.persist(window.__sessionPlan, null);
+    }
   }
+
+  /**
+   * Re-hydrate window.__sessionPlan + UI from a previously-persisted state
+   * (URL hash or localStorage mirror). Called on page load before any user
+   * interaction so refresh and open-in-new-window both resume the same point.
+   *
+   * Returns the state used (or null if there was nothing to restore).
+   */
+  window.restoreSessionFromState = async function () {
+    if (!window.CapoeiraSessionState) return null;
+    const state = window.CapoeiraSessionState.read();
+    if (!state || !state.mv || !state.mv.length) return null;
+    const [moves, music] = await Promise.all([
+      loadJSON('data/moves.json'),
+      loadJSON('data/music_library.json'),
+    ]);
+    const moveById = Object.fromEntries(moves.map(m => [m.id, m]));
+    const musicById = Object.fromEntries(music.map(t => [t.id, t]));
+    const selectedMoves = state.mv.map(id => moveById[id]).filter(Boolean);
+    const selectedMusic = state.mu.map(id => musicById[id]).filter(Boolean);
+    if (!selectedMoves.length) return null;
+    const totalTime = selectedMoves.reduce((s, m) => s + (m.duration_minutes || 0), 0);
+    renderSessionCard(state.th, selectedMoves, selectedMusic, totalTime);
+    const cardEl = document.getElementById('session-card');
+    const startBtn = document.getElementById('start-session-btn');
+    cardEl.classList.remove('hidden');
+    startBtn.classList.remove('hidden');
+    // Mirror the post-generate UI hiding (history/preamble/regen-buttons)
+    var historySection = document.getElementById('history-summary-section');
+    var preamble = document.getElementById('generator-preamble');
+    var regenBtn = document.getElementById('regenerate-session-btn');
+    var backBtn = document.getElementById('back-to-overview-btn');
+    if (historySection) historySection.classList.add('hidden');
+    if (preamble) preamble.classList.add('hidden');
+    if (regenBtn) regenBtn.classList.remove('hidden');
+    if (backBtn) backBtn.classList.remove('hidden');
+    return state;
+  };
 
   /**
    * Main entry point — called from practice.html

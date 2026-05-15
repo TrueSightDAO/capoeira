@@ -204,6 +204,7 @@
     </footer>
 
     <script src="assets/js/session-history.js"></script>
+    <script src="assets/js/session-state.js"></script>
     <script src="assets/js/session-generator.js"></script>
     <script src="assets/js/practice-flow.js"></script>
 
@@ -223,6 +224,26 @@
         if (window.CapoeiraHistory && window.CapoeiraHistory.renderDashboard) {
             window.CapoeiraHistory.renderDashboard('history-summary');
         }
+
+        // If the URL hash (or localStorage fallback) carries an in-flight
+        // session, rehydrate it. If a move index was set, jump straight into
+        // practice flow at that move — so refresh / open-in-new-window both
+        // resume exactly where the user was.
+        document.addEventListener('DOMContentLoaded', async function () {
+            if (!window.restoreSessionFromState) return;
+            const state = await window.restoreSessionFromState();
+            if (!state) return;
+            if (typeof state.moveIndex === 'number' && window.CapoeiraPractice) {
+                // start() reads window.__sessionPlan, hides generate UI, then
+                // loadMove(0) — but we want to jump to state.moveIndex.
+                window.CapoeiraPractice.start();
+                // start() always loads index 0; if state was further along,
+                // advance to that move now.
+                if (state.moveIndex > 0) {
+                    for (let i = 0; i < state.moveIndex; i++) window.CapoeiraPractice.next();
+                }
+            }
+        });
     </script>
     <script src="assets/js/nav.js" defer></script>
 <script>if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));if(window.caches)caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)));}</script>
