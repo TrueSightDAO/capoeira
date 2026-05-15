@@ -66,6 +66,11 @@
     const moveTime = move.duration_minutes * 60;
     remainingSeconds = moveTime;
 
+    // Persist state so refresh / open-in-new-window lands on this same move.
+    if (window.CapoeiraSessionState && window.__sessionPlan) {
+      window.CapoeiraSessionState.persist(window.__sessionPlan, index);
+    }
+
     document.getElementById('move-pt').textContent = move.name_pt;
     document.getElementById('move-en').textContent = move.name_en;
     document.getElementById('move-notes').textContent = move.notes || '';
@@ -333,6 +338,8 @@
    */
   function resetPractice() {
     stopTimer();
+    // Clear persisted state so we start clean.
+    if (window.CapoeiraSessionState) window.CapoeiraSessionState.clear();
     document.getElementById('practice-section').classList.add('hidden');
     document.getElementById('finish-section').classList.add('hidden');
     document.getElementById('dashboard-section').classList.add('hidden');
