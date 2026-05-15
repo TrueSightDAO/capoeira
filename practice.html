@@ -60,6 +60,14 @@
             <h2>Your Practice History</h2>
             <p>All data is stored locally in your browser. No accounts. No tracking.</p>
         </div>
+        <!-- Persistent CV link — revealed on page load if a keypair exists.
+             Lets returning users grab their public CV URL anywhere on the
+             page, not just after Finish Session. -->
+        <div id="persistent-cv-link" class="hidden" style="text-align:center;margin:0 0 1.25rem">
+            <a id="persistent-cv-anchor" href="#" target="_blank" rel="noopener" class="btn btn-outline">
+                View your public CV →
+            </a>
+        </div>
         <div id="history-summary"></div>
     </section>
 
@@ -165,6 +173,18 @@
         <div class="section section-narrow" style="text-align:center">
             <h2>Session Complete</h2>
             <p style="font-size:1.2rem;margin:1.5rem 0">Total practice time: <strong id="session-total-time">0</strong> minutes</p>
+
+            <!-- CV link — revealed once the local keypair derives the slug.
+                 The link works even before the cache build runs; truesight.me
+                 will render a 'being generated' placeholder until the JSON lands. -->
+            <div id="cv-link-section" class="hidden" style="margin:1.5rem 0;padding:1rem;background:var(--color-surface);border-radius:8px">
+                <p style="margin:0 0 0.5rem;font-weight:600">Your training record is live</p>
+                <a id="cv-link-anchor" href="#" target="_blank" rel="noopener" class="btn btn-primary">
+                    View your CV →
+                </a>
+                <p id="submit-status" style="margin:0.75rem 0 0;font-size:0.9rem;color:var(--color-text-light)">Submitting to Edgar…</p>
+            </div>
+
             <button class="btn btn-primary" onclick="window.CapoeiraPractice.logAndFinish()">
                 Log Session & View History
             </button>
@@ -205,6 +225,7 @@
 
     <script src="assets/js/session-history.js"></script>
     <script src="assets/js/session-state.js"></script>
+    <script src="assets/js/practice-event-submit.js"></script>
     <script src="assets/js/session-generator.js"></script>
     <script src="assets/js/practice-flow.js"></script>
 
@@ -225,11 +246,43 @@
             window.CapoeiraHistory.renderDashboard('history-summary');
         }
 
+        // Persistent CV link — visible whenever a keypair exists in
+        // localStorage. Lets returning users grab the URL anywhere on
+        // the page, not just after Finish Session.
+        async function revealPersistentCvLink() {
+            if (!window.CapoeiraPracticeSubmit) return;
+            if (!window.CapoeiraPracticeSubmit.getStoredPublicKey()) return;
+            const url = await window.CapoeiraPracticeSubmit.getCvUrl();
+            const anchor = document.getElementById('persistent-cv-anchor');
+            const section = document.getElementById('persistent-cv-link');
+            if (url && anchor && section) {
+                anchor.href = url;
+                section.classList.remove('hidden');
+            }
+        }
+
         // If the URL hash (or localStorage fallback) carries an in-flight
         // session, rehydrate it. If a move index was set, jump straight into
         // practice flow at that move — so refresh / open-in-new-window both
         // resume exactly where the user was.
         document.addEventListener('DOMContentLoaded', async function () {
+            // Reveal the persistent CV link if applicable. Fire-and-forget;
+            // the network-backed backfill below doesn't block UI.
+            revealPersistentCvLink();
+
+            // Backfill any historical sessions still missing submitted_at —
+            // covers the case where the user practiced offline OR before
+            // this feature shipped. Runs in the background; errors are
+            // already logged inside the module.
+            if (window.CapoeiraPracticeSubmit) {
+                window.CapoeiraPracticeSubmit.backfillUnsent().then(r => {
+                    if (r && r.submitted > 0) {
+                        console.log('[practice] Backfilled ' + r.submitted + ' past sessions to Edgar');
+                        revealPersistentCvLink();  // first-time creators get the link now
+                    }
+                });
+            }
+
             if (!window.restoreSessionFromState) return;
             const state = await window.restoreSessionFromState();
             if (!state) return;
