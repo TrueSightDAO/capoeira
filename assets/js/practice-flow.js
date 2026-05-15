@@ -316,6 +316,52 @@
       totalTime: totalMin,
       completedAt: new Date().toISOString()
     };
+
+    // Persisted state isn't useful past the finish screen — clear it so
+    // the next visit lands fresh, not back on the just-completed session.
+    if (window.CapoeiraSessionState) window.CapoeiraSessionState.clear();
+
+    // Sign + submit [PRACTICE EVENT] to Edgar, then surface the CV link.
+    // Runs async — UI is non-blocking; the link section reveals once we
+    // have the slug derived locally (no need to wait on the network).
+    if (window.CapoeiraPracticeSubmit) {
+      revealCvLinkOptimistically();
+      window.CapoeiraPracticeSubmit.submitSession(window.__completedSession)
+        .then(showSubmitResult)
+        .catch(err => showSubmitResult({ ok: false, error: String(err) }));
+    }
+  }
+
+  /**
+   * Show the "view your CV" link the moment the user finishes — the slug
+   * is derived client-side from the localStorage public key, so we don't
+   * need the network round-trip to know the URL. The CV page itself will
+   * render a "being generated" placeholder until the cache build catches
+   * up; that handling is server-side on truesight.me.
+   */
+  async function revealCvLinkOptimistically() {
+    try {
+      await window.CapoeiraPracticeSubmit.ensureKeypair();
+      const url = await window.CapoeiraPracticeSubmit.getCvUrl();
+      const section = document.getElementById('cv-link-section');
+      const anchor = document.getElementById('cv-link-anchor');
+      if (url && anchor && section) {
+        anchor.href = url;
+        section.classList.remove('hidden');
+      }
+    } catch (e) { /* non-fatal */ }
+  }
+
+  function showSubmitResult(result) {
+    const status = document.getElementById('submit-status');
+    if (!status) return;
+    if (result.ok) {
+      status.textContent = 'Submitted to Edgar — your CV is being generated.';
+      status.style.color = 'var(--color-success, #2a8c3d)';
+    } else {
+      status.textContent = 'Submission deferred (' + (result.error || 'offline') + ') — we will retry on next visit.';
+      status.style.color = 'var(--color-text-light, #888)';
+    }
   }
 
   /**
