@@ -9,7 +9,7 @@
  *   5. Marks the session as `submitted_at` in localStorage so it doesn't get re-submitted.
  *
  * It also exposes a `getCvUrl()` helper so the page can surface the
- * person's CV link immediately at Finish Session (slug = pk-<hash>
+ * person's public record link immediately at Finish Session (slug = pk-<hash>
  * derived client-side from the public key — no server round-trip).
  *
  * Design doc:

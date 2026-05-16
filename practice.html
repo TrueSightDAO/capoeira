@@ -60,12 +60,12 @@
             <h2>Your Practice History</h2>
             <p>All data is stored locally in your browser. No accounts. No tracking.</p>
         </div>
-        <!-- Persistent CV link — revealed on page load if a keypair exists.
-             Lets returning users grab their public CV URL anywhere on the
+        <!-- Persistent public record link — revealed on page load if a keypair exists.
+             Lets returning users grab their public record URL anywhere on the
              page, not just after Finish Session. -->
         <div id="persistent-cv-link" class="hidden" style="text-align:center;margin:0 0 1.25rem">
             <a id="persistent-cv-anchor" href="#" target="_blank" rel="noopener" class="btn btn-outline">
-                View your public CV →
+                Your training record →
             </a>
         </div>
         <div id="history-summary"></div>
@@ -174,13 +174,13 @@
             <h2>Session Complete</h2>
             <p style="font-size:1.2rem;margin:1.5rem 0">Total practice time: <strong id="session-total-time">0</strong> minutes</p>
 
-            <!-- CV link — revealed once the local keypair derives the slug.
+            <!-- Public record link — revealed once the local keypair derives the slug.
                  The link works even before the cache build runs; truesight.me
                  will render a 'being generated' placeholder until the JSON lands. -->
             <div id="cv-link-section" class="hidden" style="margin:1.5rem 0;padding:1rem;background:var(--color-surface);border-radius:8px">
                 <p style="margin:0 0 0.5rem;font-weight:600">Your training record is live</p>
                 <a id="cv-link-anchor" href="#" target="_blank" rel="noopener" class="btn btn-primary">
-                    View your CV →
+                    Open public record →
                 </a>
                 <p id="submit-status" style="margin:0.75rem 0 0;font-size:0.9rem;color:var(--color-text-light)">Submitting to Edgar…</p>
             </div>
@@ -246,7 +246,7 @@
             window.CapoeiraHistory.renderDashboard('history-summary');
         }
 
-        // Persistent CV link — visible whenever a keypair exists in
+        // Persistent public record link — visible whenever a keypair exists in
         // localStorage. Lets returning users grab the URL anywhere on
         // the page, not just after Finish Session.
         async function revealPersistentCvLink() {
@@ -266,7 +266,7 @@
         // practice flow at that move — so refresh / open-in-new-window both
         // resume exactly where the user was.
         document.addEventListener('DOMContentLoaded', async function () {
-            // Reveal the persistent CV link if applicable. Fire-and-forget;
+            // Reveal the persistent public record link if applicable. Fire-and-forget;
             // the network-backed backfill below doesn't block UI.
             revealPersistentCvLink();
 

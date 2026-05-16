@@ -371,7 +371,7 @@
     // the next visit lands fresh, not back on the just-completed session.
     if (window.CapoeiraSessionState) window.CapoeiraSessionState.clear();
 
-    // Sign + submit [PRACTICE EVENT] to Edgar, then surface the CV link.
+    // Sign + submit [PRACTICE EVENT] to Edgar, then surface the public record link.
     // Runs async — UI is non-blocking; the link section reveals once we
     // have the slug derived locally (no need to wait on the network).
     if (window.CapoeiraPracticeSubmit) {
@@ -383,9 +383,9 @@
   }
 
   /**
-   * Show the "view your CV" link the moment the user finishes — the slug
+   * Show the "open public record" link the moment the user finishes — the slug
    * is derived client-side from the localStorage public key, so we don't
-   * need the network round-trip to know the URL. The CV page itself will
+   * need the network round-trip to know the URL. The credentials page itself will
    * render a "being generated" placeholder until the cache build catches
    * up; that handling is server-side on truesight.me.
    */
@@ -406,7 +406,7 @@
     const status = document.getElementById('submit-status');
     if (!status) return;
     if (result.ok) {
-      status.textContent = 'Submitted to Edgar — your CV is being generated.';
+      status.textContent = 'Submitted — your training record is being updated.';
       status.style.color = 'var(--color-success, #2a8c3d)';
     } else {
       status.textContent = 'Submission deferred (' + (result.error || 'offline') + ') — we will retry on next visit.';
