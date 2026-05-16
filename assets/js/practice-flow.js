@@ -151,7 +151,11 @@
       return;
     }
     loadMove(currentMoveIndex + 1);
+    // Auto-start music on manual next — the user is in the flow.
+    playMusicAndStart();
   }
+
+  let audioEndedListener = null;
 
   /**
    * Start the countdown timer and play music.
@@ -168,7 +172,49 @@
       });
     }
 
+    // When music ends before the timer, auto-advance to next move.
+    // On the very last move, just stop (don't advance).
+    bindAudioEnded();
+
     startTimer();
+  }
+
+  /**
+   * Listen for the audio ended event. If music finishes before the
+   * move timer, auto-advance to the next move (or finish on last move).
+   * No rest period — the music's natural end is the transition.
+   */
+  function bindAudioEnded() {
+    const audio = document.getElementById('practice-audio');
+    if (!audio) return;
+
+    // Remove any previous listener to avoid stacking
+    if (audioEndedListener) {
+      audio.removeEventListener('ended', audioEndedListener);
+    }
+
+    audioEndedListener = function () {
+      stopTimer();
+      const isLastMove = currentMoveIndex >= moves.length - 1;
+      if (isLastMove) {
+        finishSession();
+      } else {
+        loadMove(currentMoveIndex + 1);
+      }
+    };
+    audio.addEventListener('ended', audioEndedListener);
+  }
+
+  /**
+   * Remove the audio ended listener (called when manually navigating,
+   * so the old move's audio ending doesn't trigger a transition).
+   */
+  function unbindAudioEnded() {
+    const audio = document.getElementById('practice-audio');
+    if (audio && audioEndedListener) {
+      audio.removeEventListener('ended', audioEndedListener);
+      audioEndedListener = null;
+    }
   }
 
   /**
@@ -222,6 +268,8 @@
       clearInterval(timerInterval);
       timerInterval = null;
     }
+
+    unbindAudioEnded();
 
     // Stop any playing audio
     const audio = document.getElementById('practice-audio');
@@ -292,6 +340,8 @@
           finishSession();
         } else {
           loadMove(currentMoveIndex + 1);
+          // Auto-start music when rest period naturally transitions.
+          playMusicAndStart();
         }
       }
     }, 1000);
