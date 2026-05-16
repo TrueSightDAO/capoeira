@@ -246,12 +246,30 @@
             window.CapoeiraHistory.renderDashboard('history-summary');
         }
 
-        // Persistent public record link — visible whenever a keypair exists in
-        // localStorage. Lets returning users grab the URL anywhere on
-        // the page, not just after Finish Session.
+        // Persistent public record link — visible only when (a) a keypair
+        // exists in localStorage AND (b) at least one practice session has
+        // been successfully submitted (i.e. has a `submitted_at` stamp in
+        // capoeira_session_history). Keypair-without-submission used to
+        // leak orphan pk-hash URLs that 404'd on truesight.me/credentials
+        // because no practice event was ever committed to lineage-credentials
+        // for that key.
+        function hasSubmittedPractice() {
+            try {
+                var raw = localStorage.getItem('capoeira_session_history');
+                if (!raw) return false;
+                var sessions = JSON.parse(raw);
+                return Array.isArray(sessions) && sessions.some(function (s) {
+                    return s && s.submitted_at;
+                });
+            } catch (e) {
+                return false;
+            }
+        }
+
         async function revealPersistentCvLink() {
             if (!window.CapoeiraPracticeSubmit) return;
             if (!window.CapoeiraPracticeSubmit.getStoredPublicKey()) return;
+            if (!hasSubmittedPractice()) return;  // gate: at least one submitted session
             const url = await window.CapoeiraPracticeSubmit.getCvUrl();
             const anchor = document.getElementById('persistent-cv-anchor');
             const section = document.getElementById('persistent-cv-link');
