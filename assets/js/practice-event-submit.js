@@ -101,7 +101,7 @@
     const pub = getStoredPublicKey();
     if (!pub) return null;
     const slug = await publicKeyToSlug(pub);
-    return `${TRUESIGHT_BASE}/credentials/#${slug}`;
+    return `${TRUESIGHT_BASE}/programs/tribomirim/members.html#${slug}`;
   }
 
   // ---- payload + signing ----

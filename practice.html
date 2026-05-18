@@ -185,28 +185,9 @@
                 <p id="submit-status" style="margin:0.75rem 0 0;font-size:0.9rem;color:var(--color-text-light)">Submitting to Edgar…</p>
             </div>
 
-            <button class="btn btn-primary" onclick="window.CapoeiraPractice.logAndFinish()">
-                Log Session & View History
-            </button>
-            <button class="btn btn-outline" style="margin-left:1rem" onclick="window.CapoeiraPractice.reset()">
+            <button class="btn btn-primary" onclick="window.CapoeiraPractice.reset()">
                 Generate New Session
             </button>
-        </div>
-    </section>
-
-    <!-- --- Dashboard Section --- -->
-    <section id="dashboard-section" class="hidden">
-        <div class="section">
-            <div class="section-heading">
-                <h2>Your Practice History</h2>
-                <p>All data is stored locally in your browser. No accounts. No tracking.</p>
-            </div>
-            <div id="history-dashboard"></div>
-            <div style="text-align:center;margin-top:2rem">
-                <button class="btn btn-outline" onclick="window.CapoeiraPractice.reset()">
-                    Generate New Session
-                </button>
-            </div>
         </div>
     </section>
 
@@ -250,7 +231,7 @@
         // exists in localStorage AND (b) at least one practice session has
         // been successfully submitted (i.e. has a `submitted_at` stamp in
         // capoeira_session_history). Keypair-without-submission used to
-        // leak orphan pk-hash URLs that 404'd on truesight.me/credentials
+        // leak orphan pk-hash URLs that 404'd on truesight.me/programs/tribomirim/members.html
         // because no practice event was ever committed to lineage-credentials
         // for that key.
         function hasSubmittedPractice() {

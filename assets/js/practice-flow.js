@@ -348,7 +348,7 @@
   }
 
   /**
-   * Finish the session and show the log CTA.
+   * Finish the session, log to local history, submit to Edgar, and show the finish CTA.
    */
   function finishSession() {
     stopTimer();
@@ -358,7 +358,7 @@
     const totalMin = Math.round(totalSessionSeconds / 60);
     document.getElementById('session-total-time').textContent = totalMin;
 
-    // Store for logging
+    // Build the completed session object
     window.__completedSession = {
       theme,
       moves,
@@ -366,6 +366,15 @@
       totalTime: totalMin,
       completedAt: new Date().toISOString()
     };
+
+    // Persist to local history immediately so the top "Your Practice History"
+    // section reflects the new session without an extra click.
+    if (window.CapoeiraHistory && window.CapoeiraHistory.logSession) {
+      window.CapoeiraHistory.logSession(window.__completedSession);
+    }
+    if (window.CapoeiraHistory && window.CapoeiraHistory.renderDashboard) {
+      window.CapoeiraHistory.renderDashboard('history-summary');
+    }
 
     // Persisted state isn't useful past the finish screen — clear it so
     // the next visit lands fresh, not back on the just-completed session.
@@ -415,18 +424,17 @@
   }
 
   /**
-   * Log session and show dashboard.
+   * Log session (idempotent if already logged in finishSession) and return to generator.
+   * Kept for backwards compatibility; the finish screen now auto-logs.
    */
   function logAndFinish() {
     if (window.CapoeiraHistory && window.CapoeiraHistory.logSession) {
       window.CapoeiraHistory.logSession(window.__completedSession);
     }
-    document.getElementById('finish-section').classList.add('hidden');
-    document.getElementById('dashboard-section').classList.remove('hidden');
-
     if (window.CapoeiraHistory && window.CapoeiraHistory.renderDashboard) {
-      window.CapoeiraHistory.renderDashboard('history-dashboard');
+      window.CapoeiraHistory.renderDashboard('history-summary');
     }
+    resetPractice();
   }
 
   /**
@@ -438,7 +446,6 @@
     if (window.CapoeiraSessionState) window.CapoeiraSessionState.clear();
     document.getElementById('practice-section').classList.add('hidden');
     document.getElementById('finish-section').classList.add('hidden');
-    document.getElementById('dashboard-section').classList.add('hidden');
     document.getElementById('generate-section').classList.remove('hidden');
     document.getElementById('session-card').classList.add('hidden');
     document.getElementById('start-session-btn').classList.add('hidden');
