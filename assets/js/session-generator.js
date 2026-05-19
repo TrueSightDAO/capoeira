@@ -191,21 +191,19 @@
   /**
    * Pick music tracks: slow → medium-fast → cool-down arc
    * matching the selected theme's moves' tempo_range.
+   *
+   * Returns ONE track per move (including ginga) so practice-flow.js
+   * can play each move's track without modulo-wrapping back to an
+   * earlier track. Previously this was hard-coded to 4 tracks
+   * regardless of the 5–7 move count, which produced 1–3 audible
+   * repeats per session at playback time.
+   *
+   * Defaults `count` to `selectedMoves.length`; explicit override
+   * stays supported for any caller that wants a different track count.
    */
-  function pickMusic(musicLibrary, selectedMoves, count = 4) {
-    const tempoMap = { Slow: 0, Medium: 1, Fast: 2 };
-    const moveTempos = selectedMoves.map(m => tempoMap[m.tempo_range] || 1);
-    const avgTempo = moveTempos.reduce((a, b) => a + b, 0) / moveTempos.length;
-
-    // Arc: start slow-ish, middle faster, end slow
-    const arcTempos = [];
-    if (count >= 4) {
-      arcTempos.push('Slow', 'Medium', 'Medium', 'Slow');
-    } else if (count === 3) {
-      arcTempos.push('Slow', 'Medium', 'Slow');
-    } else {
-      arcTempos.push('Medium', 'Slow');
-    }
+  function pickMusic(musicLibrary, selectedMoves, count) {
+    if (count == null) count = selectedMoves.length;
+    const arcTempos = buildTempoArc(count);
 
     const selected = [];
     const used = new Set();
@@ -213,12 +211,18 @@
     for (const tempo of arcTempos) {
       const candidates = musicLibrary.filter(t => t.tempo_category === tempo && !used.has(t.id));
       if (candidates.length === 0) {
-        // Fallback to any unused
+        // No unused track at the desired tempo — fall back to any unused
+        // track (right shape, wrong tempo > correct tempo, repeated).
         const fallback = musicLibrary.filter(t => !used.has(t.id));
         if (fallback.length > 0) {
           const pick = fallback[Math.floor(Math.random() * fallback.length)];
           selected.push(pick);
           used.add(pick.id);
+        } else if (musicLibrary.length > 0) {
+          // Library exhausted — only reachable if move count > library
+          // size. Today: 11 tracks, max 7 moves, so unreachable. Future-
+          // proofed: pick a random repeat (lesser evil than silence).
+          selected.push(musicLibrary[Math.floor(Math.random() * musicLibrary.length)]);
         }
       } else {
         const pick = candidates[Math.floor(Math.random() * candidates.length)];
@@ -228,6 +232,26 @@
     }
 
     return selected;
+  }
+
+  /**
+   * Build a tempo arc of length n: warm-up gentle, peak in the middle,
+   * cool down at the end. Scales sensibly from 1 up to 10+ tracks.
+   */
+  function buildTempoArc(n) {
+    if (n <= 1) return ['Medium'];
+    if (n === 2) return ['Medium', 'Slow'];
+    if (n === 3) return ['Slow', 'Medium', 'Slow'];
+    if (n === 4) return ['Slow', 'Medium', 'Medium', 'Slow'];
+    // n >= 5: opener Slow (paired with ginga), cool-down Slow,
+    // sustained Medium in the middle. From n=6 onward there's room
+    // for a single Fast peak at the middle-most position to give the
+    // session an energy spike.
+    const arc = new Array(n).fill('Medium');
+    arc[0] = 'Slow';
+    arc[n - 1] = 'Slow';
+    if (n >= 6) arc[Math.floor(n / 2)] = 'Fast';
+    return arc;
   }
 
   /**
