@@ -347,7 +347,7 @@
   /**
    * Main entry point — called from practice.html
    */
-  window.generateSession = async function (bias = {}) {
+  window.generateSession = async function () {
     const statusEl = document.getElementById('generator-status');
     const cardEl = document.getElementById('session-card');
     const startBtn = document.getElementById('start-session-btn');
@@ -369,7 +369,7 @@
 
       const history = getSessionHistory();
       const theme = pickTheme(moves, history);
-      const themeMoves = pickMoves(moves, theme, history, bias);
+      const themeMoves = pickMoves(moves, theme, history);
 
       // Ginga is the warm-up — always at position 0 (it's literally the
       // foundational rocking step every other move builds on). pickMoves
