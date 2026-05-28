@@ -84,18 +84,8 @@
                 <p>Theme-based sequencing, difficulty-weighted move selection, and berimbau music pairing. Each session is ~45 minutes.</p>
             </div>
 
-            <div style="text-align:center;margin-bottom:1.5rem">
-                <label for="diff-bias" style="margin-right:0.5rem;font-weight:600">Difficulty bias:</label>
-                <select id="diff-bias" style="padding:0.4rem 0.75rem;border-radius:6px;border:1px solid #ddd;font-family:var(--font-body)">
-                    <option value="balanced">Balanced</option>
-                    <option value="beginner" selected>More Beginner-friendly</option>
-                    <option value="intermediate">More Intermediate</option>
-                    <option value="advanced">More Advanced</option>
-                </select>
-            </div>
-
             <div style="text-align:center">
-                <button class="btn btn-primary" onclick="generateFromUI()">Generate Session</button>
+                <button class="btn btn-primary" onclick="window.generateSession()">Generate Session</button>
             </div>
         </div>
 
