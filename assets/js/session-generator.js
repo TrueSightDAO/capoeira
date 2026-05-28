@@ -4,10 +4,10 @@
  * Algorithm:
  * 1. Load last 3-4 sessions from localStorage.session_history
  * 2. Pick a theme not used in last 2 sessions
- * 3. From theme's moves, pick 4-6 weighted by:
- *    - Difficulty bias toward Beginner/Intermediate (configurable)
+ * 3. From theme's moves, pick 4-6 using round-robin cycling:
+ *    - Least-practiced moves first (guarantees every move is seen before repeats)
  *    - Total duration_minutes summing to ~45 (±10)
- *    - Recency penalty: a move in last session has lower weight
+ *    - Order by difficulty (Beginner → Intermediate → Advanced) for natural progression
  * 4. Pick music tracks matching the theme's tempo arc
  * 5. Render session card
  */
