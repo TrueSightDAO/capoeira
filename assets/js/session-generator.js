@@ -4,10 +4,10 @@
  * Algorithm:
  * 1. Load last 3-4 sessions from localStorage.session_history
  * 2. Pick a theme not used in last 2 sessions
- * 3. From theme's moves, pick 4-6 weighted by:
- *    - Difficulty bias toward Beginner/Intermediate (configurable)
+ * 3. From theme's moves, pick 4-6 using round-robin cycling:
+ *    - Least-practiced moves first (guarantees every move is seen before repeats)
  *    - Total duration_minutes summing to ~45 (±10)
- *    - Recency penalty: a move in last session has lower weight
+ *    - Order by difficulty (Beginner → Intermediate → Advanced) for natural progression
  * 4. Pick music tracks matching the theme's tempo arc
  * 5. Render session card
  */
@@ -21,12 +21,6 @@
   const MIN_MOVES = 4;
   const MAX_MOVES = 6;
   const RECENCY_LOOKBACK = 2;  // themes not in last N sessions
-
-  const DIFFICULTY_WEIGHTS = {
-    Beginner:     1.0,
-    Intermediate: 0.85,
-    Advanced:     0.45
-  };
 
   /**
    * Load JSON data safely
@@ -85,19 +79,9 @@
   }
 
   /**
-   * Pick 4-6 moves from a theme, weighted by difficulty bias, recency penalty,
-   * and summing to ~45min (±10).
-   * 
-   * @param {Array} moves - all moves
-   * @param {string} theme - selected theme
-   * @param {Array} history - session history for recency penalty
-   * @param {Object} bias - difficulty weight overrides (optional)
-   * @return {Array} selected moves (4-6)
-   */
-  /**
    * Build a per-move-id count of how many times each move has been practiced
-   * across all recorded sessions. Used to weight coverage so the user
-   * eventually cycles through every move.
+   * across all recorded sessions. Used to pick the least-practiced moves first
+   * (round-robin cycling).
    */
   function computePracticeCounts(history) {
     const counts = {};
@@ -109,11 +93,19 @@
     return counts;
   }
 
-  function pickMoves(moves, theme, history, bias = {}) {
-    const diffWeights = { ...DIFFICULTY_WEIGHTS, ...bias };
-    const lastSessionMoveIds = history.length > 0
-      ? (history[history.length - 1].moves || []).map(m => m.id)
-      : [];
+  /**
+   * Pick 4-6 moves from a theme using round-robin cycling:
+   * - Sort candidates by practice count ascending (least-practiced first)
+   * - Pick the top 4-6 that fit the ~45min (±10) time budget
+   * - Order selected moves by difficulty (Beginner → Intermediate → Advanced)
+   *   so each session has a natural progression arc
+   *
+   * @param {Array} moves - all moves
+   * @param {string} theme - selected theme
+   * @param {Array} history - session history for practice counts
+   * @return {Array} selected moves (4-6)
+   */
+  function pickMoves(moves, theme, history) {
     const practiceCounts = computePracticeCounts(history);
 
     // Ginga is the warm-up — always prepended to the session (see
@@ -121,27 +113,15 @@
     // and so the duration budget for theme moves is the remaining ~39min.
     let candidates = moves.filter(m => m.theme === theme && m.id !== 'ginga');
 
-    // Score each candidate: difficulty bias * recency penalty * coverage boost
-    candidates = candidates.map(m => {
-      let weight = diffWeights[m.difficulty] || 0.5;
-
-      // Recency penalty: 0.5x multiplier if move was in last session
-      // MULTIPLICATIVE, not a hard gate — a move can still be selected
-      if (lastSessionMoveIds.includes(m.id)) {
-        weight *= 0.5;
-      }
-
-      // Coverage boost: never-practiced moves get 2x, practiced-once 1.5x,
-      // practiced-many gradually back to ~1x. Goal: the user cycles through
-      // every move over time, with no move left permanently neglected.
-      const cnt = practiceCounts[m.id] || 0;
-      weight *= 1 + (1 / (1 + cnt));
-
-      return { ...m, _weight: weight };
+    // Round-robin: sort by practice count ascending (least-practiced first)
+    candidates.sort((a, b) => {
+      const cntA = practiceCounts[a.id] || 0;
+      const cntB = practiceCounts[b.id] || 0;
+      if (cntA !== cntB) return cntA - cntB;
+      // Tie-break by difficulty (Beginner first) so new moves are explored
+      const diffOrder = { Beginner: 0, Intermediate: 1, Advanced: 2 };
+      return (diffOrder[a.difficulty] || 0) - (diffOrder[b.difficulty] || 0);
     });
-
-    // Sort by weight descending (prefer higher-weighted moves first)
-    candidates.sort((a, b) => b._weight - a._weight);
 
     // Greedy subset selection. Theme moves fill the budget LESS Ginga's
     // warm-up duration (always prepended) so total session stays at ~45min.
@@ -153,7 +133,7 @@
     const minTarget = Math.max(0, target - DURATION_TOLERANCE);
     const maxTarget = target + DURATION_TOLERANCE;
 
-    // Weighted random selection: higher-weight moves are more likely to be picked early
+    // Pick least-practiced moves first (round-robin)
     for (let i = 0; i < candidates.length && selected.length < MAX_MOVES; i++) {
       // Skip if adding this move would exceed max target and we already have MIN_MOVES
       if (totalDur + candidates[i].duration_minutes > maxTarget && selected.length >= MIN_MOVES) {
@@ -182,10 +162,11 @@
       }
     }
 
-    return selected.map(m => {
-      const { _weight, ...move } = m;
-      return move;
-    });
+    // Order selected moves by difficulty for a natural progression arc
+    const diffOrder = { Beginner: 0, Intermediate: 1, Advanced: 2 };
+    selected.sort((a, b) => (diffOrder[a.difficulty] || 0) - (diffOrder[b.difficulty] || 0));
+
+    return selected;
   }
 
   /**
@@ -366,7 +347,7 @@
   /**
    * Main entry point — called from practice.html
    */
-  window.generateSession = async function (bias = {}) {
+  window.generateSession = async function () {
     const statusEl = document.getElementById('generator-status');
     const cardEl = document.getElementById('session-card');
     const startBtn = document.getElementById('start-session-btn');
@@ -388,7 +369,7 @@
 
       const history = getSessionHistory();
       const theme = pickTheme(moves, history);
-      const themeMoves = pickMoves(moves, theme, history, bias);
+      const themeMoves = pickMoves(moves, theme, history);
 
       // Ginga is the warm-up — always at position 0 (it's literally the
       // foundational rocking step every other move builds on). pickMoves
