@@ -22,12 +22,6 @@
   const MAX_MOVES = 6;
   const RECENCY_LOOKBACK = 2;  // themes not in last N sessions
 
-  const DIFFICULTY_WEIGHTS = {
-    Beginner:     1.0,
-    Intermediate: 0.85,
-    Advanced:     0.45
-  };
-
   /**
    * Load JSON data safely
    */
