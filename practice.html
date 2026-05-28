@@ -54,28 +54,11 @@
         </nav>
     </header>
 
-    <!-- --- Past Sessions Summary (always visible on landing) --- -->
-    <section class="section" id="history-summary-section">
-        <div class="section-heading">
-            <h2>Your Practice History</h2>
-            <p>All data is stored locally in your browser. No accounts. No tracking.</p>
-        </div>
-        <!-- Persistent public record link — revealed on page load if a keypair exists.
-             Lets returning users grab their public record URL anywhere on the
-             page, not just after Finish Session. -->
-        <div id="persistent-cv-link" class="hidden" style="text-align:center;margin:0 0 1.25rem">
-            <a id="persistent-cv-anchor" href="#" target="_blank" rel="noopener" class="btn btn-outline">
-                Your training record →
-            </a>
-        </div>
-        <div id="history-summary"></div>
-    </section>
-
     <!-- --- Generator Section --- -->
     <section class="section" id="generate-section">
         <!-- Preamble: heading + difficulty picker + Generate button.
              Once a session is rendered, this whole block hides (along with
-             #history-summary-section above) so the user only sees the
+             #history-summary-section below) so the user only sees the
              actionable session card + Start Practice button. Reappears on
              CapoeiraPractice.reset() / "← Back". -->
         <div id="generator-preamble">
@@ -104,6 +87,23 @@
                 ← Back
             </button>
         </div>
+    </section>
+
+    <!-- --- Past Sessions Summary (always visible on landing) --- -->
+    <section class="section" id="history-summary-section">
+        <div class="section-heading">
+            <h2>Your Practice History</h2>
+            <p>All data is stored locally in your browser. No accounts. No tracking.</p>
+        </div>
+        <!-- Persistent public record link — revealed on page load if a keypair exists.
+             Lets returning users grab their public record URL anywhere on the
+             page, not just after Finish Session. -->
+        <div id="persistent-cv-link" class="hidden" style="text-align:center;margin:0 0 1.25rem">
+            <a id="persistent-cv-anchor" href="#" target="_blank" rel="noopener" class="btn btn-outline">
+                Your training record →
+            </a>
+        </div>
+        <div id="history-summary"></div>
     </section>
 
     <!-- --- Practice Flow Section --- -->
