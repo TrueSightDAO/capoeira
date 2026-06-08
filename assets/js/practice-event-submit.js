@@ -16,6 +16,11 @@
  *   agentic_ai_context/CREDENTIALING_PLATFORM.md
  * Reuses the existing dapp keypair + signing pattern from:
  *   dapp/create_signature.html + dapp/report_contribution.html.
+ *
+ * DaoClient is loaded from the CDN (unpkg @truesight_dao/dao-client@1.0.1)
+ * in practice.html before this script runs.
+ *
+ * Generated-by: Sophia (TrueSight Autopilot)
  */
 (function () {
   'use strict';
@@ -32,7 +37,7 @@
 
   // ---- low-level helpers (from @truesight_dao/dao-client CDN) ----
   // These are aliased from the DaoClient global, loaded via CDN script tag
-  // in index.html before this file. Each was verified against @1.0.1.
+  // in practice.html before this file. Each was verified against @1.0.1.
   const base64ToArrayBuffer = DaoClient.base64ToArrayBuffer;
   const arrayBufferToBase64 = DaoClient.arrayBufferToBase64;
   const base64ToBase64Url = DaoClient.base64ToBase64Url;
@@ -102,9 +107,8 @@
   async function signRequestText(requestText) {
     const privateKeyB64 = localStorage.getItem(LS_PRIVATE_KEY);
     if (!privateKeyB64) throw new Error('No private key in localStorage');
-    // Use DaoClient's crypto utils directly — same RSASSA-PKCS1-v1_5/SHA-256
-    const crypto = new (Object.getPrototypeOf(DaoClient).constructor)();
-    // Actually, use the static CryptoUtils via the instance method:
+    // Use DaoClient's base64 helper for the key import; signing is the same
+    // RSASSA-PKCS1-v1_5/SHA-256 as the package uses internally.
     const privateKeyObj = await window.crypto.subtle.importKey(
       'pkcs8',
       DaoClient.base64ToArrayBuffer(privateKeyB64),
