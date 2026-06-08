@@ -30,68 +30,7 @@
   // History key used by session-history.js for the past-sessions dashboard.
   const LS_SESSION_HISTORY = 'capoeira_session_history';
 
-  // ---- low-level helpers (mirror the dapp implementations) ----
-
-  function base64ToArrayBuffer(b64) {
-    const bin = window.atob(b64);
-    const bytes = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    return bytes.buffer;
-  }
-
-  function arrayBufferToBase64(buf) {
-    let bin = '';
-    const bytes = new Uint8Array(buf);
-    for (let i = 0; i < bytes.byteLength; i++) bin += String.fromCharCode(bytes[i]);
-    return window.btoa(bin);
-  }
-
-  function base64ToBase64Url(b64) {
-    return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-  }
-
-  /**
-   * Compute the canonical practitioner slug from a base64 public key.
-   *
-   * The GAS event-processor MUST use the same derivation when deciding
-   * where to commit the practice event in lineage-credentials:
-   *
-   *   slug = "pk-" + base64url( SHA-256(base64-decoded public-key bytes) ).slice(0, 12)
-   *
-   * Truncation is fine — 12 chars of base64url = 72 bits of collision
-   * resistance, far more than enough for the practitioner population.
-   */
-  async function publicKeyToSlug(publicKeyBase64) {
-    const keyBytes = base64ToArrayBuffer(publicKeyBase64);
-    const hashBuf = await window.crypto.subtle.digest('SHA-256', keyBytes);
-    const b64 = arrayBufferToBase64(hashBuf);
-    return 'pk-' + base64ToBase64Url(b64).slice(0, 12);
-  }
-
-  // ---- keypair management ----
-
-  async function generateKeypair() {
-    const keyPair = await window.crypto.subtle.generateKey(
-      { name: 'RSASSA-PKCS1-v1_5', modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' },
-      true,
-      ['sign', 'verify']
-    );
-    const publicKey = await window.crypto.subtle.exportKey('spki', keyPair.publicKey);
-    const privateKey = await window.crypto.subtle.exportKey('pkcs8', keyPair.privateKey);
-    const publicKeyBase64 = arrayBufferToBase64(publicKey);
-    const privateKeyBase64 = arrayBufferToBase64(privateKey);
-    localStorage.setItem(LS_PUBLIC_KEY, publicKeyBase64);
-    localStorage.setItem(LS_PRIVATE_KEY, privateKeyBase64);
-    return publicKeyBase64;
-  }
-
-  async function ensureKeypair() {
-    let pub = localStorage.getItem(LS_PUBLIC_KEY);
-    const priv = localStorage.getItem(LS_PRIVATE_KEY);
-    if (pub && priv) return pub;
-    pub = await generateKeypair();
-    return pub;
-  }
+  // ---- low-level helpers (delegated to @truesight_dao/dao-client CDN) ----
 
   function getStoredPublicKey() {
     return localStorage.getItem(LS_PUBLIC_KEY) || null;
@@ -100,7 +39,7 @@
   async function getCvUrl() {
     const pub = getStoredPublicKey();
     if (!pub) return null;
-    const slug = await publicKeyToSlug(pub);
+    const slug = await DaoClient.publicKeyToSlug(pub);
     return `${TRUESIGHT_BASE}/programs/tribomirim/credentials/#${slug}`;
   }
 
@@ -140,9 +79,10 @@
   async function signRequestText(requestText) {
     const privateKeyB64 = localStorage.getItem(LS_PRIVATE_KEY);
     if (!privateKeyB64) throw new Error('No private key in localStorage');
+    const privateKeyBytes = DaoClient.base64ToArrayBuffer(privateKeyB64);
     const privateKeyObj = await window.crypto.subtle.importKey(
       'pkcs8',
-      base64ToArrayBuffer(privateKeyB64),
+      privateKeyBytes,
       { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
       false,
       ['sign']
@@ -153,7 +93,7 @@
       privateKeyObj,
       encoder.encode(requestText)
     );
-    return arrayBufferToBase64(sig);
+    return DaoClient.arrayBufferToBase64(sig);
   }
 
   // ---- submit ----
@@ -165,7 +105,9 @@
    */
   async function submitSession(session) {
     try {
-      const publicKey = await ensureKeypair();
+      // Use DaoClient to auto-load or generate keypair
+      const client = new DaoClient();
+      const publicKey = client.publicKey;
       const sourceUrl = window.location.href;
       const requestText = buildPracticeEventText(session, { publicKey, sourceUrl });
       const requestHash = await signRequestText(requestText);
@@ -182,7 +124,7 @@
 
       const resp = await fetch(EDGAR_SUBMIT_URL, { method: 'POST', body: formData });
       const ok = resp.ok;
-      const slug = await publicKeyToSlug(publicKey);
+      const slug = await client.getSlug();
 
       if (!ok) {
         const errText = await resp.text().catch(() => '');
@@ -243,9 +185,7 @@
   }
 
   window.CapoeiraPracticeSubmit = {
-    ensureKeypair,
     getStoredPublicKey,
-    publicKeyToSlug,
     getCvUrl,
     submitSession,
     backfillUnsent,
