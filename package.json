@@ -1,0 +1,14 @@
+{
+  "name": "capoeira",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Tribo Bahia Mirim Capoeira — Practice Platform",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.0.0",
+    "vitest": "^3.0.0"
+  }
+}
