@@ -4,9 +4,8 @@
  * On Finish Session this module:
  *   1. Ensures a localStorage RSA keypair (generates one if absent, anonymous).
  *   2. Builds the [PRACTICE EVENT] payload from a completed-session object.
- *   3. Signs it with RSASSA-PKCS1-v1_5 / SHA-256 (same shape as dapp).
- *   4. POSTs to Edgar /dao/submit_contribution.
- *   5. Marks the session as `submitted_at` in localStorage so it doesn't get re-submitted.
+ *   3. Submits via DaoClient.submitEvent() — one call handles signing + POST.
+ *   4. Marks the session as `submitted_at` in localStorage so it doesn't get re-submitted.
  *
  * It also exposes a `getCvUrl()` helper so the page can surface the
  * person's public record link immediately at Finish Session (slug = pk-<hash>
@@ -14,10 +13,8 @@
  *
  * Design doc:
  *   agentic_ai_context/CREDENTIALING_PLATFORM.md
- * Reuses the existing dapp keypair + signing pattern from:
- *   dapp/create_signature.html + dapp/report_contribution.html.
  *
- * DaoClient is loaded from the CDN (unpkg @truesight_dao/dao-client@1.0.1)
+ * DaoClient is loaded from the CDN (unpkg @truesight_dao/dao-client@1.1.0-rc.1)
  * in practice.html before this script runs.
  *
  * Generated-by: Sophia (TrueSight Autopilot)
@@ -25,7 +22,6 @@
 (function () {
   'use strict';
 
-  const EDGAR_SUBMIT_URL = 'https://edgar.truesight.me/dao/submit_contribution';
   const TRUESIGHT_BASE = 'https://truesight.me';
 
   // Match the dapp's localStorage keys so a user who has already
@@ -35,94 +31,32 @@
   // History key used by session-history.js for the past-sessions dashboard.
   const LS_SESSION_HISTORY = 'capoeira_session_history';
 
-  // ---- low-level helpers (from @truesight_dao/dao-client CDN) ----
-  // These are aliased from the DaoClient global, loaded via CDN script tag
-  // in practice.html before this file. Each was verified against @1.0.1.
-  const base64ToArrayBuffer = DaoClient.base64ToArrayBuffer;
-  const arrayBufferToBase64 = DaoClient.arrayBufferToBase64;
-  const base64ToBase64Url = DaoClient.base64ToBase64Url;
-  const publicKeyToSlug = DaoClient.publicKeyToSlug;
+  // Instantiate the DAO client once. Uses localStorage-backed keypair
+  // (auto-loads existing keys, generates new ones if absent).
+  const client = new DaoClient({
+    storagePrefix: 'truesight_dao_',
+  });
 
   // ---- keypair management ----
 
-  async function generateKeypair() {
-    const kp = await DaoClient.generateKeyPair();
-    localStorage.setItem(LS_PUBLIC_KEY, kp.publicKey);
-    localStorage.setItem(LS_PRIVATE_KEY, kp.privateKey);
+  async function ensureKeypair() {
+    // DaoClient constructor already loads or generates a keypair.
+    // If the client has a publicKey, we're good.
+    if (client.publicKey) return client.publicKey;
+    // Fallback: generate explicitly (shouldn't normally be needed).
+    const kp = await client.generateKeyPair();
     return kp.publicKey;
   }
 
-  async function ensureKeypair() {
-    let pub = localStorage.getItem(LS_PUBLIC_KEY);
-    const priv = localStorage.getItem(LS_PRIVATE_KEY);
-    if (pub && priv) return pub;
-    pub = await generateKeypair();
-    return pub;
-  }
-
   function getStoredPublicKey() {
-    return localStorage.getItem(LS_PUBLIC_KEY) || null;
+    return client.publicKey || localStorage.getItem(LS_PUBLIC_KEY) || null;
   }
 
   async function getCvUrl() {
     const pub = getStoredPublicKey();
     if (!pub) return null;
-    const slug = await publicKeyToSlug(pub);
+    const slug = await client.getSlug();
     return `${TRUESIGHT_BASE}/programs/tribomirim/credentials/#${slug}`;
-  }
-
-  // ---- payload + signing ----
-
-  function buildPracticeEventText(session, opts) {
-    const captured = (session.completedAt || new Date().toISOString());
-    const moves = (session.moves || []).map(m => ({
-      id: m.id,
-      name_pt: m.name_pt,
-      duration_seconds: Math.round((m.duration_minutes || 0) * 60),
-    }));
-    const music = (session.music || []).map(t => t.id || t.title);
-    const totalMin = session.totalTime || Math.round(moves.reduce((s, m) => s + (m.duration_seconds || 0), 0) / 60);
-
-    const payload = {
-      theme: session.theme || '',
-      moves_practiced: moves,
-      music_played: music,
-      total_practice_minutes: totalMin,
-    };
-    const payloadJson = JSON.stringify(payload, null, 2);
-
-    return (
-      '[PRACTICE EVENT]\n'
-      + '- Program: capoeira-tribo-mirim\n'
-      + '- Practice Type: training-session\n'
-      + '- Practitioner Public Key: ' + opts.publicKey + '\n'
-      + (opts.practitionerName ? '- Practitioner Name: ' + opts.practitionerName + '\n' : '')
-      + '- Captured At: ' + captured + '\n'
-      + '- Source URL: ' + opts.sourceUrl + '\n'
-      + '- Payload JSON:\n' + payloadJson + '\n'
-      + '--------'
-    );
-  }
-
-  async function signRequestText(requestText) {
-    const privateKeyB64 = localStorage.getItem(LS_PRIVATE_KEY);
-    if (!privateKeyB64) throw new Error('No private key in localStorage');
-    // Use DaoClient's base64 helper for the key import; signing is the same
-    // RSASSA-PKCS1-v1_5/SHA-256 as the package uses internally.
-    const privateKeyObj = await window.crypto.subtle.importKey(
-      'pkcs8',
-      DaoClient.base64ToArrayBuffer(privateKeyB64),
-      { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
-      false,
-      ['sign']
-    );
-    const encoder = new TextEncoder();
-    const sig = await window.crypto.subtle.sign(
-      'RSASSA-PKCS1-v1_5',
-      privateKeyObj,
-      encoder.encode(requestText)
-    );
-    return DaoClient.arrayBufferToBase64(sig);
   }
 
   // ---- submit ----
@@ -134,29 +68,37 @@
    */
   async function submitSession(session) {
     try {
-      const publicKey = await ensureKeypair();
-      const sourceUrl = window.location.href;
-      const requestText = buildPracticeEventText(session, { publicKey, sourceUrl });
-      const requestHash = await signRequestText(requestText);
-      const shareText = (
-        requestText
-        + '\n\nMy Digital Signature: ' + publicKey
-        + '\n\nRequest Transaction ID: ' + requestHash
-        + '\n\nThis submission was generated using ' + sourceUrl
-        + '\n\nVerify submission here: https://dapp.truesight.me/verify_request.html'
-      );
+      await ensureKeypair();
 
-      const formData = new FormData();
-      formData.append('text', shareText);
+      const captured = (session.completedAt || new Date().toISOString());
+      const moves = (session.moves || []).map(m => ({
+        id: m.id,
+        name_pt: m.name_pt,
+        duration_seconds: Math.round((m.duration_minutes || 0) * 60),
+      }));
+      const music = (session.music || []).map(t => t.id || t.title);
+      const totalMin = session.totalTime || Math.round(moves.reduce((s, m) => s + (m.duration_seconds || 0), 0) / 60);
 
-      const resp = await fetch(EDGAR_SUBMIT_URL, { method: 'POST', body: formData });
-      const ok = resp.ok;
-      const slug = await publicKeyToSlug(publicKey);
+      const result = await client.submitEvent({
+        eventType: 'PRACTICE EVENT',
+        fields: {
+          Program: 'capoeira-tribo-mirim',
+          'Practice Type': 'training-session',
+          'Captured At': captured,
+          'Source URL': window.location.href,
+          Theme: session.theme || '',
+          'Moves Practiced': JSON.stringify(moves),
+          'Music Played': JSON.stringify(music),
+          'Total Practice Minutes': String(totalMin),
+        },
+      });
 
-      if (!ok) {
-        const errText = await resp.text().catch(() => '');
-        return { ok: false, requestHash, slug, error: 'HTTP ' + resp.status + ' ' + errText.slice(0, 120) };
+      if (!result.ok) {
+        return { ok: false, error: result.error || 'Submission failed', slug: result.slug };
       }
+
+      const slug = result.slug;
+      const requestHash = result.txId;
 
       // Mark this session as submitted in localStorage history so the
       // backfill scanner doesn't re-submit it.
@@ -164,8 +106,6 @@
         const raw = localStorage.getItem(LS_SESSION_HISTORY);
         const history = raw ? JSON.parse(raw) : [];
         if (Array.isArray(history)) {
-          // Find the entry that matches by completedAt + theme — that's the
-          // tightest identifier we have without modifying session-history.js.
           for (let i = history.length - 1; i >= 0; i--) {
             const h = history[i];
             if (h.completedAt === session.completedAt && h.theme === session.theme) {
@@ -214,7 +154,7 @@
   window.CapoeiraPracticeSubmit = {
     ensureKeypair,
     getStoredPublicKey,
-    publicKeyToSlug,
+    publicKeyToSlug: client.getSlug.bind(client),
     getCvUrl,
     submitSession,
     backfillUnsent,
