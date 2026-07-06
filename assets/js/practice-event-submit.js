@@ -79,17 +79,22 @@
       const music = (session.music || []).map(t => t.id || t.title);
       const totalMin = session.totalTime || Math.round(moves.reduce((s, m) => s + (m.duration_seconds || 0), 0) / 60);
 
+      const payload = {
+        theme: session.theme || '',
+        moves_practiced: moves,
+        music_played: music,
+        total_practice_minutes: totalMin,
+      };
+
       const result = await client.submitEvent({
         eventType: 'PRACTICE EVENT',
         fields: {
           Program: 'capoeira-tribo-mirim',
           'Practice Type': 'training-session',
+          'Practitioner Public Key': client.publicKey,
           'Captured At': captured,
           'Source URL': window.location.href,
-          Theme: session.theme || '',
-          'Moves Practiced': JSON.stringify(moves),
-          'Music Played': JSON.stringify(music),
-          'Total Practice Minutes': String(totalMin),
+          'Payload JSON': JSON.stringify(payload, null, 2),
         },
       });
 

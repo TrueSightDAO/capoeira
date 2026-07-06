@@ -70,8 +70,8 @@ describe('practice-event-submit module', () => {
       fields: {
         Program: 'capoeira-tribo-mirim',
         'Practice Type': 'training-session',
-        Theme: 'Foundation',
-        'Total Practice Minutes': '45',
+        'Practitioner Public Key': client.publicKey,
+        'Payload JSON': JSON.stringify({ theme: 'Foundation', total_practice_minutes: 45 }),
       },
     });
     expect(result.ok).toBe(true);
@@ -93,21 +93,26 @@ describe('practice-event-submit module', () => {
       totalTime: 45,
     };
 
+    const payload = {
+      theme: session.theme,
+      moves_practiced: session.moves.map((m: any) => ({
+        id: m.id,
+        name_pt: m.name_pt,
+        duration_seconds: Math.round((m.duration_minutes || 0) * 60),
+      })),
+      music_played: session.music.map((t: any) => t.id || t.title),
+      total_practice_minutes: session.totalTime,
+    };
+
     const result = await client.submitEvent({
       eventType: 'PRACTICE EVENT',
       fields: {
         Program: 'capoeira-tribo-mirim',
         'Practice Type': 'training-session',
+        'Practitioner Public Key': client.publicKey,
         'Captured At': session.completedAt,
         'Source URL': 'https://capoeira.agroverse.shop/practice.html',
-        Theme: session.theme,
-        'Moves Practiced': JSON.stringify(session.moves.map((m: any) => ({
-          id: m.id,
-          name_pt: m.name_pt,
-          duration_seconds: Math.round((m.duration_minutes || 0) * 60),
-        }))),
-        'Music Played': JSON.stringify(session.music.map((t: any) => t.id || t.title)),
-        'Total Practice Minutes': String(session.totalTime),
+        'Payload JSON': JSON.stringify(payload, null, 2),
       },
     });
 
