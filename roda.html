@@ -134,6 +134,8 @@
           <div class="roda-controls">
             <button id="prev-btn" class="btn">← Previous</button>
             <button id="next-btn" class="btn">Next →</button>
+            <button id="start-roda-session-btn" class="btn btn-primary">Start Roda Session</button>
+            <button id="end-roda-session-btn" class="btn btn-outline hidden">End Roda Session</button>
             <div class="order-toggle">
               <label for="order-select">Order:</label>
               <select id="order-select">
@@ -143,6 +145,7 @@
               </select>
             </div>
           </div>
+          <p id="roda-session-status" style="text-align:center;color:var(--color-text-light);font-size:0.9rem;margin:-0.5rem 0 1rem"></p>
 
           <div class="roda-content">
             <div><h3>Lyrics (Portuguese)</h3><pre id="lyrics-pt">—</pre></div>
@@ -178,9 +181,13 @@
         <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
     </footer>
 
+    <script src="assets/js/session-history.js"></script>
+    <script src="https://unpkg.com/@truesight_dao/dao-client@1.1.0-rc.3/dist/dao-client.min.js"></script>
+    <script src="assets/js/practice-event-submit.js"></script>
     <script>
     (async function () {
       const tempoRank = { Slow: 0, Medium: 1, Fast: 2 };
+      const RODA_SESSION_KEY = 'capoeira_roda_session_start';
       const res = await fetch('data/music_library.json', { cache: 'no-store' });
       const tracks = await res.json();
 
@@ -196,10 +203,107 @@
         prevBtn: document.getElementById('prev-btn'),
         nextBtn: document.getElementById('next-btn'),
         orderSel: document.getElementById('order-select'),
+        startRodaBtn: document.getElementById('start-roda-session-btn'),
+        endRodaBtn: document.getElementById('end-roda-session-btn'),
+        rodaStatus: document.getElementById('roda-session-status'),
       };
 
       let order = [];
       let cursor = 0;
+
+      // --- Roda session logging: reuses the same localStorage history +
+      // Edgar submission pipeline as practice.html (session-history.js /
+      // practice-event-submit.js), but tagged theme:'roda' with no
+      // moves/techniques — a roda is communal music, not technique drilling.
+      let rodaSessionActive = false;
+      let rodaSessionStart = null;
+      let rodaTracksPlayed = new Map(); // id/title -> title, de-duped
+      let rodaTimerInterval = null;
+
+      function updateRodaButtons() {
+        els.startRodaBtn.classList.toggle('hidden', rodaSessionActive);
+        els.endRodaBtn.classList.toggle('hidden', !rodaSessionActive);
+      }
+
+      function updateRodaElapsed() {
+        if (!rodaSessionStart) return;
+        const elapsed = Math.floor((Date.now() - new Date(rodaSessionStart).getTime()) / 1000);
+        const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+        const s = String(elapsed % 60).padStart(2, '0');
+        els.rodaStatus.textContent = `Roda session in progress — ${m}:${s}`;
+      }
+
+      function startRodaTimer() {
+        updateRodaElapsed();
+        rodaTimerInterval = setInterval(updateRodaElapsed, 1000);
+      }
+
+      function stopRodaTimer() {
+        if (rodaTimerInterval) {
+          clearInterval(rodaTimerInterval);
+          rodaTimerInterval = null;
+        }
+      }
+
+      function trackCurrentSong() {
+        if (!rodaSessionActive) return;
+        const t = order[cursor];
+        if (t) rodaTracksPlayed.set(t.id || t.title, t.title);
+      }
+
+      function startRodaSession() {
+        if (rodaSessionActive) return;
+        rodaSessionActive = true;
+        rodaSessionStart = new Date().toISOString();
+        localStorage.setItem(RODA_SESSION_KEY, rodaSessionStart);
+        rodaTracksPlayed.clear();
+        trackCurrentSong();
+        updateRodaButtons();
+        startRodaTimer();
+      }
+
+      function endRodaSession() {
+        if (!rodaSessionActive) return;
+        stopRodaTimer();
+
+        const start = new Date(rodaSessionStart);
+        const now = new Date();
+        const totalMin = Math.max(1, Math.round((now - start) / 60000));
+
+        const session = {
+          theme: 'roda',
+          moves: [],
+          music: Array.from(rodaTracksPlayed.entries()).map(([id, title]) => ({ id, title })),
+          totalTime: totalMin,
+          completedAt: now.toISOString(),
+        };
+
+        if (window.CapoeiraHistory && window.CapoeiraHistory.logSession) {
+          window.CapoeiraHistory.logSession(session);
+        }
+        if (window.CapoeiraPracticeSubmit) {
+          window.CapoeiraPracticeSubmit.submitSession(session).catch(err => {
+            console.error('[roda] session submission failed:', err);
+          });
+        }
+
+        rodaSessionActive = false;
+        rodaSessionStart = null;
+        rodaTracksPlayed.clear();
+        localStorage.removeItem(RODA_SESSION_KEY);
+        updateRodaButtons();
+        els.rodaStatus.textContent = `Roda session logged — ${totalMin} min.`;
+      }
+
+      els.startRodaBtn.addEventListener('click', startRodaSession);
+      els.endRodaBtn.addEventListener('click', endRodaSession);
+
+      // Resume an in-flight roda session across refresh/reopen.
+      const storedStart = localStorage.getItem(RODA_SESSION_KEY);
+      if (storedStart) {
+        rodaSessionActive = true;
+        rodaSessionStart = storedStart;
+      }
 
       function rebuildOrder(mode) {
         const copy = tracks.slice();
@@ -264,6 +368,7 @@
         els.lyricsEn.textContent = t.lyrics_en || '(no translation on file)';
         els.history.textContent = t.historical_note || '(no historical note on file)';
         renderPlaylist();
+        trackCurrentSong();
       }
 
       function step(delta) {
@@ -282,6 +387,8 @@
 
       rebuildOrder('slow-to-fast');
       loadCurrent();
+      updateRodaButtons();
+      if (rodaSessionActive) startRodaTimer();
     })();
     </script>
     <script src="assets/js/nav.js" defer></script>

@@ -48,6 +48,7 @@
     const sessions = loadSessions();
     sessions.push({
       timestamp: new Date().toISOString(),
+      completedAt: session.completedAt || new Date().toISOString(),
       theme: session.theme || 'unknown',
       moves: (session.moves || []).map(m => ({
         id: m.id,
