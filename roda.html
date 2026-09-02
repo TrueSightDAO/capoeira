@@ -260,11 +260,15 @@
         trackCurrentSong();
         updateRodaButtons();
         startRodaTimer();
+        // Start the berimbau music — this click is a user gesture, so autoplay is allowed.
+        els.audio.play().catch(() => { /* user can still press play on the player */ });
       }
 
       function endRodaSession() {
         if (!rodaSessionActive) return;
         stopRodaTimer();
+        // Stop the music when the roda ends.
+        els.audio.pause();
 
         const start = new Date(rodaSessionStart);
         const now = new Date();
