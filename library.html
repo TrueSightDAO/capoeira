@@ -38,32 +38,32 @@
                 <img src="assets/images/logo/tribobahia-logo.png" alt="Tribo Bahia Mirim Capoeira" onerror="this.style.display='none'">
                 Tribo Bahia Mirim
             </a>
-            <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav-links">
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu" data-i18n-aria-label="library.nav.menu" aria-expanded="false" aria-controls="primary-nav-links">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="primary-nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="practice.html">Practice</a></li>
-                <li><a href="library.html">Move Library</a></li>
-                <li><a href="roda.html">Roda</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="berimbau.html">Berimbau</a></li>
-                <li><a href="roots.html">Roots</a></li>
-                <li><a href="transparency.html">Transparency</a></li>
-                <li><a href="index.html#donate" class="donate-link">Donate</a></li>
+                <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                <li><a href="practice.html" data-i18n="nav.practice">Practice</a></li>
+                <li><a href="library.html" data-i18n="nav.library">Move Library</a></li>
+                <li><a href="roda.html" data-i18n="nav.roda">Roda</a></li>
+                <li><a href="community.html" data-i18n="nav.community">Community</a></li>
+                <li><a href="berimbau.html" data-i18n="nav.berimbau">Berimbau</a></li>
+                <li><a href="roots.html" data-i18n="nav.roots">Roots</a></li>
+                <li><a href="transparency.html" data-i18n="nav.transparency">Transparency</a></li>
+                <li><a href="index.html#donate" class="donate-link" data-i18n="nav.donate">Donate</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="section">
         <div class="section-heading">
-            <h2>Move Library</h2>
-            <p>Every move in the practice platform, searchable by name, theme, difficulty, and tempo. Click a move to see its full instruction video and notes on the practice page.</p>
+            <h2 data-i18n="library.heading">Move Library</h2>
+            <p data-i18n="library.sub">Every move in the practice platform, searchable by name, theme, difficulty, and tempo. Click a move to see its full instruction video and notes on the practice page.</p>
         </div>
 
         <!-- Filters -->
         <div class="filter-bar">
-            <input type="search" id="library-search" placeholder="Search moves by name or description...">
+            <input type="search" id="library-search" placeholder="Search moves by name or description..." data-i18n-placeholder="library.search.placeholder">
             <select id="filter-theme">
                 <option value="">All Themes</option>
                 <option value="Foundation">Foundation</option>
@@ -105,18 +105,18 @@
         </div>
 
         <div id="library-empty" class="empty-state hidden">
-            <p>Moves are being curated. Bico Duro's video instruction is being transcribed and catalogued. Check back soon.</p>
+            <p data-i18n="library.empty">Moves are being curated. Bico Duro's video instruction is being transcribed and catalogued. Check back soon.</p>
         </div>
     </section>
 
     <footer>
         <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="practice.html">Practice</a>
-            <a href="library.html">Move Library</a>
-            <a href="transparency.html">Transparency</a>
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="practice.html" data-i18n="nav.practice">Practice</a>
+            <a href="library.html" data-i18n="nav.library">Move Library</a>
+            <a href="transparency.html" data-i18n="nav.transparency">Transparency</a>
         </div>
-        <p>Tribo Bahia Mirim Capoeira — Baia Itacare, Bahia, Brazil</p>
+        <p data-i18n="footer.tagline">Tribo Bahia Mirim Capoeira — Baia Itacare, Bahia, Brazil</p>
         <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
     </footer>
 
@@ -129,6 +129,32 @@
     </div>
 
     <script src="assets/js/move-library.js"></script>
+    <script src="assets/js/i18n/common.js"></script>
+    <script>
+        // Page-local strings for library.html. Merged over I18N_COMMON by i18n.js.
+        // NOTE: the move-table filter labels / column headers / taxonomy (theme,
+        // difficulty, tempo) are intentionally NOT translated here -- those values
+        // live in data/moves.json and are re-rendered by move-library.js, so
+        // translating only part of that cluster would show one concept in two
+        // languages side-by-side. Deferred to a dedicated follow-up unit.
+        window.I18N_PAGE = {
+            en: {
+                'library.nav.menu': 'Menu',
+                'library.heading': 'Move Library',
+                'library.sub': 'Every move in the practice platform, searchable by name, theme, difficulty, and tempo. Click a move to see its full instruction video and notes on the practice page.',
+                'library.search.placeholder': 'Search moves by name or description...',
+                'library.empty': "Moves are being curated. Bico Duro's video instruction is being transcribed and catalogued. Check back soon."
+            },
+            pt: {
+                'library.nav.menu': 'Menu',
+                'library.heading': 'Biblioteca de Movimentos',
+                'library.sub': 'Todos os movimentos da plataforma de prática, pesquisáveis por nome, tema, dificuldade e tempo. Clique em um movimento para ver o vídeo completo de instrução e as anotações na página de prática.',
+                'library.search.placeholder': 'Pesquisar movimentos por nome ou descrição...',
+                'library.empty': 'Os movimentos estão sendo organizados. As instruções em vídeo de Bico Duro estão sendo transcritas e catalogadas. Volte em breve.'
+            }
+        };
+    </script>
+    <script src="assets/js/i18n.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
 <script>if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));if(window.caches)caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)));}</script>
 </body>
