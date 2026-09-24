@@ -101,27 +101,27 @@
                 <img src="assets/images/logo/tribobahia-logo.png" alt="Tribo Bahia Mirim Capoeira" onerror="this.style.display='none'">
                 Tribo Bahia Mirim
             </a>
-            <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav-links">
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu" data-i18n-aria-label="roda.nav.menu" aria-expanded="false" aria-controls="primary-nav-links">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="primary-nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="practice.html">Practice</a></li>
-                <li><a href="library.html">Move Library</a></li>
-                <li><a href="roda.html">Roda</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="berimbau.html">Berimbau</a></li>
-                <li><a href="roots.html">Roots</a></li>
-                <li><a href="transparency.html">Transparency</a></li>
-                <li><a href="index.html#donate" class="donate-link">Donate</a></li>
+                <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                <li><a href="practice.html" data-i18n="nav.practice">Practice</a></li>
+                <li><a href="library.html" data-i18n="nav.library">Move Library</a></li>
+                <li><a href="roda.html" data-i18n="nav.roda">Roda</a></li>
+                <li><a href="community.html" data-i18n="nav.community">Community</a></li>
+                <li><a href="berimbau.html" data-i18n="nav.berimbau">Berimbau</a></li>
+                <li><a href="roots.html" data-i18n="nav.roots">Roots</a></li>
+                <li><a href="transparency.html" data-i18n="nav.transparency">Transparency</a></li>
+                <li><a href="index.html#donate" class="donate-link" data-i18n="nav.donate">Donate</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="section">
         <div class="section-heading">
-            <h2>Roda — The Music of Capoeira</h2>
-            <p>Sit in the roda. The berimbau leads. Every song carries history — listen, read along, and learn what the lyrics mean and where they come from.</p>
+            <h2 data-i18n="roda.heading">Roda — The Music of Capoeira</h2>
+            <p data-i18n="roda.sub">Sit in the roda. The berimbau leads. Every song carries history — listen, read along, and learn what the lyrics mean and where they come from.</p>
         </div>
 
         <div class="roda-stage">
@@ -132,52 +132,52 @@
           <audio id="roda-audio" class="roda-audio" controls preload="metadata"></audio>
 
           <div class="roda-controls">
-            <button id="prev-btn" class="btn">← Previous</button>
-            <button id="next-btn" class="btn">Next →</button>
-            <button id="start-roda-session-btn" class="btn btn-primary">Start Roda Session</button>
-            <button id="end-roda-session-btn" class="btn btn-outline hidden">End Roda Session</button>
+            <button id="prev-btn" class="btn" data-i18n="roda.prev">← Previous</button>
+            <button id="next-btn" class="btn" data-i18n="roda.next">Next →</button>
+            <button id="start-roda-session-btn" class="btn btn-primary" data-i18n="roda.start">Start Roda Session</button>
+            <button id="end-roda-session-btn" class="btn btn-outline hidden" data-i18n="roda.end">End Roda Session</button>
             <div class="order-toggle">
-              <label for="order-select">Order:</label>
+              <label for="order-select" data-i18n="roda.order.label">Order:</label>
               <select id="order-select">
-                <option value="slow-to-fast">Slow → fast</option>
-                <option value="random">Random</option>
-                <option value="fast-to-slow">Fast → slow</option>
+                <option value="slow-to-fast" data-i18n="roda.order.slowFast">Slow → fast</option>
+                <option value="random" data-i18n="roda.order.random">Random</option>
+                <option value="fast-to-slow" data-i18n="roda.order.fastSlow">Fast → slow</option>
               </select>
             </div>
           </div>
           <p id="roda-session-status" style="text-align:center;color:var(--color-text-light);font-size:0.9rem;margin:-0.5rem 0 1rem"></p>
 
           <div class="roda-content">
-            <div><h3>Lyrics (Portuguese)</h3><pre id="lyrics-pt">—</pre></div>
-            <div><h3>Translation (English)</h3><pre id="lyrics-en">—</pre></div>
-            <div class="roda-history"><h3 style="font-style:normal">The story behind it</h3><p id="historical-note">—</p></div>
+            <div><h3 data-i18n="roda.lyricsPt">Lyrics (Portuguese)</h3><pre id="lyrics-pt">—</pre></div>
+            <div><h3 data-i18n="roda.lyricsEn">Translation (English)</h3><pre id="lyrics-en">—</pre></div>
+            <div class="roda-history"><h3 style="font-style:normal" data-i18n="roda.story">The story behind it</h3><p id="historical-note">—</p></div>
           </div>
         </div>
 
         <div class="roda-list">
-          <h3>Playlist</h3>
+          <h3 data-i18n="roda.playlist">Playlist</h3>
           <ol id="roda-playlist"></ol>
         </div>
 
         <div style="text-align:center;margin-top:2rem">
-          <p style="color:var(--color-text-light);font-size:0.85rem">Lyrics marked <em>medium</em> or <em>low</em> certainty were reconstructed from cultural memory — corrections welcome.</p>
-          <a href="berimbau.html" class="btn btn-secondary" style="margin-top:0.5rem">How a Berimbau is Made →</a>
-          <a href="practice.html" class="btn" style="margin-top:0.5rem;margin-left:0.5rem">Practice with these moves →</a>
+          <p style="color:var(--color-text-light);font-size:0.85rem" data-i18n-html="roda.caveat">Lyrics marked <em>medium</em> or <em>low</em> certainty were reconstructed from cultural memory — corrections welcome.</p>
+          <a href="berimbau.html" class="btn btn-secondary" style="margin-top:0.5rem" data-i18n="roda.ctaBerimbau">How a Berimbau is Made →</a>
+          <a href="practice.html" class="btn" style="margin-top:0.5rem;margin-left:0.5rem" data-i18n="roda.ctaPractice">Practice with these moves →</a>
         </div>
     </section>
 
     <footer>
         <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="practice.html">Practice</a>
-            <a href="library.html">Move Library</a>
-            <a href="roda.html">Roda</a>
-            <a href="community.html">Community</a>
-            <a href="berimbau.html">Berimbau</a>
-            <a href="roots.html">Roots</a>
-            <a href="transparency.html">Transparency</a>
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="practice.html" data-i18n="nav.practice">Practice</a>
+            <a href="library.html" data-i18n="nav.library">Move Library</a>
+            <a href="roda.html" data-i18n="nav.roda">Roda</a>
+            <a href="community.html" data-i18n="nav.community">Community</a>
+            <a href="berimbau.html" data-i18n="nav.berimbau">Berimbau</a>
+            <a href="roots.html" data-i18n="nav.roots">Roots</a>
+            <a href="transparency.html" data-i18n="nav.transparency">Transparency</a>
         </div>
-        <p>Tribo Bahia Mirim Capoeira — Itacaré, Bahia, Brazil</p>
+        <p data-i18n="footer.tagline">Tribo Bahia Mirim Capoeira — Itacaré, Bahia, Brazil</p>
         <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
     </footer>
 
@@ -395,6 +395,60 @@
       if (rodaSessionActive) startRodaTimer();
     })();
     </script>
+    <script src="assets/js/i18n/common.js"></script>
+    <script>
+        // Page-local strings for roda.html. Merged over I18N_COMMON by i18n.js.
+        // NOTE: the JS-generated roda session-status text ("Roda session in
+        // progress -- mm:ss", "logged -- N min.") and the per-track playlist
+        // tempo line (from data/music_library.json) are intentionally NOT
+        // translated here -- they are written by roda.html's own inline script
+        // and are re-rendered on every track change, so translating only part
+        // of that cluster would show one concept in two languages. Deferred to
+        // a dedicated follow-up unit (same policy as library.html's move table).
+        window.I18N_PAGE = {
+            en: {
+                'roda.nav.menu': 'Menu',
+                'roda.heading': 'Roda — The Music of Capoeira',
+                'roda.sub': 'Sit in the roda. The berimbau leads. Every song carries history — listen, read along, and learn what the lyrics mean and where they come from.',
+                'roda.prev': '← Previous',
+                'roda.next': 'Next →',
+                'roda.start': 'Start Roda Session',
+                'roda.end': 'End Roda Session',
+                'roda.order.label': 'Order:',
+                'roda.order.slowFast': 'Slow → fast',
+                'roda.order.random': 'Random',
+                'roda.order.fastSlow': 'Fast → slow',
+                'roda.lyricsPt': 'Lyrics (Portuguese)',
+                'roda.lyricsEn': 'Translation (English)',
+                'roda.story': 'The story behind it',
+                'roda.playlist': 'Playlist',
+                'roda.caveat': 'Lyrics marked <em>medium</em> or <em>low</em> certainty were reconstructed from cultural memory — corrections welcome.',
+                'roda.ctaBerimbau': 'How a Berimbau is Made →',
+                'roda.ctaPractice': 'Practice with these moves →'
+            },
+            pt: {
+                'roda.nav.menu': 'Menu',
+                'roda.heading': 'Roda — A Música da Capoeira',
+                'roda.sub': 'Sente-se na roda. O berimbau conduz. Cada canção carrega história — ouça, acompanhe a letra e aprenda o que as letras significam e de onde vêm.',
+                'roda.prev': '← Anterior',
+                'roda.next': 'Próximo →',
+                'roda.start': 'Iniciar Sessão de Roda',
+                'roda.end': 'Encerrar Sessão de Roda',
+                'roda.order.label': 'Ordem:',
+                'roda.order.slowFast': 'Lento → rápido',
+                'roda.order.random': 'Aleatório',
+                'roda.order.fastSlow': 'Rápido → lento',
+                'roda.lyricsPt': 'Letra (Português)',
+                'roda.lyricsEn': 'Tradução (Inglês)',
+                'roda.story': 'A história por trás',
+                'roda.playlist': 'Lista de Reprodução',
+                'roda.caveat': 'Letras marcadas como <em>média</em> ou <em>baixa</em> certeza foram reconstruídas a partir da memória cultural — correções são bem-vindas.',
+                'roda.ctaBerimbau': 'Como um Berimbau é Feito →',
+                'roda.ctaPractice': 'Praticar com estes movimentos →'
+            }
+        };
+    </script>
+    <script src="assets/js/i18n.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
 <script>if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));if(window.caches)caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)));}</script>
 </body>
