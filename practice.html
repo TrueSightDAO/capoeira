@@ -37,19 +37,19 @@
                 <img src="assets/images/logo/tribobahia-logo.png" alt="Tribo Bahia Mirim Capoeira" onerror="this.style.display='none'">
                 Tribo Bahia Mirim
             </a>
-            <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav-links">
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu" data-i18n-aria-label="practice.nav.menu" aria-expanded="false" aria-controls="primary-nav-links">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="primary-nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="practice.html">Practice</a></li>
-                <li><a href="library.html">Move Library</a></li>
-                <li><a href="roda.html">Roda</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="berimbau.html">Berimbau</a></li>
-                <li><a href="roots.html">Roots</a></li>
-                <li><a href="transparency.html">Transparency</a></li>
-                <li><a href="index.html#donate" class="donate-link">Donate</a></li>
+                <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                <li><a href="practice.html" data-i18n="nav.practice">Practice</a></li>
+                <li><a href="library.html" data-i18n="nav.library">Move Library</a></li>
+                <li><a href="roda.html" data-i18n="nav.roda">Roda</a></li>
+                <li><a href="community.html" data-i18n="nav.community">Community</a></li>
+                <li><a href="berimbau.html" data-i18n="nav.berimbau">Berimbau</a></li>
+                <li><a href="roots.html" data-i18n="nav.roots">Roots</a></li>
+                <li><a href="transparency.html" data-i18n="nav.transparency">Transparency</a></li>
+                <li><a href="index.html#donate" class="donate-link" data-i18n="nav.donate">Donate</a></li>
             </ul>
         </nav>
     </header>
@@ -63,12 +63,12 @@
              CapoeiraPractice.reset() / "← Back". -->
         <div id="generator-preamble">
             <div class="section-heading">
-                <h2>Generate a Session</h2>
-                <p>Theme-based sequencing with round-robin move cycling and berimbau music pairing. Each session is ~45 minutes.</p>
+                <h2 data-i18n="practice.gen.heading">Generate a Session</h2>
+                <p data-i18n="practice.gen.sub">Theme-based sequencing with round-robin move cycling and berimbau music pairing. Each session is ~45 minutes.</p>
             </div>
 
             <div style="text-align:center">
-                <button class="btn btn-primary" onclick="window.generateSession()">Generate Session</button>
+                <button class="btn btn-primary" onclick="window.generateSession()" data-i18n="practice.gen.cta">Generate Session</button>
             </div>
         </div>
 
@@ -77,13 +77,13 @@
         <div id="session-card" class="session-card hidden" style="margin-top:2rem"></div>
 
         <div style="margin-top:1rem;display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap">
-            <button id="start-session-btn" class="btn btn-primary hidden" onclick="window.CapoeiraPractice.start()">
+            <button id="start-session-btn" class="btn btn-primary hidden" onclick="window.CapoeiraPractice.start()" data-i18n="practice.gen.start">
                 Start Practice
             </button>
-            <button id="regenerate-session-btn" class="btn btn-outline hidden" onclick="window.generateSession()">
+            <button id="regenerate-session-btn" class="btn btn-outline hidden" onclick="window.generateSession()" data-i18n="practice.gen.regenerate">
                 Generate Different
             </button>
-            <button id="back-to-overview-btn" class="btn btn-outline hidden" onclick="window.CapoeiraPractice.reset()">
+            <button id="back-to-overview-btn" class="btn btn-outline hidden" onclick="window.CapoeiraPractice.reset()" data-i18n="practice.gen.back">
                 ← Back
             </button>
         </div>
@@ -92,15 +92,15 @@
     <!-- --- Past Sessions Summary (always visible on landing) --- -->
     <section class="section" id="history-summary-section">
         <div class="section-heading">
-            <h2>Your Practice History</h2>
-            <p>All data is stored locally in your browser. No accounts. No tracking.</p>
+            <h2 data-i18n="practice.history.heading">Your Practice History</h2>
+            <p data-i18n="practice.history.sub">All data is stored locally in your browser. No accounts. No tracking.</p>
         </div>
         <!-- Persistent public record link — revealed on page load if a keypair exists.
              Lets returning users grab their public record URL anywhere on the
              page, not just after Finish Session. -->
         <div id="persistent-cv-link" class="hidden" style="text-align:center;margin:0 0 1.25rem">
             <a id="persistent-cv-anchor" href="#" target="_blank" rel="noopener" class="btn btn-outline">
-                Your training record →
+                <span data-i18n="practice.history.record">Your training record →</span>
             </a>
         </div>
         <div id="history-summary"></div>
@@ -127,16 +127,16 @@
                     <div class="timer" id="countdown">00:00</div>
 
                     <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;align-items:center">
-                        <button id="prev-move-btn" class="btn btn-outline" onclick="window.CapoeiraPractice.prev()" aria-label="Previous move">
+                        <button id="prev-move-btn" class="btn btn-outline" onclick="window.CapoeiraPractice.prev()" aria-label="Previous move" data-i18n="practice.flow.prev">
                             ← Previous
                         </button>
-                        <button id="play-music-btn" class="btn btn-primary" onclick="window.CapoeiraPractice.playMusic()">
+                        <button id="play-music-btn" class="btn btn-primary" onclick="window.CapoeiraPractice.playMusic()" data-i18n="practice.flow.play">
                             Play Music &amp; Start Timer
                         </button>
-                        <button id="pause-btn" class="btn btn-outline hidden" onclick="window.CapoeiraPractice.togglePause()">
+                        <button id="pause-btn" class="btn btn-outline hidden" onclick="window.CapoeiraPractice.togglePause()" data-i18n="practice.flow.pause">
                             Pause
                         </button>
-                        <button id="next-move-btn" class="btn btn-outline" onclick="window.CapoeiraPractice.next()" aria-label="Next move">
+                        <button id="next-move-btn" class="btn btn-outline" onclick="window.CapoeiraPractice.next()" aria-label="Next move" data-i18n="practice.flow.next">
                             Next →
                         </button>
                     </div>
@@ -144,14 +144,14 @@
 
                 <!-- Sidebar: Music Player -->
                 <div>
-                    <h4 style="margin-bottom:0.75rem">Music</h4>
+                    <h4 style="margin-bottom:0.75rem" data-i18n="practice.flow.music">Music</h4>
                     <div id="music-player"></div>
                 </div>
             </div>
 
             <!-- Rest Period -->
             <div id="rest-section" class="session-card hidden" style="text-align:center;margin-top:2rem">
-                <h3 style="color:var(--color-success)">Rest</h3>
+                <h3 style="color:var(--color-success)" data-i18n="practice.flow.rest">Rest</h3>
                 <div class="timer" style="color:var(--color-success)" id="rest-countdown">30</div>
                 <p id="next-move-label" style="color:var(--color-text-light)"></p>
             </div>
@@ -161,21 +161,21 @@
     <!-- --- Finish Section --- -->
     <section id="finish-section" class="hidden">
         <div class="section section-narrow" style="text-align:center">
-            <h2>Session Complete</h2>
-            <p style="font-size:1.2rem;margin:1.5rem 0">Total practice time: <strong id="session-total-time">0</strong> minutes</p>
+            <h2 data-i18n="practice.finish.heading">Session Complete</h2>
+            <p style="font-size:1.2rem;margin:1.5rem 0"><span data-i18n="practice.finish.totalLabel">Total practice time:</span> <strong id="session-total-time">0</strong> <span data-i18n="practice.finish.totalUnit">minutes</span></p>
 
             <!-- Public record link — revealed once the local keypair derives the slug.
                  The link works even before the cache build runs; truesight.me
                  will render a 'being generated' placeholder until the JSON lands. -->
             <div id="cv-link-section" class="hidden" style="margin:1.5rem 0;padding:1rem;background:var(--color-surface);border-radius:8px">
-                <p style="margin:0 0 0.5rem;font-weight:600">Your training record is live</p>
+                <p style="margin:0 0 0.5rem;font-weight:600" data-i18n="practice.finish.recordLive">Your training record is live</p>
                 <a id="cv-link-anchor" href="#" target="_blank" rel="noopener" class="btn btn-primary">
-                    Open public record →
+                    <span data-i18n="practice.finish.openRecord">Open public record →</span>
                 </a>
-                <p id="submit-status" style="margin:0.75rem 0 0;font-size:0.9rem;color:var(--color-text-light)">Submitting to Edgar…</p>
+                <p id="submit-status" style="margin:0.75rem 0 0;font-size:0.9rem;color:var(--color-text-light)" data-i18n="practice.finish.submitting">Submitting to Edgar…</p>
             </div>
 
-            <button class="btn btn-primary" onclick="window.CapoeiraPractice.reset()">
+            <button class="btn btn-primary" onclick="window.CapoeiraPractice.reset()" data-i18n="practice.finish.newSession">
                 Generate New Session
             </button>
         </div>
@@ -185,12 +185,12 @@
 
     <footer>
         <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="practice.html">Practice</a>
-            <a href="library.html">Move Library</a>
-            <a href="transparency.html">Transparency</a>
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="practice.html" data-i18n="nav.practice">Practice</a>
+            <a href="library.html" data-i18n="nav.library">Move Library</a>
+            <a href="transparency.html" data-i18n="nav.transparency">Transparency</a>
         </div>
-        <p>Tribo Bahia Mirim Capoeira — Baia Itacare, Bahia, Brazil</p>
+        <p data-i18n="footer.tagline">Tribo Bahia Mirim Capoeira — Baia Itacare, Bahia, Brazil</p>
         <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
     </footer>
 
@@ -277,6 +277,63 @@
             }
         });
     </script>
+    <script src="assets/js/i18n/common.js"></script>
+    <script>
+        // Page-local strings for practice.html. Merged over I18N_COMMON by i18n.js.
+        window.I18N_PAGE = {
+            en: {
+                'practice.nav.menu': 'Menu',
+                'practice.gen.heading': 'Generate a Session',
+                'practice.gen.sub': 'Theme-based sequencing with round-robin move cycling and berimbau music pairing. Each session is ~45 minutes.',
+                'practice.gen.cta': 'Generate Session',
+                'practice.gen.start': 'Start Practice',
+                'practice.gen.regenerate': 'Generate Different',
+                'practice.gen.back': '← Back',
+                'practice.history.heading': 'Your Practice History',
+                'practice.history.sub': 'All data is stored locally in your browser. No accounts. No tracking.',
+                'practice.history.record': 'Your training record →',
+                'practice.flow.prev': '← Previous',
+                'practice.flow.play': 'Play Music & Start Timer',
+                'practice.flow.pause': 'Pause',
+                'practice.flow.next': 'Next →',
+                'practice.flow.music': 'Music',
+                'practice.flow.rest': 'Rest',
+                'practice.finish.heading': 'Session Complete',
+                'practice.finish.totalLabel': 'Total practice time:',
+                'practice.finish.totalUnit': 'minutes',
+                'practice.finish.recordLive': 'Your training record is live',
+                'practice.finish.openRecord': 'Open public record →',
+                'practice.finish.submitting': 'Submitting to Edgar…',
+                'practice.finish.newSession': 'Generate New Session'
+            },
+            pt: {
+                'practice.nav.menu': 'Menu',
+                'practice.gen.heading': 'Gerar uma Sessão',
+                'practice.gen.sub': 'Sequenciamento por tema com rodízio de movimentos e música de berimbau. Cada sessão dura ~45 minutos.',
+                'practice.gen.cta': 'Gerar Sessão',
+                'practice.gen.start': 'Começar a Praticar',
+                'practice.gen.regenerate': 'Gerar Outra',
+                'practice.gen.back': '← Voltar',
+                'practice.history.heading': 'Seu Histórico de Prática',
+                'practice.history.sub': 'Todos os dados são armazenados localmente no seu navegador. Sem contas. Sem rastreamento.',
+                'practice.history.record': 'Seu registro de treino →',
+                'practice.flow.prev': '← Anterior',
+                'practice.flow.play': 'Tocar Música e Iniciar',
+                'practice.flow.pause': 'Pausar',
+                'practice.flow.next': 'Próximo →',
+                'practice.flow.music': 'Música',
+                'practice.flow.rest': 'Descanso',
+                'practice.finish.heading': 'Sessão Concluída',
+                'practice.finish.totalLabel': 'Tempo total de prática:',
+                'practice.finish.totalUnit': 'minutos',
+                'practice.finish.recordLive': 'Seu registro de treino está no ar',
+                'practice.finish.openRecord': 'Abrir registro público →',
+                'practice.finish.submitting': 'Enviando para Edgar…',
+                'practice.finish.newSession': 'Gerar Nova Sessão'
+            }
+        };
+    </script>
+    <script src="assets/js/i18n.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
 <script>if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));if(window.caches)caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)));}</script>
 </body>
