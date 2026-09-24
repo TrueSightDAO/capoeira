@@ -37,53 +37,53 @@
                 <img src="assets/images/logo/tribobahia-logo.png" alt="Tribo Bahia Mirim Capoeira" onerror="this.style.display='none'">
                 Tribo Bahia Mirim
             </a>
-            <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav-links">
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu" data-i18n-aria-label="transparency.nav.menu" aria-expanded="false" aria-controls="primary-nav-links">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="primary-nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="practice.html">Practice</a></li>
-                <li><a href="library.html">Move Library</a></li>
-                <li><a href="roda.html">Roda</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="berimbau.html">Berimbau</a></li>
-                <li><a href="roots.html">Roots</a></li>
-                <li><a href="transparency.html">Transparency</a></li>
-                <li><a href="index.html#donate" class="donate-link">Donate</a></li>
+                <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                <li><a href="practice.html" data-i18n="nav.practice">Practice</a></li>
+                <li><a href="library.html" data-i18n="nav.library">Move Library</a></li>
+                <li><a href="roda.html" data-i18n="nav.roda">Roda</a></li>
+                <li><a href="community.html" data-i18n="nav.community">Community</a></li>
+                <li><a href="berimbau.html" data-i18n="nav.berimbau">Berimbau</a></li>
+                <li><a href="roots.html" data-i18n="nav.roots">Roots</a></li>
+                <li><a href="transparency.html" data-i18n="nav.transparency">Transparency</a></li>
+                <li><a href="index.html#donate" class="donate-link" data-i18n="nav.donate">Donate</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="section section-narrow">
         <div class="section-heading">
-            <h2>Where Every Dollar Goes</h2>
-            <p>Every donation, minus Stripe and Wise transfer fees, goes directly to Bico Duro and the kids. TrueSight DAO takes no cut.</p>
+            <h2 data-i18n="transparency.heading">Where Every Dollar Goes</h2>
+            <p data-i18n="transparency.sub">Every donation, minus Stripe and Wise transfer fees, goes directly to Bico Duro and the kids. TrueSight DAO takes no cut.</p>
         </div>
 
         <div class="card" style="margin-bottom:2rem">
-            <h3>The Flow</h3>
+            <h3 data-i18n="transparency.flow.heading">The Flow</h3>
             <ol style="padding-left:1.25rem;line-height:2;color:var(--color-text-light);font-size:0.95rem">
-                <li>You donate via <strong>Stripe Checkout</strong> on this site</li>
-                <li>Stripe deducts their processing fee (2.9% + $0.30 per transaction)</li>
-                <li>The remaining amount is recorded in the <strong>TrueSight DAO treasury-cache ledger</strong></li>
-                <li>Funds are transferred to Bico Duro via <strong>Wise</strong> to Brazil (0.5% + $1.50 fee)</li>
-                <li>Bico Duro receives the final amount via Pix (Brazilian instant payment)</li>
-                <li>Every transfer is published on the <strong>public transparency dashboard</strong> at <a href="https://tribomirimbahia.truesight.me">tribomirimbahia.truesight.me</a></li>
+                <li data-i18n-html="transparency.flow.step1">You donate via <strong>Stripe Checkout</strong> on this site</li>
+                <li data-i18n="transparency.flow.step2">Stripe deducts their processing fee (2.9% + $0.30 per transaction)</li>
+                <li data-i18n-html="transparency.flow.step3">The remaining amount is recorded in the <strong>TrueSight DAO treasury-cache ledger</strong></li>
+                <li data-i18n-html="transparency.flow.step4">Funds are transferred to Bico Duro via <strong>Wise</strong> to Brazil (0.5% + $1.50 fee)</li>
+                <li data-i18n="transparency.flow.step5">Bico Duro receives the final amount via Pix (Brazilian instant payment)</li>
+                <li data-i18n-html="transparency.flow.step6">Every transfer is published on the <strong>public transparency dashboard</strong> at <a href="https://tribomirimbahia.truesight.me">tribomirimbahia.truesight.me</a></li>
             </ol>
         </div>
 
         <div class="fee-calc">
-            <h3 style="margin-bottom:0.75rem">Example: What Your Donation Funds</h3>
+            <h3 style="margin-bottom:0.75rem" data-i18n="transparency.calc.heading">Example: What Your Donation Funds</h3>
             <table>
-                <tr><td>Your donation:</td><td style="font-weight:700" id="calc-donation">$50.00</td></tr>
-                <tr><td>Stripe fee (2.9% + $0.30):</td><td style="color:var(--color-danger)" id="calc-stripe-fee">$1.75</td></tr>
-                <tr><td>Net after Stripe:</td><td style="font-weight:600" id="calc-after-stripe">$48.25</td></tr>
-                <tr><td>Wise transfer fee (0.5% + $1.50):</td><td style="color:var(--color-danger)" id="calc-wise-fee">$1.74</td></tr>
-                <tr><td>Net to Tribo Bahia Mirim:</td><td style="font-weight:700;color:var(--color-success)" id="calc-net">$46.51</td></tr>
+                <tr><td data-i18n="transparency.calc.donation">Your donation:</td><td style="font-weight:700" id="calc-donation">$50.00</td></tr>
+                <tr><td data-i18n="transparency.calc.stripeFee">Stripe fee (2.9% + $0.30):</td><td style="color:var(--color-danger)" id="calc-stripe-fee">$1.75</td></tr>
+                <tr><td data-i18n="transparency.calc.afterStripe">Net after Stripe:</td><td style="font-weight:600" id="calc-after-stripe">$48.25</td></tr>
+                <tr><td data-i18n="transparency.calc.wiseFee">Wise transfer fee (0.5% + $1.50):</td><td style="color:var(--color-danger)" id="calc-wise-fee">$1.74</td></tr>
+                <tr><td data-i18n="transparency.calc.net">Net to Tribo Bahia Mirim:</td><td style="font-weight:700;color:var(--color-success)" id="calc-net">$46.51</td></tr>
             </table>
 
             <div style="margin-top:1.5rem">
-                <label for="calc-input" style="font-weight:600;margin-right:0.5rem">Try a different amount:</label>
+                <label for="calc-input" style="font-weight:600;margin-right:0.5rem" data-i18n="transparency.calc.tryAmount">Try a different amount:</label>
                 $<input type="number" id="calc-input" value="50" min="1" max="10000" step="1"
                     style="padding:0.4rem 0.5rem;border:1px solid #ddd;border-radius:4px;width:100px;font-family:var(--font-body);font-size:0.95rem"
                     oninput="updateFeeCalc()">
@@ -91,15 +91,15 @@
         </div>
 
         <div class="card" style="background:var(--color-success);color:#fff;text-align:center;margin:2rem 0">
-            <p style="color:rgba(255,255,255,0.95);font-size:1.1rem;margin:0">
+            <p style="color:rgba(255,255,255,0.95);font-size:1.1rem;margin:0" data-i18n-html="transparency.noCut">
                 <strong>TrueSight DAO does not take a percentage.</strong><br>
                 100% of net proceeds go to the after-school program.
             </p>
         </div>
 
         <div style="text-align:center;margin-top:2rem">
-            <p style="color:var(--color-text-light)">For the full public ledger, visit the transparency dashboard:</p>
-            <a href="https://tribomirimbahia.truesight.me" class="btn btn-primary" style="margin-top:0.75rem">
+            <p style="color:var(--color-text-light)" data-i18n="transparency.fullLedger">For the full public ledger, visit the transparency dashboard:</p>
+            <a href="https://tribomirimbahia.truesight.me" class="btn btn-primary" style="margin-top:0.75rem" data-i18n="transparency.viewDashboard">
                 View Full Dashboard →
             </a>
         </div>
@@ -107,12 +107,12 @@
 
     <footer>
         <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="practice.html">Practice</a>
-            <a href="library.html">Move Library</a>
-            <a href="transparency.html">Transparency</a>
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="practice.html" data-i18n="nav.practice">Practice</a>
+            <a href="library.html" data-i18n="nav.library">Move Library</a>
+            <a href="transparency.html" data-i18n="nav.transparency">Transparency</a>
         </div>
-        <p>Tribo Bahia Mirim Capoeira — Baia Itacare, Bahia, Brazil</p>
+        <p data-i18n="footer.tagline">Tribo Bahia Mirim Capoeira — Baia Itacare, Bahia, Brazil</p>
         <p style="margin-top:0.5rem"><a href="https://agroverse.shop">Agroverse</a> &middot; <a href="https://truesight.me">TrueSight DAO</a></p>
     </footer>
 
@@ -140,12 +140,72 @@
         if (params.get('just_donated') === '1') {
             const heading = document.querySelector('.section-heading p');
             if (heading) {
-                heading.textContent = 'Thank you for your donation! Every dollar, minus fees, goes directly to Bico Duro and the kids.';
+                // Swap the element's i18n key so i18n.js's on-load setLang() keeps this
+                // message (and translates it) instead of overwriting it with the default sub.
+                heading.setAttribute('data-i18n', 'transparency.thankyou');
+                heading.textContent = (window.t ? window.t('transparency.thankyou') : 'Thank you for your donation! Every dollar, minus fees, goes directly to Bico Duro and the kids.');
                 heading.style.color = 'var(--color-success)';
                 heading.style.fontWeight = '600';
             }
         }
     </script>
+    <script src="assets/js/i18n/common.js"></script>
+    <script>
+        // Page-local strings for transparency.html. Merged over I18N_COMMON by i18n.js.
+        // NOTE: the fee-calculator VALUES ($ amounts in #calc-*) are computed by this
+        // page's own inline script and are NOT translated here; only the static row
+        // labels are. The `?just_donated=1` thank-you swaps this page's one heading <p>
+        // onto 'transparency.thankyou' so it survives the on-load setLang() pass.
+        window.I18N_PAGE = {
+            en: {
+                'transparency.nav.menu': 'Menu',
+                'transparency.heading': 'Where Every Dollar Goes',
+                'transparency.sub': 'Every donation, minus Stripe and Wise transfer fees, goes directly to Bico Duro and the kids. TrueSight DAO takes no cut.',
+                'transparency.flow.heading': 'The Flow',
+                'transparency.flow.step1': 'You donate via <strong>Stripe Checkout</strong> on this site',
+                'transparency.flow.step2': 'Stripe deducts their processing fee (2.9% + $0.30 per transaction)',
+                'transparency.flow.step3': 'The remaining amount is recorded in the <strong>TrueSight DAO treasury-cache ledger</strong>',
+                'transparency.flow.step4': 'Funds are transferred to Bico Duro via <strong>Wise</strong> to Brazil (0.5% + $1.50 fee)',
+                'transparency.flow.step5': 'Bico Duro receives the final amount via Pix (Brazilian instant payment)',
+                'transparency.flow.step6': 'Every transfer is published on the <strong>public transparency dashboard</strong> at <a href="https://tribomirimbahia.truesight.me">tribomirimbahia.truesight.me</a>',
+                'transparency.calc.heading': 'Example: What Your Donation Funds',
+                'transparency.calc.donation': 'Your donation:',
+                'transparency.calc.stripeFee': 'Stripe fee (2.9% + $0.30):',
+                'transparency.calc.afterStripe': 'Net after Stripe:',
+                'transparency.calc.wiseFee': 'Wise transfer fee (0.5% + $1.50):',
+                'transparency.calc.net': 'Net to Tribo Bahia Mirim:',
+                'transparency.calc.tryAmount': 'Try a different amount:',
+                'transparency.noCut': '<strong>TrueSight DAO does not take a percentage.</strong><br>100% of net proceeds go to the after-school program.',
+                'transparency.fullLedger': 'For the full public ledger, visit the transparency dashboard:',
+                'transparency.viewDashboard': 'View Full Dashboard \u2192',
+                'transparency.thankyou': 'Thank you for your donation! Every dollar, minus fees, goes directly to Bico Duro and the kids.'
+            },
+            pt: {
+                'transparency.nav.menu': 'Menu',
+                'transparency.heading': 'Para Onde Vai Cada D\u00f3lar',
+                'transparency.sub': 'Cada doa\u00e7\u00e3o, menos as taxas de transfer\u00eancia do Stripe e da Wise, vai diretamente para Bico Duro e as crian\u00e7as. A TrueSight DAO n\u00e3o fica com nada.',
+                'transparency.flow.heading': 'O Fluxo',
+                'transparency.flow.step1': 'Voc\u00ea doa via <strong>Stripe Checkout</strong> neste site',
+                'transparency.flow.step2': 'O Stripe desconta sua taxa de processamento (2,9% + US$ 0,30 por transa\u00e7\u00e3o)',
+                'transparency.flow.step3': 'O valor restante \u00e9 registrado no <strong>livro-raz\u00e3o treasury-cache da TrueSight DAO</strong>',
+                'transparency.flow.step4': 'Os fundos s\u00e3o transferidos para Bico Duro via <strong>Wise</strong> para o Brasil (taxa de 0,5% + US$ 1,50)',
+                'transparency.flow.step5': 'Bico Duro recebe o valor final via Pix (pagamento instant\u00e2neo brasileiro)',
+                'transparency.flow.step6': 'Cada transfer\u00eancia \u00e9 publicada no <strong>painel p\u00fablico de transpar\u00eancia</strong> em <a href="https://tribomirimbahia.truesight.me">tribomirimbahia.truesight.me</a>',
+                'transparency.calc.heading': 'Exemplo: O Que Sua Doa\u00e7\u00e3o Financia',
+                'transparency.calc.donation': 'Sua doa\u00e7\u00e3o:',
+                'transparency.calc.stripeFee': 'Taxa do Stripe (2,9% + US$ 0,30):',
+                'transparency.calc.afterStripe': 'L\u00edquido ap\u00f3s o Stripe:',
+                'transparency.calc.wiseFee': 'Taxa de transfer\u00eancia Wise (0,5% + US$ 1,50):',
+                'transparency.calc.net': 'L\u00edquido para Tribo Bahia Mirim:',
+                'transparency.calc.tryAmount': 'Tente um valor diferente:',
+                'transparency.noCut': '<strong>A TrueSight DAO n\u00e3o fica com nenhuma porcentagem.</strong><br>100% do valor l\u00edquido vai para o programa de contraturno escolar.',
+                'transparency.fullLedger': 'Para ver o livro-raz\u00e3o p\u00fablico completo, acesse o painel de transpar\u00eancia:',
+                'transparency.viewDashboard': 'Ver Painel Completo \u2192',
+                'transparency.thankyou': 'Obrigado pela sua doa\u00e7\u00e3o! Cada d\u00f3lar, menos as taxas, vai diretamente para Bico Duro e as crian\u00e7as.'
+            }
+        };
+    </script>
+    <script src="assets/js/i18n.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
 <script>if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));if(window.caches)caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)));}</script>
 </body>
