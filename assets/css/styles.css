@@ -122,6 +122,37 @@ body > header nav a.logo img {
 .hamburger { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 8px; }
 .hamburger span { display: block; width: 24px; height: 2.5px; background: var(--color-primary); border-radius: 2px; transition: transform 0.2s; }
 
+/* --- Language toggle (EN/PT) — injected by assets/js/i18n.js ---
+   Sits in the header nav. `margin-left: auto` pushes it (and everything after
+   it) to the right so the toggle sits next to the nav links on desktop and
+   next to the hamburger on mobile — no per-page markup needed. */
+.lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+.lang-toggle button {
+    background: none;
+    border: 1px solid var(--color-text-light);
+    border-radius: 4px;
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-text-light);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.lang-toggle button:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.lang-toggle button.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
 @media (max-width: 768px) {
     .hamburger { display: flex; }
     .nav-links {
