@@ -19,15 +19,23 @@ python3 -m http.server 8000
 
 ```
 ├── index.html           # Landing page (narrative, photos, donate CTA)
-├── library.html         # Move library (searchable/filterable)
 ├── practice.html        # Session generator + practice flow + history
+├── library.html         # Move library (searchable/filterable)
+├── roda.html            # Roda — the music of capoeira
 ├── transparency.html    # Donation flow summary + fee calculator
+├── berimbau.html        # How to make a berimbau
+├── community.html       # Community life in Itacaré
+├── roots.html           # Where the cacao grows
 ├── assets/
 │   ├── css/styles.css
-│   ├── js/session-generator.js
-│   ├── js/practice-flow.js
-│   ├── js/move-library.js
-│   ├── js/session-history.js
+│   ├── js/
+│   │   ├── i18n.js             # Shared EN/PT engine (header = the markup contract)
+│   │   ├── i18n/common.js      # Nav/footer/toggle strings shared by every page
+│   │   ├── nav.js              # Mobile hamburger nav
+│   │   ├── session-generator.js
+│   │   ├── practice-flow.js
+│   │   ├── move-library.js
+│   │   └── session-history.js
 │   └── images/          # Add hero/thumbnail images here
 ├── data/
 │   ├── moves.json              # 39 moves (Phase 1A), all with YouTube URLs on admin@truesight.me
@@ -38,12 +46,15 @@ python3 -m http.server 8000
 │   └── music/                  # *.mp3 — local audio for practice sessions
 ├── scripts/
 │   └── upload_clips_to_youtube.py  # Slice + upload, reuses agroverse_shop OAuth (admin@truesight.me)
+├── test/                # Vitest unit + headless-browser i18n tests (see below)
 └── README.md
 ```
 
 ## Deploy
 
 Deploys via GitHub Pages from the `capoeira` repo, custom domain `capoeira.agroverse.shop`.
+
+> There is **no beta/staging environment** for this repo — merging to `main` **is** the production deploy. Test locally before every merge.
 
 ### DNS
 
@@ -53,6 +64,30 @@ CNAME record: `capoeira.agroverse.shop` → `<username>.github.io`
 
 - Source: Deploy from a branch
 - Branch: `main` / `(root)`
+
+## Internationalization (English / Portuguese)
+
+Every page carries an **EN/PT toggle** in the header. Choosing a language stores it in
+`localStorage('capoeira_lang')` and every other page reads that back on load, so the
+preference is **retained as you navigate the site** (the plan's core requirement).
+
+- **Engine:** `assets/js/i18n.js` — shared `t()` / `setLang()` + the DOM-apply loop; it also
+  injects the toggle button itself. Its file header is the authoritative **markup contract**
+  (including how to add a 9th page).
+- **Shared strings:** `assets/js/i18n/common.js` (`nav.*`, `footer.*`, `lang.*`).
+- **Per-page strings:** a small inline `window.I18N_PAGE = { en: {…}, pt: {…} }` on each page,
+  merged over the common dictionary at init (page keys win on collision).
+- **Default language:** English (the site's original language); storage key is the namespaced
+  `capoeira_lang` (deliberately not SunMint's `sunmint_lang`).
+
+Run the i18n tests — unit is Chromium-free; integration drives a real headless browser:
+
+```
+npx vitest run                        # unit
+VITEST_INTEGRATION=1 npx vitest run   # + per-page toggle & cross-page persistence
+```
+
+> ⚠️ Portuguese strings are an **AI first-draft** pending native-reader review.
 
 ## Data pipeline (Phase 1A — shipped 2026-05-10)
 
