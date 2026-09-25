@@ -28,6 +28,11 @@
  *      right after the .logo anchor — no per-page toggle markup required.
  *   5. Keys: shared keys live in common.js (nav.*, footer.*, lang.*); page-local
  *      keys live in that page's I18N_PAGE. Page keys win on collision.
+ *   6. Adding a new page (9th+): no change to i18n.js is needed. Copy the pattern
+ *      from index.html -- include the three i18n tags (item 1), mark the page's
+ *      content with data-i18n* attributes (items 2-3), and add a nav.* entry in
+ *      common.js ONLY if the page joins the header nav. The engine picks it up
+ *      automatically; localStorage('capoeira_lang') already persists across pages.
  * ────────────────────────────────────────────────────────────────────────────
  */
 (function () {
